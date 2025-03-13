@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.        gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -27,6 +28,7 @@ public class GameScreen implements Screen {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2,stage,game);
 
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -93,7 +95,7 @@ public class GameScreen implements Screen {
         }
         x = 0;
         y = Gdx.graphics.getHeight()/1.65f;
-        Master.home = new Home(x, y, stage);
+        Master.home = new Home(x, y, stage,game);
         x = 200;
         y = 303;
         Master.well = new Well(x, y, stage);
