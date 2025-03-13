@@ -5,9 +5,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.        gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import java.util.Vector;
 
 public class GameScreen implements Screen {
     Texture background;
@@ -27,13 +30,20 @@ public class GameScreen implements Screen {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2,stage,game);
 
-
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float v) {
         ScreenUtils.clear(0, 0, 0, 0);
 
+
+        if(Gdx.input.justTouched()){
+            Vector2 mousePosition = new Vector2();
+            mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
+            stage.getViewport().unproject(mousePosition);
+            new Plants(mousePosition.x, mousePosition.y, stage);
+        }
 
         stage.act();
         stage.draw();
