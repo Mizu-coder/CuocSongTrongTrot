@@ -7,10 +7,7 @@ import com.badlogic.        gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.util.Vector;
 
 public class GameScreen implements Screen {
     Texture background;
@@ -42,7 +39,17 @@ public class GameScreen implements Screen {
             Vector2 mousePosition = new Vector2();
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
-            new Plants(mousePosition.x, mousePosition.y, stage);
+
+            System.out.println("x = " + Gdx.input.getX() + " y = " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
+            if(game.type == 1) {
+                new Plants(mousePosition.x, mousePosition.y, stage,game);
+            }
+            if(game.type == 2) {
+                new Plants(mousePosition.x, mousePosition.y, stage,game);
+            }
+            if(game.type == 3) {
+                new Plants(mousePosition.x, mousePosition.y, stage,game);
+            }
         }
 
         stage.act();
@@ -51,27 +58,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
     public void dispose() {
-
     }
 
     public void generateMap() {
@@ -120,8 +122,18 @@ public class GameScreen implements Screen {
             y += 32;
             x = 0;
         }
+        x = 205;
+        y = 465;
+        new PumkinSeed(x, y, stage,game);
 
+        x = 256;
+        y = 465;
+        new CarrotSeed(x, y, stage,game);
+        x = 300;
+        y = 465;
+        new Potato(x,y,stage,game);
+        x = 205;
+        y = 435;
+        new Tomato(x, y, stage,game);
     }
-
-
 }
