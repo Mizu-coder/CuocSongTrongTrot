@@ -17,4 +17,12 @@ public class Tomato extends MyActor{
             }
         });
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(game.seedt == 0){
+            game.type = 6;
+        }
+    }
 }

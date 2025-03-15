@@ -4,16 +4,16 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Potato extends MyActor{
+public class Bean extends MyActor{
     Master game;
-    Potato(float x, float y, Stage s, Master game) {
+    Bean(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
-        textureRegion = Utils.seedpacket(16,16,16,16);
-        setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+        textureRegion = Utils.seedpacket(16*4,16,16,16);
+        setSize(textureRegion.getRegionWidth()*2, textureRegion.getRegionHeight()*2);
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                game.type = 3;
+                game.type = 5;
             }
         });
     }
@@ -21,7 +21,7 @@ public class Potato extends MyActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(game.seedp == 0){
+        if(game.seedb == 0){
             game.type = 6;
         }
     }

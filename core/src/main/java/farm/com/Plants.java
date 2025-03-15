@@ -18,7 +18,6 @@ public class Plants extends MyActor{
             frames[2] = Utils.getRegionPlants(32,0,16,16);
             frames[3] = Utils.getRegionPlants(48,0,16,16);
             frames[4] = Utils.getRegionPlants(64,0,16,16);
-
             animation = new Animation<TextureRegion>(0.5f, frames);
         }
         if(game.type == 2){
@@ -48,10 +47,19 @@ public class Plants extends MyActor{
             frames[4] = Utils.getRegionPlants(16*4,16*3,16,16);
             animation = new Animation<TextureRegion>(0.5f, frames);
         }
+        if(game.type == 5){
+            TextureRegion[] frames = new TextureRegion[5];
+            frames[0] = Utils.getRegionPlants(0,16*4,16,16*3);
+            frames[1] = Utils.getRegionPlants(16,16*4,16,16*3);
+            frames[2] = Utils.getRegionPlants(16*2,16*4,16,16*3);
+            frames[3] = Utils.getRegionPlants(16*3,16*4,16,16*3);
+            frames[4] = Utils.getRegionPlants(16*4,16*4,16,16*3);
+            animation = new Animation<TextureRegion>(0.5f, frames);
+        }
 
         time = 0;
         textureRegion = animation.getKeyFrame(time);
-        setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
+        setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
     }
 
     @Override

@@ -40,15 +40,33 @@ public class GameScreen implements Screen {
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
 
-            System.out.println("x = " + Gdx.input.getX() + " y = " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
-            if(game.type == 1) {
-                new Plants(mousePosition.x, mousePosition.y, stage,game);
+//            System.out.println("x = " + Gdx.input.getX() + " y = " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
+            if(game.type == 1){
+                System.out.println(mousePosition.x + " " + Master.soil.getX() + " " + game.seedpu);
             }
-            if(game.type == 2) {
-                new Plants(mousePosition.x, mousePosition.y, stage,game);
+            if(game.type == 1 && game.seedpu > 0
+                && Master.soil.getX() < mousePosition.x
+                && Master.soil.getX() + Master.soil.getWidth() > mousePosition.x
+                && Master.soil.getY() < mousePosition.y
+                && mousePosition.y < Master.soil.getY() + Master.soil.getHeight()) {
+                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
+                game.seedpu -= 1;
             }
-            if(game.type == 3) {
-                new Plants(mousePosition.x, mousePosition.y, stage,game);
+            if(game.type == 2 && game.seedc > 0) {
+                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
+                game.seedc -= 1;
+            }
+            if(game.type == 3&& game.seedp > 0) {
+                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
+                game.seedp -= 1;
+            }
+            if(game.type == 4 && game.seedt > 0) {
+                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
+                game.seedt -= 1;
+            }
+            if(game.type == 5 && game.seedb > 0) {
+                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16*2, stage,game);
+                game.seedb -= 1;
             }
         }
 
@@ -116,7 +134,7 @@ public class GameScreen implements Screen {
         y = 10;
         for(int i = 0; i < 8; i++){
             for (int t = 0; t < 14; t++) {
-                new Soil(x, y, stage);
+                Master.soil  = new Soil(x, y, stage);
                 x += 32;
             }
             y += 32;
@@ -129,11 +147,14 @@ public class GameScreen implements Screen {
         x = 256;
         y = 465;
         new CarrotSeed(x, y, stage,game);
-        x = 300;
+        x = 310;
         y = 465;
         new Potato(x,y,stage,game);
         x = 205;
         y = 435;
         new Tomato(x, y, stage,game);
+        x = 273;
+        y = 435;
+        new Bean(x, y, stage,game);
     }
 }

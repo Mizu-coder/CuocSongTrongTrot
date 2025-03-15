@@ -22,7 +22,15 @@ public class Master extends Game {
     public static Home home;
     public static Well well;
     public static Tree tree;
+    public static Soil soil;
+    public static Plants plants;
+
     int type = 0;
+    int seedc = 5;
+    int seedb = 5;
+    int seedp = 5;
+    int seedt = 5;
+    int seedpu = 5;
     @Override
     public void create() {
 

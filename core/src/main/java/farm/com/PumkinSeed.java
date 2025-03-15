@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class PumkinSeed extends MyActor{
     Master game;
+
     PumkinSeed(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
@@ -16,5 +17,13 @@ public class PumkinSeed extends MyActor{
                 game.type = 1;
             }
         });
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(game.seedpu == 0){
+            game.type = 6;
+        }
     }
 }
