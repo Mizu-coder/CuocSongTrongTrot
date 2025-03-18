@@ -186,7 +186,7 @@ public class GameScreen implements Screen {
         }
         x = 0;
         y = Gdx.graphics.getHeight()/1.65f;
-        Master.home = new Home(x, y, stage);
+        Master.home = new Home(x, y, stage,game);
         x = 200;
         y = 303;
         Master.well = new Well(x, y, stage,game);
