@@ -15,22 +15,7 @@ public class Well extends MyActor{
         setSize(textureRegion.getRegionWidth()*3, textureRegion.getRegionHeight()*4);
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if(game.type ==1){
-                    game.water = 1;
-                }
-                if(game.type ==2){
-                    game.water = 2;
-                }
-                if(game.type ==3){
-                    game.water = 3;
-                }
-                if(game.type ==4){
-                    game.water = 4;
-                }
-                if(game.type ==5){
-                    game.water = 5;
-                }
-
+                game.water = true;
             }
         });
     }

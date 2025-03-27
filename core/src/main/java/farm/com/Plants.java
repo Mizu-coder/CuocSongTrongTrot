@@ -74,36 +74,35 @@ public class Plants extends MyActor{
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if(game.type == 1){
-                    if(game.water == 1){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                        game.seedpu +=1;
-                        setPosition(1000,1000);
-                    }
-                }
-                if(game.type == 2){
-                    if(game.water == 2){
+                if(game.water) {
+                    game.water = false;
+                    if (game.type == 1) {
                         time += Gdx.graphics.getDeltaTime();
                         textureRegion = animation.getKeyFrame(time);
                     }
-                }
-                if(game.type == 3){
-                    if(game.water == 3){
+                    if (game.type == 2) {
                         time += Gdx.graphics.getDeltaTime();
                         textureRegion = animation.getKeyFrame(time);
                     }
-                }
-                if(game.type == 4){
-                    if(game.water == 4){
+                    if (game.type == 3) {
                         time += Gdx.graphics.getDeltaTime();
                         textureRegion = animation.getKeyFrame(time);
                     }
-                }
-                if(game.type == 5){
-                    if(game.water == 5){
+                    if (game.type == 4) {
                         time += Gdx.graphics.getDeltaTime();
                         textureRegion = animation.getKeyFrame(time);
+                    }
+                    if (game.type == 5) {
+                        time += Gdx.graphics.getDeltaTime();
+                        textureRegion = animation.getKeyFrame(time);
+                    }
+                } else {
+                    if(animation.isAnimationFinished(time)){
+                        if (game.type == 1) {
+                            new Collect(getX(), getY(), 3, getStage());
+                            game.seedpu += 3;
+                            remove();
+                        }
                     }
                 }
 
@@ -114,6 +113,5 @@ public class Plants extends MyActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-
     }
 }

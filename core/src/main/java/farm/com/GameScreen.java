@@ -7,6 +7,7 @@ import com.badlogic.        gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
@@ -23,6 +24,8 @@ public class GameScreen implements Screen {
     Character famer;
     public static int day = 1;
     public static float time = 0;
+
+    Array<Plants> listPlants = new Array<>();
     public GameScreen(Master game) {
         this.game = game;
         stage = new Stage();
@@ -86,53 +89,55 @@ public class GameScreen implements Screen {
             if(game.type == 1){
                 System.out.println(mousePosition.x + " " + Master.soil.getX() + " " + game.seedpu);
             }
-            if(game.type == 1 && game.seedpu > 0
-                && 0 < mousePosition.x
-                && 14*32 > mousePosition.x
-                && 0 < mousePosition.y
-                && mousePosition.y < 8*32 && game.water != 1){
-                new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
-                game.seedpu -= 1;
-                layout.setText(game.font, "" + game.seedpu);
-            }
-            if(game.type == 2 && game.seedc > 0
-                && 0 < mousePosition.x
-                && 14*32 > mousePosition.x
-                && 0 < mousePosition.y
-                && mousePosition.y < 8*32&& game.water != 2) {
-                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
-                game.seedc -= 1;
-                layout2.setText(game.font, "" + game.seedc);
-            }
-            if(game.type == 3&& game.seedp > 0
-                && 0 < mousePosition.x
-                && 14*32 > mousePosition.x
-                && 0 < mousePosition.y
-                && mousePosition.y < 8*32&& game.water != 3) {
-                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
-                game.seedp -= 1;
-                layout3.setText(game.font, "" + game.seedp);
-            }
-            if(game.type == 4 && game.seedt > 0
-                && 0 < mousePosition.x
-                && 14*32 > mousePosition.x
-                && 0 < mousePosition.y
-                && mousePosition.y < 8*32&& game.water != 4) {
-                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16, stage,game);
-                game.seedt -= 1;
-                layout4.setText(game.font, "" + game.seedt);
-            }
-            if(game.type == 5 && game.seedb > 0
-                && 0 < mousePosition.x
-                && 14*32 > mousePosition.x
-                && 0 < mousePosition.y
-                && mousePosition.y < 8*32&& game.water != 5) {
-                Master.plants = new Plants(mousePosition.x-16, mousePosition.y-16*2, stage,game);
-                game.seedb -= 1;
-                layout5.setText(game.font, "" + game.seedb);
+            if(isPositionFree(mousePosition)) {
+                if (game.type == 1 && game.seedpu > 0
+                    && 0 < mousePosition.x
+                    && 14 * 32 > mousePosition.x
+                    && 0 < mousePosition.y
+                    && mousePosition.y < 8 * 32 && !game.water) {
+                    listPlants.add(new Plants(mousePosition.x - 16, mousePosition.y - 16, stage, game));
+                    game.seedpu -= 1;
+                }
+                if (game.type == 2 && game.seedc > 0
+                    && 0 < mousePosition.x
+                    && 14 * 32 > mousePosition.x
+                    && 0 < mousePosition.y
+                    && mousePosition.y < 8 * 32 && !game.water) {
+                    listPlants.add(new Plants(mousePosition.x - 16, mousePosition.y - 16, stage, game));
+                    game.seedc -= 1;
+                }
+                if (game.type == 3 && game.seedp > 0
+                    && 0 < mousePosition.x
+                    && 14 * 32 > mousePosition.x
+                    && 0 < mousePosition.y
+                    && mousePosition.y < 8 * 32 && !game.water) {
+                    listPlants.add(new Plants(mousePosition.x - 16, mousePosition.y - 16, stage, game));
+                    game.seedp -= 1;
+                }
+                if (game.type == 4 && game.seedt > 0
+                    && 0 < mousePosition.x
+                    && 14 * 32 > mousePosition.x
+                    && 0 < mousePosition.y
+                    && mousePosition.y < 8 * 32 && !game.water) {
+                    listPlants.add(new Plants(mousePosition.x - 16, mousePosition.y - 16, stage, game));
+                    game.seedt -= 1;
+                }
+                if (game.type == 5 && game.seedb > 0
+                    && 0 < mousePosition.x
+                    && 14 * 32 > mousePosition.x
+                    && 0 < mousePosition.y
+                    && mousePosition.y < 8 * 32 && !game.water) {
+                    listPlants.add(new Plants(mousePosition.x - 16, mousePosition.y - 16, stage, game));
+                    game.seedb -= 1;
+                }
             }
         }
 
+        layout.setText(game.font, "" + game.seedpu);
+        layout2.setText(game.font, "" + game.seedc);
+        layout3.setText(game.font, "" + game.seedp);
+        layout4.setText(game.font, "" + game.seedt);
+        layout5.setText(game.font, "" + game.seedb);
         stage.act();
         stage.draw();
         game.batch.begin();
@@ -145,6 +150,15 @@ public class GameScreen implements Screen {
             game.font.draw(game.batch,"Day " + day,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
         }
         game.batch.end();
+    }
+
+    public boolean isPositionFree(Vector2 position){
+        for (Plants plants: listPlants){
+            if (plants.getBound().contains(position)){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

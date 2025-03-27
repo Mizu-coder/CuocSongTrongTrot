@@ -32,7 +32,7 @@ public class Master extends Game {
     int seedt = 5;
     int seedpu = 5;
 
-    int water = 0;
+    boolean water = false;
     int check = 0;
 
     int end = 0;
