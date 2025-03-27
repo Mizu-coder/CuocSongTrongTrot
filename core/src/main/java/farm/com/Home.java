@@ -16,8 +16,9 @@ public class Home extends MyActor{
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                new Day(0,0,s);
-                System.out.println(11);
+                game.check = 1;
+                GameScreen.day += 1;
+                new Day(0,0,s,game);
             }
         });
     }

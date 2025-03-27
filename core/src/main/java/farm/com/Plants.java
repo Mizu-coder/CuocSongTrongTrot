@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Plants extends MyActor{
     Master game;
     float time;
+    int result;
     Animation<TextureRegion> animation;
     Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
@@ -22,6 +23,8 @@ public class Plants extends MyActor{
             frames[3] = Utils.getRegionPlants(48, 0, 16, 16);
             frames[4] = Utils.getRegionPlants(64, 0, 16, 16);
             animation = new Animation<TextureRegion>(0.01f,frames);
+
+
         }
         if (game.type == 2) {
             TextureRegion[] frames = new TextureRegion[5];
@@ -30,6 +33,7 @@ public class Plants extends MyActor{
             frames[2] = Utils.getRegionPlants(16 * 2, 16, 16, 16);
             frames[3] = Utils.getRegionPlants(16 * 3, 16, 16, 16);
             frames[4] = Utils.getRegionPlants(16 * 4, 16, 16, 16);
+            result = 2;
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 3) {
@@ -39,6 +43,7 @@ public class Plants extends MyActor{
             frames[2] = Utils.getRegionPlants(16 * 2, 16 * 2, 16, 16);
             frames[3] = Utils.getRegionPlants(16 * 3, 16 * 2, 16, 16);
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 2, 16, 16);
+            result = 3;
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 4) {
@@ -48,6 +53,7 @@ public class Plants extends MyActor{
             frames[2] = Utils.getRegionPlants(16 * 2, 16 * 3, 16, 16);
             frames[3] = Utils.getRegionPlants(16 * 3, 16 * 3, 16, 16);
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 3, 16, 16);
+            result = 4;
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 5) {
@@ -57,6 +63,7 @@ public class Plants extends MyActor{
             frames[2] = Utils.getRegionPlants(16 * 2, 16 * 4, 16, 16 * 3);
             frames[3] = Utils.getRegionPlants(16 * 3, 16 * 4, 16, 16 * 3);
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 4, 16, 16 * 3);
+            result = 5;
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
 
@@ -71,6 +78,8 @@ public class Plants extends MyActor{
                     if(game.water == 1){
                         time += Gdx.graphics.getDeltaTime();
                         textureRegion = animation.getKeyFrame(time);
+                        game.seedpu +=1;
+                        setPosition(1000,1000);
                     }
                 }
                 if(game.type == 2){

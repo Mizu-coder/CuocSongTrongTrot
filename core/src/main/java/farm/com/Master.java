@@ -34,6 +34,8 @@ public class Master extends Game {
 
     int water = 0;
     int check = 0;
+
+    int end = 0;
     @Override
     public void create() {
 

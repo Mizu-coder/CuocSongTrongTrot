@@ -19,11 +19,14 @@ public class GameScreen implements Screen {
     GlyphLayout layout3;
     GlyphLayout layout4;
     GlyphLayout layout5;
+    GlyphLayout end;
     Character famer;
-
+    public static int day = 1;
+    public static float time = 0;
     public GameScreen(Master game) {
         this.game = game;
         stage = new Stage();
+
     }
     @Override
     public void show() {
@@ -38,6 +41,7 @@ public class GameScreen implements Screen {
         layout3 = new GlyphLayout();
         layout4 = new GlyphLayout();
         layout5 = new GlyphLayout();
+        end = new GlyphLayout();
 
         layout.setText(game.font, "" + game.seedpu);
         layout.width = 0.4f;
@@ -59,6 +63,8 @@ public class GameScreen implements Screen {
         layout5.width = 0.4f;
         layout5.height = 0.4f;
 
+        end.setText(game.font, "Day " + day);
+
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -67,6 +73,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
+
 
 
 
@@ -134,6 +141,9 @@ public class GameScreen implements Screen {
         game.font.draw(game.batch, layout3,335,495);
         game.font.draw(game.batch, layout4,232,465);
         game.font.draw(game.batch, layout5,300,465);
+        if(game.check == 1){
+            game.font.draw(game.batch,"Day " + day,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        }
         game.batch.end();
     }
 
