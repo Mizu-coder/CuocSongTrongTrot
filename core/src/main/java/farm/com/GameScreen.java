@@ -24,9 +24,9 @@ public class GameScreen implements Screen {
     GlyphLayout layout4;
     GlyphLayout layout5;
     Character famer;
-
     Array<Soil> soils;
     Array<Plants> listPlants;
+    Array<Cage> cages;
 
     static final int WIDTH = 960;
     static final int HEIGHT = 1080;
@@ -37,6 +37,7 @@ public class GameScreen implements Screen {
         staticStage = new Stage();
         soils = new Array<>();
         listPlants = new Array<>();
+        cages = new Array<>();
     }
     @Override
     public void show() {
@@ -208,7 +209,8 @@ public class GameScreen implements Screen {
         }
 
         // chuồng nuôi
-        new Cage(0,0, stage);
+        cages.add(new Cage(0,0, stage, 8));
+        cages.add(new Cage(0, 32 * 8, stage, 5));
 
 
         x = Gdx.graphics.getWidth() - 200;
