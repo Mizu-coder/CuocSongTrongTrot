@@ -1,11 +1,10 @@
 package farm.com;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-public class Soil extends MyActor{
+public class Cage extends MyActor{
     TextureRegion t1;
     TextureRegion t2;
     TextureRegion t3;
@@ -16,17 +15,17 @@ public class Soil extends MyActor{
     TextureRegion t8;
     TextureRegion t9;
 
-    Soil(float x, float y, Stage s) {
+    Cage(float x, float y, Stage s) {
         super(x, y, s);
-        t1 = Utils.getRegion(0,48,16,16);
-        t2 = Utils.getRegion(16,48,16,16);
-        t3 = Utils.getRegion(32,48,16,16);
-        t4 = Utils.getRegion(0,32,16,16);
-        t5 = Utils.getRegion(16,32,16,16);
-        t6 = Utils.getRegion( 32,32,16,16);
-        t7 = Utils.getRegion( 0,16,16,16);
-        t8 = Utils.getRegion( 16,16,16,16);
-        t9 = Utils.getRegion( 32,16,16,16);
+        t1 = Utils.getRegion(128,80,16,16);
+        t2 = Utils.getRegion(128 + 16,80,16,16);
+        t3 = Utils.getRegion(128 + 32,80,16,16);
+        t4 = Utils.getRegion(128,64,16,16);
+        t5 = Utils.getRegion(128 + 16,64,16,16);
+        t6 = Utils.getRegion( 128 + 32,64,16,16);
+        t7 = Utils.getRegion( 128 ,48,16,16);
+        t8 = Utils.getRegion( 128 + 16,48,16,16);
+        t9 = Utils.getRegion( 128 + 32,48,16,16);
         setSize(32*3, 32*7);
     }
 
@@ -38,6 +37,8 @@ public class Soil extends MyActor{
         x += 32;
         batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
+        batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
         batch.draw(t3, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x = getX();
         y += 32;
@@ -45,39 +46,51 @@ public class Soil extends MyActor{
         x += 32;
         batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
-        batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
-        x = getX();
-        y += 32;
-        batch.draw(t4, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
-        x += 32;
-        batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+     //   batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
         batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x = getX();
         y += 32;
         batch.draw(t4, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
-        batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+    //    batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+     //   batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
         batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x = getX();
         y += 32;
         batch.draw(t4, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
-        batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+    //    batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+    //    batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
         batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x = getX();
         y += 32;
         batch.draw(t4, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
-        batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+    //    batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+     //   batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+        batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x = getX();
+        y += 32;
+        batch.draw(t4, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+     //   batch.draw(t5, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+      //  batch.draw(t2, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
         batch.draw(t6, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
 
         x = getX();
         y += 32;
         batch.draw(t7, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
+        x += 32;
+        batch.draw(t8, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;
         batch.draw(t8, x, y, getOriginX(), getOriginY(), 32, 32, getScaleX(), getScaleY(), getRotation());
         x += 32;

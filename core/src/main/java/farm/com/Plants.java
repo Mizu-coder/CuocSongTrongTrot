@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Plants extends MyActor{
     Master game;
     float time;
+    boolean isWatered = false;
     Animation<TextureRegion> animation;
     Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
@@ -67,37 +69,19 @@ public class Plants extends MyActor{
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if(game.type == 1){
-                    if(game.water == 1){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                    }
+                if(game.water){
+                    isWatered = true;
+                    game.water = false;
+                    addAction(Actions.sequence(
+                        Actions.delay(3),
+                        Actions.run(
+                            () -> {
+                                time += Gdx.graphics.getDeltaTime();
+                                textureRegion = animation.getKeyFrame(time);
+                            }
+                        )
+                    ));
                 }
-                if(game.type == 2){
-                    if(game.water == 2){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                    }
-                }
-                if(game.type == 3){
-                    if(game.water == 3){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                    }
-                }
-                if(game.type == 4){
-                    if(game.water == 4){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                    }
-                }
-                if(game.type == 5){
-                    if(game.water == 5){
-                        time += Gdx.graphics.getDeltaTime();
-                        textureRegion = animation.getKeyFrame(time);
-                    }
-                }
-
             }
         });
     }
@@ -105,6 +89,5 @@ public class Plants extends MyActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-
     }
 }

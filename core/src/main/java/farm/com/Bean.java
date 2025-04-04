@@ -17,12 +17,4 @@ public class Bean extends MyActor{
             }
         });
     }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if(game.seedb == 0){
-            game.type = 6;
-        }
-    }
 }

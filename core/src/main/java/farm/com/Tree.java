@@ -8,8 +8,8 @@ public class Tree extends MyActor{
 
     Tree(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = Utils.getRegion(16*3,0,16,16*2);
-        setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
+        textureRegion = new TextureRegion(new Texture("trees.png"));
+        setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
     }
 
 }

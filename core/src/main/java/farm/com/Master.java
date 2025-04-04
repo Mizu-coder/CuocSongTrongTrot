@@ -17,13 +17,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Master extends Game {
     SpriteBatch batch;
     BitmapFont font;
-    Stage s;
     public static Lake lake;
     public static Home home;
     public static Well well;
     public static Tree tree;
-    public static Soil soil;
-    public static Plants plants;
 
     int type = 0;
     int seedc = 5;
@@ -32,8 +29,8 @@ public class Master extends Game {
     int seedt = 5;
     int seedpu = 5;
 
-    int water = 0;
-    int check = 0;
+    boolean water = false;
+    GameScreen gameScreen;
     @Override
     public void create() {
 
@@ -45,6 +42,7 @@ public class Master extends Game {
         fontParameters.color = Color.YELLOW;
         font = fontGenerator.generateFont(fontParameters);
         fontGenerator.dispose();
+        gameScreen = new GameScreen(this);
         this.setScreen(new MenuScreen(this));
 
     }

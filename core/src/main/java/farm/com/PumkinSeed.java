@@ -18,12 +18,4 @@ public class PumkinSeed extends MyActor{
             }
         });
     }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if(game.seedpu == 0){
-            game.type = 6;
-        }
-    }
 }

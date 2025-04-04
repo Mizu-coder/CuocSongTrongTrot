@@ -17,12 +17,4 @@ public class Potato extends MyActor{
             }
         });
     }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        if(game.seedp == 0){
-            game.type = 6;
-        }
-    }
 }
