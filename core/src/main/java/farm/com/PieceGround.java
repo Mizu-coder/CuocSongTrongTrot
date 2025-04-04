@@ -33,7 +33,7 @@ public class PieceGround extends MyActor {
         textureRegionArray.add(t1);
         textureRegionArray.add(t2);
         textureRegionArray.add(t3);
-        textureRegionArray.add(t8);
+       // textureRegionArray.add(t8);
 
         textureRegion = textureRegionArray.random();
         setSize(32, 32);

@@ -217,6 +217,15 @@ public class GameScreen implements Screen {
         new Cock(280, 230, stage, 3);
         new Cock(870, 620, stage, 2);
 
+        // Duong di trong nong trai
+        x = 460;
+        y = 0;
+        for (int i = 0; i < 20; i++) {
+            new Ground(x, y, stage, 2);
+            new Ground(x + 32, y, stage, 2);
+            y += 32;
+        }
+
 
         x = Gdx.graphics.getWidth() - 200;
         y = Gdx.graphics.getHeight() - 40;
