@@ -212,6 +212,11 @@ public class GameScreen implements Screen {
         cages.add(new Cage(0,0, stage, 8));
         cages.add(new Cage(0, 32 * 8, stage, 5));
 
+        // Vài đôống rơm
+        new Cock(250, HEIGHT - 200, stage, 3);
+        new Cock(280, 230, stage, 3);
+        new Cock(870, 620, stage, 2);
+
 
         x = Gdx.graphics.getWidth() - 200;
         y = Gdx.graphics.getHeight() - 40;
