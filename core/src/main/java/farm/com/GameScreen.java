@@ -78,6 +78,9 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(staticStage);
 
         Gdx.input.setInputProcessor(multiplexer);
+
+        new Cow(413,886,stage);
+        new Pig(400,800,stage);
     }
 
     @Override
@@ -105,6 +108,7 @@ public class GameScreen implements Screen {
             Vector2 mousePosition = new Vector2();
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
+            System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
 
             if(game.type == 1 && game.seedpu > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)){
                 listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
