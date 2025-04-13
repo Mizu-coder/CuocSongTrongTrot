@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Home extends MyActor{
     Master game;
+
     Home(float x, float y, Stage s,Master game) {
         super(x, y, s);
         this.game = game;
@@ -18,6 +19,13 @@ public class Home extends MyActor{
             public void clicked(InputEvent event, float x, float y) {
                 new Day(0,0,s);
                 System.out.println(11);
+                game.gameScreen.day += 1;
+                for(Chicken c: game.gameScreen.chickens){
+                    c.age++;
+                }
+                for(Pig p: game.gameScreen.pigs){
+                    p.age++;
+                }
             }
         });
     }

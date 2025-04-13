@@ -5,16 +5,21 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-public class Pig extends AnimalActor{
+public class Chicken extends AnimalActor{
     int time;
-    int age = 1;
     Animation<TextureRegion> animation;
-    Pig(float x, float y, Stage s) {
+    Master game;
+    GameScreen gameScreen;
+    int age;
+    Chicken(float x, float y, Stage s, Master game) {
         super(x, y, s);
         TextureRegion[] frames = new TextureRegion[2];
-        frames[0] = Utils.piglet(0,0,8,8);
-        frames[1] = Utils.piglet(16,0,8,8);
+        this.game = game;
+        gameScreen = new GameScreen(game);
+        frames[0] = Utils.chic(0,0,8,8);
+        frames[1] = Utils.chic(16,0,8,8);
         animation = new Animation(0.5f, frames);
         time = 0;
         textureRegion = animation.getKeyFrame(time);
@@ -26,19 +31,15 @@ public class Pig extends AnimalActor{
         super.draw(batch, parentAlpha);
         time += Gdx.graphics.getDeltaTime();
         textureRegion = animation.getKeyFrame(time);
+
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(age >= 5){
-           // textureRegion = Utils.pig(0,0,16,8);
-            textureRegion = Utils.pig(16,0,16,8);
+        if(age >= 3){
+            textureRegion = Utils.chike(0,0,8,8);
+            textureRegion = Utils.chike(8,0,8,8);
         }
     }
-
 }
-
-
-
-

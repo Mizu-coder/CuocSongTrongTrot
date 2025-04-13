@@ -29,6 +29,8 @@ public class Master extends Game {
     int seedt = 5;
     int seedpu = 5;
 
+    int timing = 0;
+
     boolean water = false;
     GameScreen gameScreen;
     @Override
