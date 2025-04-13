@@ -24,10 +24,15 @@ public class GameScreen implements Screen {
     GlyphLayout layout3;
     GlyphLayout layout4;
     GlyphLayout layout5;
+    GlyphLayout da;
     Character famer;
     Array<Soil> soils;
     Array<Plants> listPlants;
     Array<Cage> cages;
+    Array<Chicken> chickens;
+    Array<Pig> pigs;
+    int day;
+    int timing;
 
     static final int WIDTH = 960;
     static final int HEIGHT = 1080;
@@ -39,11 +44,16 @@ public class GameScreen implements Screen {
         soils = new Array<>();
         listPlants = new Array<>();
         cages = new Array<>();
+        chickens = new Array<>();
+        pigs = new Array<>();
+
     }
     @Override
     public void show() {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
+        day = 1;
+        timing = day;
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -58,6 +68,7 @@ public class GameScreen implements Screen {
         layout3 = new GlyphLayout();
         layout4 = new GlyphLayout();
         layout5 = new GlyphLayout();
+        da = new GlyphLayout();
 
         layout.setText(game.font, "" + game.seedpu);
         layout.width = 0.4f;
@@ -79,11 +90,21 @@ public class GameScreen implements Screen {
         layout5.width = 0.4f;
         layout5.height = 0.4f;
 
+        da.setText(game.font,"Day "+ day);
+        da.width = 0.4f;
+        da.height = 0.4f;
+
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
 
         Gdx.input.setInputProcessor(multiplexer);
+
+        new Cow(413,886,stage);
+
+        pigs.add(new Pig(400,800,stage));
+        chickens.add(new Chicken(420,770,stage,game));
+
     }
 
     @Override
@@ -111,6 +132,7 @@ public class GameScreen implements Screen {
             Vector2 mousePosition = new Vector2();
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
+            System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
 
             if(game.type == 1 && game.seedpu > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)){
                 listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));

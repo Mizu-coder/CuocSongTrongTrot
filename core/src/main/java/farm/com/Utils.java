@@ -4,6 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Utils {
+    private static Texture chic = new Texture("Chicken_run.png");
+    private static Texture ch = new Texture("Chick_run.png");
+    private static Texture pi = new Texture("Pig_run.png");
+    private static Texture pil = new Texture("Piglet_run.png");
+    private static Texture co = new Texture("Cow_run.png");
     private static Texture texture = new Texture("tilemap_packed.png");
     private static Texture texture2 = new Texture("spring farm tilemap.png");
     private static Texture texturePlants = new Texture("plants free.png");
@@ -20,4 +25,20 @@ public class Utils {
     public static TextureRegion seedpacket(int x, int y, int width, int height) {
         return new TextureRegion(seed,x,y,width,height);
     }
+    public static TextureRegion cow(int x, int y, int width, int height) {
+        return new TextureRegion(co,x,y,width,height);
+    }
+    public static TextureRegion piglet(int x, int y, int width, int height) {
+        return new TextureRegion(pil,x,y,width,height);
+    }
+    public static TextureRegion pig(int x, int y, int width, int height) {
+        return new TextureRegion(pi,x,y,width,height);
+    }
+    public static TextureRegion chic(int x, int y, int width, int height) {
+        return new TextureRegion(ch,x,y,width,height);
+    }
+    public static TextureRegion chike(int x, int y, int width, int height) {
+        return new TextureRegion(chic,x,y,width,height);
+    }
+
 }
