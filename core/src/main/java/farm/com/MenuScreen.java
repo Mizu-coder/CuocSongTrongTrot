@@ -2,6 +2,7 @@ package farm.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,20 +20,17 @@ public class MenuScreen implements Screen {
     Stage stage;
     OrthographicCamera camera;
     Master game;
-    Texture start;
+    Start start;
     GlyphLayout layout;
+
+    Music music;
 
 
     public MenuScreen(Master game){
         this.game = game;
         stage = new Stage();
-
-    }
-
-    @Override
-    public void show() {
         background = new Texture("menu.png");
-        start = new Texture("start.png");
+//        start = new Texture("start.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
@@ -42,21 +40,28 @@ public class MenuScreen implements Screen {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = game.font;
         style.fontColor = Color.WHITE;
-        style.up = new TextureRegionDrawable(start);
-        TextButton startButton = new TextButton("",style);
-        startButton.setPosition(Gdx.graphics.getWidth()/2 - startButton.getWidth()/2,
-            Gdx.graphics.getHeight()/2 - startButton.getHeight()/2) ;
-        stage.addActor(startButton);
+        start = new Start(Gdx.graphics.getWidth()/3+32, 140,stage);
         Gdx.input.setInputProcessor(stage);
-        startButton.addListener(new ClickListener(){
+        start.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(game.gameScreen);
+                start.remove();
             }
         });
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
+        music.setLooping(true);
+        music.play();
+    }
+
+    @Override
+    public void show() {
+
     }
 
     @Override
     public void render(float v) {
+
         ScreenUtils.clear(Color.BLUE);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
@@ -70,7 +75,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-
+//        stage.clear();
     }
 
     @Override
@@ -85,7 +90,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void hide() {
-
+        stage.clear();
     }
 
     @Override

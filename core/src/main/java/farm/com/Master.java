@@ -15,7 +15,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
-    SpriteBatch batch;
+    //public static Cage cages;
+    public SpriteBatch batch;
     BitmapFont font;
     public static Lake lake;
     public static Home home;
@@ -33,6 +34,7 @@ public class Master extends Game {
 
     boolean water = false;
     GameScreen gameScreen;
+    MenuScreen menuScreen;
     @Override
     public void create() {
 
@@ -45,7 +47,8 @@ public class Master extends Game {
         font = fontGenerator.generateFont(fontParameters);
         fontGenerator.dispose();
         gameScreen = new GameScreen(this);
-        this.setScreen(new MenuScreen(this));
+        menuScreen = new MenuScreen(this);
+        this.setScreen(menuScreen);
 
     }
 

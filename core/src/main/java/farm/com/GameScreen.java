@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -53,6 +54,12 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = day;
+
+        // Vài đống rơm
+        new Cock(250, HEIGHT - 200, stage, 3);
+        new Cock(280, 230, stage, 3);
+        new Cock(870, 620, stage, 2);
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
@@ -232,11 +239,8 @@ public class GameScreen implements Screen {
         // chuồng nuôi
         cages.add(new Cage(0,0, stage, 8));
         cages.add(new Cage(0, 32 * 8, stage, 5));
+        cages.add(new Cage(700, 20 * 8, stage, 5));
 
-        // Vài đôống rơm
-        new Cock(250, HEIGHT - 200, stage, 3);
-        new Cock(280, 230, stage, 3);
-        new Cock(870, 620, stage, 2);
 
         // Duong di trong nong trai
         x = 460;
