@@ -33,6 +33,7 @@ public class GameScreen implements Screen {
     Array<Pig> pigs;
     int day;
     int timing;
+    boolean rain;
 
     static final int WIDTH = 960;
     static final int HEIGHT = 1080;
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = day;
+        rain = true;
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -105,6 +107,8 @@ public class GameScreen implements Screen {
         pigs.add(new Pig(400,800,stage));
         chickens.add(new Chicken(420,770,stage,game));
 
+
+
     }
 
     @Override
@@ -112,6 +116,10 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
+
+        if(rain == true) {
+            new Rain(900, 535,stage);
+        }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
