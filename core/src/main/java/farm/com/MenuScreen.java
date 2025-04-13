@@ -2,6 +2,7 @@ package farm.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,6 +22,8 @@ public class MenuScreen implements Screen {
     Master game;
     Start start;
     GlyphLayout layout;
+
+    Music music;
 
 
     public MenuScreen(Master game){
@@ -46,6 +49,9 @@ public class MenuScreen implements Screen {
             }
         });
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
@@ -55,6 +61,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float v) {
+
         ScreenUtils.clear(Color.BLUE);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
