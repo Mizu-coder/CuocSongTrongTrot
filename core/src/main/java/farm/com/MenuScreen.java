@@ -45,7 +45,7 @@ public class MenuScreen implements Screen {
         style.up = new TextureRegionDrawable(start);
         TextButton startButton = new TextButton("",style);
         startButton.setPosition(Gdx.graphics.getWidth()/2 - startButton.getWidth()/2,
-            Gdx.graphics.getHeight()/2 - startButton.getHeight()/2) ;
+            Gdx.graphics.getHeight()/2-50 - startButton.getHeight()/2-50) ;
         stage.addActor(startButton);
         Gdx.input.setInputProcessor(stage);
         startButton.addListener(new ClickListener(){

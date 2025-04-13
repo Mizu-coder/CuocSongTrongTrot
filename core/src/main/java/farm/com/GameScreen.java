@@ -43,6 +43,10 @@ public class GameScreen implements Screen {
     public void show() {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
+        // Vài đống rơm
+        new Cock(250, HEIGHT - 200, stage, 3);
+        new Cock(280, 230, stage, 3);
+        new Cock(870, 620, stage, 2);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -211,11 +215,8 @@ public class GameScreen implements Screen {
         // chuồng nuôi
         cages.add(new Cage(0,0, stage, 8));
         cages.add(new Cage(0, 32 * 8, stage, 5));
+        cages.add(new Cage(700, 20 * 8, stage, 5));
 
-        // Vài đôống rơm
-        new Cock(250, HEIGHT - 200, stage, 3);
-        new Cock(280, 230, stage, 3);
-        new Cock(870, 620, stage, 2);
 
         // Duong di trong nong trai
         x = 460;

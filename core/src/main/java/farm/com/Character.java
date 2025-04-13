@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+
+
 public class Character extends MyActor{
 
     Master game;
@@ -46,9 +48,13 @@ public class Character extends MyActor{
         if(getBound().overlaps(Master.home.getBound())) {
             return true;
         }
+       // if(getBound().overlaps(Master.cages.getBound())) {
+       //     return true;
+      //  }
         if(getBound().overlaps(Master.tree.getBound())) {
             return true;
         }
+
         if(getBound().overlaps(Master.well.getBound())) {
             return true;
         }
