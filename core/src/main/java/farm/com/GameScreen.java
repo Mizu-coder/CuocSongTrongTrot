@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.Random;
+
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
     Stage stage;
@@ -55,7 +57,8 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = day;
-        rain = true;
+        rain = MathUtils.randomBoolean();
+
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -107,6 +110,11 @@ public class GameScreen implements Screen {
         pigs.add(new Pig(400,800,stage));
         chickens.add(new Chicken(420,770,stage,game));
 
+        Master.sunny = new Sunny(920, 535,stage);
+        Master.rain = new Rain(900, 535,stage);
+        Master.rain.remove();
+
+        Master.sunny.remove();
 
 
     }
@@ -118,7 +126,11 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         if(rain == true) {
-            new Rain(900, 535,stage);
+           Master.rain = new Rain(900, 535,stage);
+           Master.sunny.remove();
+        } else {
+            Master.sunny = new Sunny(920, 535,stage);
+            Master.rain.remove();
         }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {

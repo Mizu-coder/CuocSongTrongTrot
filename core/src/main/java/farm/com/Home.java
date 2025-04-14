@@ -2,6 +2,7 @@ package farm.com;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -26,6 +27,7 @@ public class Home extends MyActor{
                 for(Pig p: game.gameScreen.pigs){
                     p.age++;
                 }
+                game.gameScreen.rain = MathUtils.randomBoolean();
             }
         });
     }

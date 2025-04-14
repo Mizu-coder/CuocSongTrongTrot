@@ -22,6 +22,8 @@ public class Master extends Game {
     public static Home home;
     public static Well well;
     public static Tree tree;
+    public static Rain rain;
+    public static Sunny sunny;
 
     int type = 0;
     int seedc = 5;
