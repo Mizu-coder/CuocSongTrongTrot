@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.actors.Weather;
+import farm.com.enums.WeatherType;
 
 import java.util.Random;
 
@@ -35,7 +37,6 @@ public class GameScreen implements Screen {
     Array<Pig> pigs;
     int day;
     int timing;
-    boolean rain;
 
     static final int WIDTH = 960;
     static final int HEIGHT = 1080;
@@ -49,7 +50,6 @@ public class GameScreen implements Screen {
         cages = new Array<>();
         chickens = new Array<>();
         pigs = new Array<>();
-
     }
     @Override
     public void show() {
@@ -57,8 +57,6 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = day;
-        rain = MathUtils.randomBoolean();
-
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -110,13 +108,6 @@ public class GameScreen implements Screen {
         pigs.add(new Pig(400,800,stage));
         chickens.add(new Chicken(420,770,stage,game));
 
-        Master.sunny = new Sunny(920, 535,stage);
-        Master.rain = new Rain(900, 535,stage);
-        Master.rain.remove();
-
-        Master.sunny.remove();
-
-
     }
 
     @Override
@@ -124,14 +115,6 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
-        if(rain == true) {
-           Master.rain = new Rain(900, 535,stage);
-           Master.sunny.remove();
-        } else {
-            Master.sunny = new Sunny(920, 535,stage);
-            Master.rain.remove();
-        }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
@@ -284,6 +267,8 @@ public class GameScreen implements Screen {
         new Tomato(x, y, staticStage,game);
         x += 40;
         new Bean(x, y, staticStage,game);
+        game.weather = new Weather(0,0, staticStage);
+        game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
     }
     private void genBackground(){
         float x = 0;

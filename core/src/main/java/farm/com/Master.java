@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.actors.Weather;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
@@ -22,8 +23,6 @@ public class Master extends Game {
     public static Home home;
     public static Well well;
     public static Tree tree;
-    public static Rain rain;
-    public static Sunny sunny;
 
     int type = 0;
     int seedc = 5;
@@ -32,11 +31,11 @@ public class Master extends Game {
     int seedt = 5;
     int seedpu = 5;
 
-    int timing = 0;
-
     boolean water = false;
     GameScreen gameScreen;
     MenuScreen menuScreen;
+    public Weather weather;
+
     @Override
     public void create() {
 
