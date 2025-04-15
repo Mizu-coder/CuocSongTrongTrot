@@ -8,13 +8,12 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.actors.Weather;
-import farm.com.enums.WeatherType;
-
-import java.util.Random;
+import farm.com.animals.Chicken;
+import farm.com.animals.Cow;
+import farm.com.animals.Pig;
 
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
@@ -59,7 +58,7 @@ public class GameScreen implements Screen {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
-        timing = day;
+        timing = 0;
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -115,6 +114,11 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
+
+        timing++;
+        if(timing % (60*24) == 0){
+            newDay();
+        }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
@@ -340,5 +344,17 @@ public class GameScreen implements Screen {
             }
         }
         return true;
+    }
+
+    public void newDay(){
+        new Day(0,0,stage);
+        day ++;
+        for(Chicken c: chickens){
+            c.age++;
+        }
+        for(Pig p: pigs){
+            p.age++;
+        }
+        game.weather.ranDomWeatherType();
     }
 }

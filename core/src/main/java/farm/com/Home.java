@@ -1,12 +1,10 @@
 package farm.com;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import farm.com.enums.WeatherType;
+import farm.com.animals.Chicken;
+import farm.com.animals.Pig;
 
 public class Home extends MyActor{
     Master game;
@@ -16,21 +14,6 @@ public class Home extends MyActor{
         this.game = game;
         textureRegion = Utils.getRegion(0,16*4,16*4,16*4);
         setSize(textureRegion.getRegionWidth()*3, textureRegion.getRegionHeight()*3);
-        addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                new Day(0,0,s);
-                System.out.println(11);
-                game.gameScreen.day += 1;
-                for(Chicken c: game.gameScreen.chickens){
-                    c.age++;
-                }
-                for(Pig p: game.gameScreen.pigs){
-                    p.age++;
-                }
-                game.weather.ranDomWeatherType();
-            }
-        });
     }
 
 }

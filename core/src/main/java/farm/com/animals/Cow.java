@@ -1,24 +1,31 @@
-package farm.com;
+package farm.com.animals;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.EnergyBar;
+import farm.com.MyActor;
+import farm.com.Utils;
 
-public class Pig extends AnimalActor{
+public class Cow extends AnimalActor {
     int time;
-    int age = 1;
     Animation<TextureRegion> animation;
-    Pig(float x, float y, Stage s) {
+    public Cow(float x, float y, Stage s) {
         super(x, y, s);
-        TextureRegion[] frames = new TextureRegion[2];
-        frames[0] = Utils.piglet(0,0,8,8);
-        frames[1] = Utils.piglet(16,0,8,8);
+        TextureRegion[] frames = new TextureRegion[3];
+        frames[0] = Utils.cow(0,0,16,16);
+        frames[1] = Utils.cow(16,0,16,16);
+        frames[2] = Utils.cow(16,16,16,16);
         animation = new Animation(0.5f, frames);
         time = 0;
         textureRegion = animation.getKeyFrame(time);
         setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+
+        energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
+        minusEnerGy = 1f/40;
     }
 
     @Override
@@ -31,14 +38,5 @@ public class Pig extends AnimalActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(age >= 5){
-           // textureRegion = Utils.pig(0,0,16,8);
-            textureRegion = Utils.pig(16,0,16,8);
-        }
     }
-
 }
-
-
-
-
