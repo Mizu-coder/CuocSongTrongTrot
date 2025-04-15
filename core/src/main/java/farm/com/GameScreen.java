@@ -140,31 +140,40 @@ public class GameScreen implements Screen {
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
             System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
+            float x = onSoils(mousePosition.x, mousePosition.y);
 
-            if(game.type == 1 && game.seedpu > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)){
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedpu -= 1;
-                layout.setText(game.font, "" + game.seedpu);
-            }
-            if(game.type == 2 && game.seedc > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedc -= 1;
-                layout2.setText(game.font, "" + game.seedc);
-            }
-            if(game.type == 3&& game.seedp > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedp -= 1;
-                layout3.setText(game.font, "" + game.seedp);
-            }
-            if(game.type == 4 && game.seedt > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedt -= 1;
-                layout4.setText(game.font, "" + game.seedt);
-            }
-            if(game.type == 5 && game.seedb > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16*2, stage,game));
-                game.seedb -= 1;
-                layout5.setText(game.font, "" + game.seedb);
+            if(x > 0) {
+                if(mousePosition.x < x + 48){
+                    x = x + 16;
+                } else {
+                    x = x + 48;
+                }
+
+                if (game.type == 1 && game.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedpu -= 1;
+                    layout.setText(game.font, "" + game.seedpu);
+                }
+                if (game.type == 2 && game.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedc -= 1;
+                    layout2.setText(game.font, "" + game.seedc);
+                }
+                if (game.type == 3 && game.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedp -= 1;
+                    layout3.setText(game.font, "" + game.seedp);
+                }
+                if (game.type == 4 && game.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedt -= 1;
+                    layout4.setText(game.font, "" + game.seedt);
+                }
+                if (game.type == 5 && game.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game));
+                    game.seedb -= 1;
+                    layout5.setText(game.font, "" + game.seedb);
+                }
             }
         }
 
@@ -329,13 +338,13 @@ public class GameScreen implements Screen {
             x += 32;
         }
     }
-    private boolean onSoils(float x, float y){
+    private float onSoils(float x, float y){
         for (Soil s: soils) {
             if(s.getBound().contains(x, y)){
-                return true;
+                return s.getX();
             }
         }
-        return false;
+        return -1;
     }
     private boolean isFree(float x, float y){
         for (Plants p: listPlants) {
