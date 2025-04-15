@@ -69,18 +69,21 @@ public class Plants extends MyActor{
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if(game.water){
-                    isWatered = true;
-                    game.water = false;
-                    addAction(Actions.sequence(
-                        Actions.delay(3),
-                        Actions.run(
-                            () -> {
-                                time += Gdx.graphics.getDeltaTime();
-                                textureRegion = animation.getKeyFrame(time);
-                            }
-                        )
-                    ));
+                if (game.sun < 3 && game.rai < 3) {
+
+                    if (game.water) {
+                        isWatered = true;
+                        game.water = false;
+                        addAction(Actions.sequence(
+                            Actions.delay(3),
+                            Actions.run(
+                                () -> {
+                                    time += Gdx.graphics.getDeltaTime();
+                                    textureRegion = animation.getKeyFrame(time);
+                                }
+                            )
+                        ));
+                    }
                 }
             }
         });

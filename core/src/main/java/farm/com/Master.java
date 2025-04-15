@@ -31,10 +31,15 @@ public class Master extends Game {
     int seedt = 5;
     int seedpu = 5;
 
+    public int sun = 3;
+    public int rai = 3;
+
     boolean water = false;
     GameScreen gameScreen;
     MenuScreen menuScreen;
     public Weather weather;
+
+
 
     @Override
     public void create() {

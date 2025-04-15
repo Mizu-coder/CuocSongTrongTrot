@@ -35,6 +35,8 @@ public class GameScreen implements Screen {
     Array<Cage> cages;
     Array<Chicken> chickens;
     Array<Pig> pigs;
+    Array<Cow> cows;
+
     int day;
     int timing;
 
@@ -50,6 +52,7 @@ public class GameScreen implements Screen {
         cages = new Array<>();
         chickens = new Array<>();
         pigs = new Array<>();
+        cows = new Array<>();
     }
     @Override
     public void show() {
@@ -103,10 +106,7 @@ public class GameScreen implements Screen {
 
         Gdx.input.setInputProcessor(multiplexer);
 
-        new Cow(413,886,stage);
 
-        pigs.add(new Pig(400,800,stage));
-        chickens.add(new Chicken(420,770,stage,game));
 
     }
 
@@ -209,6 +209,15 @@ public class GameScreen implements Screen {
         float x = 0;
         float y = 0;
 
+        float px = 111;
+        float py = 366;
+
+        float cx = 755;
+        float cy = 323;
+
+        float cox = 116;
+        float coy = 142;
+
         // Hàng cây
         x = Gdx.graphics.getWidth() / 2.5f;
         y = HEIGHT - 100;
@@ -267,8 +276,42 @@ public class GameScreen implements Screen {
         new Tomato(x, y, staticStage,game);
         x += 40;
         new Bean(x, y, staticStage,game);
-        game.weather = new Weather(0,0, staticStage);
+        game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
+        cows.add(new Cow(cox,coy,stage));
+        cox -= 32;
+        coy -= 32;
+        cows.add(new Cow(cox,coy,stage));
+        cox += 64;
+        coy += 32;
+        cows.add(new Cow(cox,coy,stage));
+        cox -= 96;
+        coy -= 96;
+        cows.add(new Cow(cox,coy,stage));
+
+
+        pigs.add(new Pig(px,py,stage));
+        px += 32;
+        py += 32;
+        pigs.add(new Pig(px,py,stage));
+        px -= 64;
+        py += 32;
+        pigs.add(new Pig(px,py,stage));
+        px += 32;
+        py -= 128;
+        pigs.add(new Pig(px,py,stage));
+
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx -= 32;
+        cy -= 32;
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx += 32;
+        cy -= 32*3;
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx += 32;
+        cy += 32;
+        chickens.add(new Chicken(cx,cy,stage,game));
+
     }
     private void genBackground(){
         float x = 0;
