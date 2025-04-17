@@ -1,17 +1,12 @@
-package farm.com;
+package farm.com.screens;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.*;
 import farm.com.actors.Weather;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -34,12 +29,11 @@ public class Master extends Game {
     public int sun = 0;
     public int rai = 0;
 
-    boolean water = false;
+    public boolean water = false;
     GameScreen gameScreen;
     MenuScreen menuScreen;
     public Weather weather;
-
-
+    public Season season;
 
     @Override
     public void create() {

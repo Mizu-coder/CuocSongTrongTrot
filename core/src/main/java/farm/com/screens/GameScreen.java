@@ -1,4 +1,4 @@
-package farm.com;
+package farm.com.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -10,10 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.*;
+import farm.com.Character;
 import farm.com.actors.Weather;
 import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
+import farm.com.seeds.*;
 
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
@@ -39,8 +42,8 @@ public class GameScreen implements Screen {
     int day;
     int timing;
 
-    static final int WIDTH = 960;
-    static final int HEIGHT = 1080;
+    public static final int WIDTH = 960;
+    public static final int HEIGHT = 1080;
 
     public GameScreen(Master game) {
         this.game = game;
@@ -104,7 +107,6 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(staticStage);
 
         Gdx.input.setInputProcessor(multiplexer);
-
 
 
     }
@@ -200,7 +202,7 @@ public class GameScreen implements Screen {
         x += 40;
         game.font.draw(game.batch, layout5,x,y);
         game.batch.end();
-        new Spring(92,599,stage);
+
     }
 
     @Override
@@ -298,6 +300,8 @@ public class GameScreen implements Screen {
         new Bean(x, y, staticStage,game);
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
+        game.season = new Season(0,0, staticStage);;
+
         cows.add(new Cow(cox,coy,stage,game));
         cox -= 32;
         coy -= 32;

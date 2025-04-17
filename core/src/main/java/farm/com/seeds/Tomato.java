@@ -1,12 +1,15 @@
-package farm.com;
+package farm.com.seeds;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import farm.com.MyActor;
+import farm.com.Utils;
+import farm.com.screens.Master;
 
-public class Tomato extends MyActor{
+public class Tomato extends MyActor {
     Master game;
-    Tomato(float x, float y, Stage s, Master game) {
+    public Tomato(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
         textureRegion = Utils.seedpacket(16*3,16,16,16);

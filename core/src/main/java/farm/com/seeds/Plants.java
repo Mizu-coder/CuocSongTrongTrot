@@ -1,4 +1,4 @@
-package farm.com;
+package farm.com.seeds;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -7,16 +7,22 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import farm.com.MyActor;
+import farm.com.Utils;
+import farm.com.enums.PlantType;
+import farm.com.screens.Master;
 
-public class Plants extends MyActor{
+public class Plants extends MyActor {
     Master game;
     float time;
     boolean isWatered = false;
     Animation<TextureRegion> animation;
-    Plants(float x, float y, Stage s, Master game) {
+    public PlantType plantType = PlantType.PUMKIN;
+    public Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
         if (game.type == 1) {
+            plantType = PlantType.PUMKIN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 0, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 0, 16, 16);
@@ -26,6 +32,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f,frames);
         }
         if (game.type == 2) {
+            plantType = PlantType.CARROT;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16, 16, 16);
@@ -35,6 +42,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 3) {
+            plantType = PlantType.POTATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 2, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16 * 2, 16, 16);
@@ -44,6 +52,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 4) {
+            plantType = PlantType.TOMATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 3, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16 * 3, 16, 16);
@@ -53,6 +62,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 5) {
+            plantType = PlantType.BEAN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 4, 16, 16 * 3);
             frames[1] = Utils.getRegionPlants(16, 16 * 4, 16, 16 * 3);
@@ -69,12 +79,12 @@ public class Plants extends MyActor{
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if (game.sun < 3 && game.rai < 3) {
+                if (game.sun < 100 && game.rai < 100) {
                     if (game.water) {
                         isWatered = true;
                         game.water = false;
                         addAction(Actions.sequence(
-                            Actions.delay(3),
+                            Actions.delay(1),
                             Actions.run(
                                 () -> {
                                     time += Gdx.graphics.getDeltaTime();
@@ -84,26 +94,27 @@ public class Plants extends MyActor{
                         ));
                     }
                     if(animation.isAnimationFinished(time)){
-                        if(game.type == 1){
-
-                            game.seedpu += 3;
-                            remove();
-                        }
-                        if(game.type == 2){
-                            game.seedc += 2;
-                            remove();
-                        }
-                        if(game.type == 3){
-                            game.seedp += 5;
-                            remove();
-                        }
-                        if(game.type == 4){
-                            game.seedt += 5;
-                            remove();
-                        }
-                        if(game.type == 5){
-                            game.seedb += 6;
-                            remove();
+                        switch (plantType){
+                            case PUMKIN -> {
+                                game.seedpu += 3;
+                                remove();
+                            }
+                            case CARROT -> {
+                                game.seedc += 2;
+                                remove();
+                            }
+                            case POTATO -> {
+                                game.seedp += 5;
+                                remove();
+                            }
+                            case TOMATO -> {
+                                game.seedt += 5;
+                                remove();
+                            }
+                            case BEAN -> {
+                                game.seedb += 6;
+                                remove();
+                            }
                         }
                     }
                 }

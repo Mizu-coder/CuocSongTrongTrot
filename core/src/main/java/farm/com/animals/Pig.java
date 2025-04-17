@@ -1,14 +1,12 @@
 package farm.com.animals;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
-import farm.com.Master;
+import farm.com.screens.Master;
 import farm.com.Utils;
 
 public class Pig extends AnimalActor {

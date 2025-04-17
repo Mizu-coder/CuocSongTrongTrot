@@ -16,7 +16,7 @@ public class Soil extends MyActor{
     TextureRegion t8;
     TextureRegion t9;
 
-    Soil(float x, float y, Stage s) {
+    public Soil(float x, float y, Stage s) {
         super(x, y, s);
         t1 = Utils.getRegion(0,48,16,16);
         t2 = Utils.getRegion(16,48,16,16);

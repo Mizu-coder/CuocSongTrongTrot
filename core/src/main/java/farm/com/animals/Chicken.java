@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
-import farm.com.GameScreen;
-import farm.com.Master;
+import farm.com.screens.GameScreen;
+import farm.com.screens.Master;
 import farm.com.Utils;
 
 public class Chicken extends AnimalActor {

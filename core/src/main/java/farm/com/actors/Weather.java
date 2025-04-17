@@ -4,9 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import farm.com.Master;
+import farm.com.screens.Master;
 import farm.com.MyActor;
-import farm.com.Sunny;
 import farm.com.enums.WeatherType;
 
 public class Weather extends MyActor {
