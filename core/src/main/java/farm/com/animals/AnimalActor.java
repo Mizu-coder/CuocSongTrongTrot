@@ -21,9 +21,7 @@ public class AnimalActor extends MyActor {
         super.act(delta);
         if(energy > 0) {
             energy -= minusEnerGy;
-            System.out.println("energy = " + energy);
         } else {
-            System.out.println("teo roi aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             energy = 0;
             energyBar.remove();
             remove();

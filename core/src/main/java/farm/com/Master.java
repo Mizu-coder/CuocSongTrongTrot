@@ -24,15 +24,15 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
 
-    int type = 0;
-    int seedc = 5;
-    int seedb = 5;
-    int seedp = 5;
-    int seedt = 5;
-    int seedpu = 5;
+    public int type = 0;
+    public int seedc = 5;
+    public int seedb = 5;
+    public int seedp = 5;
+    public int seedt = 5;
+    public int seedpu = 5;
 
-    public int sun = 3;
-    public int rai = 3;
+    public int sun = 0;
+    public int rai = 0;
 
     boolean water = false;
     GameScreen gameScreen;

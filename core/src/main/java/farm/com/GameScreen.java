@@ -152,30 +152,36 @@ public class GameScreen implements Screen {
                 if (game.type == 1 && game.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
                     game.seedpu -= 1;
-                    layout.setText(game.font, "" + game.seedpu);
+
                 }
                 if (game.type == 2 && game.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
                     game.seedc -= 1;
-                    layout2.setText(game.font, "" + game.seedc);
+
                 }
                 if (game.type == 3 && game.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
                     game.seedp -= 1;
-                    layout3.setText(game.font, "" + game.seedp);
+
                 }
                 if (game.type == 4 && game.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
                     game.seedt -= 1;
-                    layout4.setText(game.font, "" + game.seedt);
+
                 }
                 if (game.type == 5 && game.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game));
                     game.seedb -= 1;
-                    layout5.setText(game.font, "" + game.seedb);
+
                 }
             }
         }
+
+        layout.setText(game.font, "" + game.seedpu);
+        layout2.setText(game.font, "" + game.seedc);
+        layout3.setText(game.font, "" + game.seedp);
+        layout4.setText(game.font, "" + game.seedt);
+        layout5.setText(game.font, "" + game.seedb);
 
         stage.act();
         stage.draw();
@@ -291,28 +297,28 @@ public class GameScreen implements Screen {
         new Bean(x, y, staticStage,game);
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
-        cows.add(new Cow(cox,coy,stage));
+        cows.add(new Cow(cox,coy,stage,game));
         cox -= 32;
         coy -= 32;
-        cows.add(new Cow(cox,coy,stage));
+        cows.add(new Cow(cox,coy,stage,game));
         cox += 64;
         coy += 32;
-        cows.add(new Cow(cox,coy,stage));
+        cows.add(new Cow(cox,coy,stage,game));
         cox -= 96;
         coy -= 96;
-        cows.add(new Cow(cox,coy,stage));
+        cows.add(new Cow(cox,coy,stage,game));
 
 
-        pigs.add(new Pig(px,py,stage));
+        pigs.add(new Pig(px,py,stage,game));
         px += 32;
         py += 32;
-        pigs.add(new Pig(px,py,stage));
+        pigs.add(new Pig(px,py,stage,game));
         px -= 64;
         py += 32;
-        pigs.add(new Pig(px,py,stage));
+        pigs.add(new Pig(px,py,stage,game));
         px += 32;
         py -= 128;
-        pigs.add(new Pig(px,py,stage));
+        pigs.add(new Pig(px,py,stage,game));
 
         chickens.add(new Chicken(cx,cy,stage,game));
         cx -= 32;
