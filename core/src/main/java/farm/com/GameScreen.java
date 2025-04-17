@@ -200,7 +200,7 @@ public class GameScreen implements Screen {
         x += 40;
         game.font.draw(game.batch, layout5,x,y);
         game.batch.end();
-        new Season(92,599,stage);
+        new Spring(92,599,stage);
     }
 
     @Override
