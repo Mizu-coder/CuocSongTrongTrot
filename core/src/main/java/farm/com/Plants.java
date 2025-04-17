@@ -70,7 +70,6 @@ public class Plants extends MyActor{
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 if (game.sun < 3 && game.rai < 3) {
-
                     if (game.water) {
                         isWatered = true;
                         game.water = false;
@@ -84,7 +83,31 @@ public class Plants extends MyActor{
                             )
                         ));
                     }
+                    if(animation.isAnimationFinished(time)){
+                        if(game.type == 1){
+
+                            game.seedpu += 3;
+                            remove();
+                        }
+                        if(game.type == 2){
+                            game.seedc += 2;
+                            remove();
+                        }
+                        if(game.type == 3){
+                            game.seedp += 5;
+                            remove();
+                        }
+                        if(game.type == 4){
+                            game.seedt += 5;
+                            remove();
+                        }
+                        if(game.type == 5){
+                            game.seedb += 6;
+                            remove();
+                        }
+                    }
                 }
+
             }
         });
     }
