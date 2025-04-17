@@ -8,30 +8,30 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import farm.com.EnergyBar;
-import farm.com.Master;
-import farm.com.MyActor;
-import farm.com.Utils;
+import farm.com.*;
 
 public class Cow extends AnimalActor {
-    int time;
+    float time;
     Animation<TextureRegion> animation;
     Master game;
     public Cow(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
-        TextureRegion[] frames = new TextureRegion[3];
+        TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.cow(0,0,16,16);
-        frames[1] = Utils.cow(16,0,16,16);
-        frames[2] = Utils.cow(16,16,16,16);
-        animation = new Animation(0.5f, frames);
-        time = 0;
+         frames[1] = Utils.cow(16,0,16,16);
+       // frames[2] = Utils.cow(32,0,16,16);
+        animation = new Animation<>(0.2f, frames);
+        animation.setPlayMode(Animation.PlayMode.LOOP);
         textureRegion = animation.getKeyFrame(time);
+        time = 0;
+
         setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
         minusEnerGy = 1f/40;
-        if(energy < 100){
+
+
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if (energy < 100) {
@@ -56,20 +56,25 @@ public class Cow extends AnimalActor {
                             energy += 10;
                         }
                     }
+
+                    if(age > 5){
+                        GameState.meatTotal += meat;
+                        infoMeat.fadeOut();
+                        energyBar.remove();
+                        remove();
+                    }
                 }
             });
-        }
-    }
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        time += Gdx.graphics.getDeltaTime();
-        textureRegion = animation.getKeyFrame(time);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        time += delta;
+        textureRegion = animation.getKeyFrame(time);
+
+        if(age > 3){
+            textureRegion = Utils.cow(32,0,16,16);
+        }
     }
 }

@@ -17,7 +17,6 @@ public class Chicken extends AnimalActor {
     Animation<TextureRegion> animation;
     Master game;
     GameScreen gameScreen;
-    public int age;
     public Chicken(float x, float y, Stage s, Master game) {
         super(x, y, s);
         TextureRegion[] frames = new TextureRegion[2];
