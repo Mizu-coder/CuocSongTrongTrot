@@ -116,7 +116,7 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         timing++;
-        if(timing % (60*24) == 0){
+        if(timing % (60*3) == 0){
             newDay();
         }
 
@@ -369,6 +369,9 @@ public class GameScreen implements Screen {
         }
         for(Pig p: pigs){
             p.age++;
+        }
+        for(Cow c: cows){
+            c.age++;
         }
         game.weather.ranDomWeatherType();
     }

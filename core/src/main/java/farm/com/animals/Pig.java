@@ -13,7 +13,6 @@ import farm.com.Utils;
 
 public class Pig extends AnimalActor {
     float time;
-    public int age = 1;
     Animation<TextureRegion> animation;
     Animation<TextureRegion> animationBig;
     Master game;

@@ -4,16 +4,24 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import farm.com.EnergyBar;
 import farm.com.MyActor;
+import farm.com.ShowInfo;
 
 public class AnimalActor extends MyActor {
     float energy = 100;
     float minusEnerGy = 0;
     float cost = 100;
+    float meat = 99;
     float sellingPrice = 100;
+    public int age;
+
+    ShowInfo infoMeat;
 
     EnergyBar energyBar;
     AnimalActor(float x, float y, Stage s) {
         super(x, y, s);
+
+        infoMeat = new ShowInfo(0,0, getStage(), "" + (int)meat, 10);
+        infoMeat.remove(); // xoa khooi san khau de hide
     }
 
     @Override
@@ -33,5 +41,12 @@ public class AnimalActor extends MyActor {
                 energyBar.setColor(Color.RED);
             }
         }
+        if(age > 3){
+            if(infoMeat.getStage() == null){
+                getStage().addActor(infoMeat);
+                infoMeat.setPosition(getX()+ getWidth() - 2, getY() + getHeight() - 8);
+            }
+        }
     }
+
 }
