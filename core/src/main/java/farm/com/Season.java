@@ -17,6 +17,9 @@ public class Season extends MyActor{
 
         switch (seasonType){
             case SPRING -> textureRegion = new TextureRegion(new Texture("spring.png"));
+            case AUTUMN -> textureRegion = new TextureRegion(new Texture("autumn.png"));
+            case WINTER -> textureRegion = new TextureRegion(new Texture("winter.png"));
+            case SUMMER -> textureRegion = new TextureRegion(new Texture("summer.png"));
 
             default -> textureRegion = new TextureRegion(new Texture("spring.png"));
 

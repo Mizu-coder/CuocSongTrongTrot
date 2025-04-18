@@ -16,10 +16,12 @@ import farm.com.actors.Weather;
 import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
+import farm.com.enums.SeasonType;
 import farm.com.seeds.*;
 
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
+    SeasonType seasonType;
     Stage stage;
     Stage staticStage;
     InputMultiplexer multiplexer;
@@ -55,6 +57,7 @@ public class GameScreen implements Screen {
         chickens = new Array<>();
         pigs = new Array<>();
         cows = new Array<>();
+
     }
     @Override
     public void show() {
@@ -62,6 +65,10 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = 0;
+
+
+
+
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -116,6 +123,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
+
 
         timing++;
         if(timing % (60*3) == 0){
@@ -184,6 +192,16 @@ public class GameScreen implements Screen {
         layout3.setText(game.font, "" + game.seedp);
         layout4.setText(game.font, "" + game.seedt);
         layout5.setText(game.font, "" + game.seedb);
+
+        if(day % 3 == 0){
+
+            switch (seasonType){
+                case SPRING -> seasonType = SeasonType.AUTUMN;
+                case AUTUMN -> seasonType = SeasonType.SUMMER;
+                case SUMMER -> seasonType = SeasonType.WINTER;
+                case WINTER -> seasonType = SeasonType.SPRING;
+            }
+        }
 
         stage.act();
         stage.draw();
@@ -300,7 +318,7 @@ public class GameScreen implements Screen {
         new Bean(x, y, staticStage,game);
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
-        game.season = new Season(0,0, staticStage);;
+        game.season = new Season(0,0, staticStage);
 
         cows.add(new Cow(cox,coy,stage,game));
         cox -= 32;
