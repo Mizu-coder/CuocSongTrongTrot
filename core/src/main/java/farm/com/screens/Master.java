@@ -34,6 +34,8 @@ public class Master extends Game {
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;
+    public boolean clicked = false;
+    public boolean hadMilk = false;
 
     @Override
     public void create() {

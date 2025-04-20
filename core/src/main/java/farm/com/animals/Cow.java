@@ -58,13 +58,17 @@ public class Cow extends AnimalActor {
                             energy += 10;
                         }
                     }
+                    if(energy >= 50){
+                        if(age > 5){
+                            if(game.clicked){
+                                game.hadMilk = true;
+                                GameState.milkTotal += milk;
+                                infoMilk.fadeOut();
+                                energy -= 20;
+                            }
+                        }
+                    }
 
-//                    if(age > 5){
-//                        GameState.totalBeef += meat;
-//                        infoMeat.fadeOut();
-//                        energyBar.remove();
-//                        remove();
-//                    }
                 }
             });
     }
