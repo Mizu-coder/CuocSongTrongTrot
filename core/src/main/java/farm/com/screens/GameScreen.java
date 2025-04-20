@@ -23,9 +23,10 @@ import farm.com.animals.Pig;
 import farm.com.enums.SeasonType;
 import farm.com.seeds.*;
 
+import static farm.com.enums.SeasonType.*;
+
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
-    SeasonType seasonType;
     Stage stage;
     Stage staticStage;
     InputMultiplexer multiplexer;
@@ -46,6 +47,8 @@ public class GameScreen implements Screen {
     Array<Cow> cows;
     AnimalActor animalActor;
 
+    Shop shop;
+
     boolean nextDay = false;
     int day;
     int timing;
@@ -64,8 +67,6 @@ public class GameScreen implements Screen {
         pigs = new Array<>();
         cows = new Array<>();
 
-        seasonType = SeasonType.WINTER;
-
     }
     @Override
     public void show() {
@@ -73,13 +74,6 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = 0;
-
-
-
-
-
-        //Mùa
-        new Weather_Summer(200 , 980,stage, 1);
 
 
         // Vài đống rơm
@@ -125,10 +119,11 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
 
-        Shop.addListener(new ClickListener(){
+        shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
+
+        shop.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
-                game.setScreen(game.menuScreen);
-                Shop.remove();
+                game.setScreen(new ShopScreen(game));
             }
         });
 
@@ -214,15 +209,6 @@ public class GameScreen implements Screen {
         layout5.setText(game.font, "" + game.seedb);
         da.setText(game.font,"Day "+ day);
 
-        if(day % 3 == 0){
-
-            switch (seasonType){
-                case SPRING -> seasonType = SeasonType.AUTUMN;
-                case AUTUMN -> seasonType = SeasonType.SUMMER;
-                case SUMMER -> seasonType = SeasonType.WINTER;
-                case WINTER -> seasonType = SeasonType.SPRING;
-            }
-        }
 
         stage.act();
         stage.draw();
@@ -333,8 +319,6 @@ public class GameScreen implements Screen {
         x = Gdx.graphics.getWidth() - 200;
         y = Gdx.graphics.getHeight() - 40;
 
-        new Shop(x, y, staticStage, game);
-
         new PumkinSeed(x, y, staticStage,game);
 
         x += 40;
@@ -427,5 +411,13 @@ public class GameScreen implements Screen {
             c.age++;
         }
         game.weather.ranDomWeatherType();
+        if(day % 3 == 0){
+            switch (game.season.seasonType){
+                case SPRING -> game.season.seasonType = SUMMER;
+                case AUTUMN -> game.season.seasonType = WINTER;
+                case SUMMER -> game.season.seasonType = AUTUMN;
+                case WINTER -> game.season.seasonType = SPRING;
+            }
+        }
     }
 }

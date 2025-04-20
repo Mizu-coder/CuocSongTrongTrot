@@ -7,12 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Shop extends MyActor{
-    Master game;
-    Shop(float x, float y, Stage s, Master game) {
+    public Shop(float x, float y, Stage s) {
         super(x, y, s);
-        this.game = game;
         textureRegion = new TextureRegion(new Texture("Shop.png"));
-        setSize(textureRegion.getRegionWidth()/2, textureRegion.getRegionHeight()/2);
+        setSize(textureRegion.getRegionWidth()/4, textureRegion.getRegionHeight()/4);
 
     }
 }

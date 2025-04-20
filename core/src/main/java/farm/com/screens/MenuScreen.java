@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.Shop;
 import farm.com.Start;
 
 public class MenuScreen implements Screen {
     Texture background;
-    Shop shop;
     Stage stage;
     OrthographicCamera camera;
     Master game;
