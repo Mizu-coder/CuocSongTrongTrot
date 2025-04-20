@@ -20,7 +20,7 @@ public class AnimalActor extends MyActor {
     AnimalActor(float x, float y, Stage s) {
         super(x, y, s);
 
-        infoMeat = new ShowInfo(0,0, getStage(), "" + (int)meat, 10);
+        infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, getStage(), "" + (int)meat, 10);
         infoMeat.remove(); // xoa khooi san khau de hide
     }
 

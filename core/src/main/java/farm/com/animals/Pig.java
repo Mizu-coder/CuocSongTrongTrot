@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
+import farm.com.GameState;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
@@ -58,6 +59,12 @@ public class Pig extends AnimalActor {
                             game.seedb -= 1;
                             energy += 10;
                         }
+                    }
+                    if(age > 5){
+                        GameState.meatTotal += meat;
+                        infoMeat.fadeOut();
+                        energyBar.remove();
+                        remove();
                     }
                 }
             });

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
+import farm.com.GameState;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 import farm.com.Utils;
@@ -31,7 +32,6 @@ public class Chicken extends AnimalActor {
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
         minusEnerGy = 1f/60;
-        if(energy < 100){
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if (energy < 100) {
@@ -55,12 +55,19 @@ public class Chicken extends AnimalActor {
                             game.seedb -= 1;
                             energy += 10;
                         }
+
+                    }
+
+                    if(age > 5){
+                        GameState.meatTotal += meat;
+                        infoMeat.fadeOut();
+                        energyBar.remove();
+                        remove();
                     }
                 }
             });
         }
 
-    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

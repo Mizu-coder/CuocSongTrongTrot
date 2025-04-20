@@ -1,13 +1,16 @@
 package farm.com.seeds;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import farm.com.GameState;
 import farm.com.MyActor;
+import farm.com.ShowInfo;
 import farm.com.Utils;
 import farm.com.enums.PlantType;
 import farm.com.screens.Master;
@@ -18,9 +21,13 @@ public class Plants extends MyActor {
     boolean isWatered = false;
     Animation<TextureRegion> animation;
     public PlantType plantType = PlantType.PUMKIN;
+    ShowInfo infoSeed;
     public Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
+        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)game.seedpu, 10);
+        infoSeed.remove();
+
         if (game.type == 1) {
             plantType = PlantType.PUMKIN;
             TextureRegion[] frames = new TextureRegion[5];
@@ -97,25 +104,31 @@ public class Plants extends MyActor {
                         switch (plantType){
                             case PUMKIN -> {
                                 game.seedpu += 3;
+                                infoSeed.fadeOut();
                                 remove();
                             }
                             case CARROT -> {
                                 game.seedc += 2;
+                                infoSeed.fadeOut();
                                 remove();
                             }
                             case POTATO -> {
                                 game.seedp += 5;
+                                infoSeed.fadeOut();
                                 remove();
                             }
                             case TOMATO -> {
                                 game.seedt += 5;
+                                infoSeed.fadeOut();
                                 remove();
                             }
                             case BEAN -> {
                                 game.seedb += 6;
+                                infoSeed.fadeOut();
                                 remove();
                             }
                         }
+
                     }
                 }
 
@@ -126,5 +139,11 @@ public class Plants extends MyActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if(animation.isAnimationFinished(time)){
+            if(infoSeed.getStage() == null){
+                getStage().addActor(infoSeed);
+                infoSeed.setPosition(getX()+ getWidth() - 2, getY() + getHeight() - 8);
+            }
+        }
     }
 }

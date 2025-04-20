@@ -1,6 +1,7 @@
 package farm.com.animals;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -64,6 +65,7 @@ public class Cow extends AnimalActor {
                 }
             });
     }
+
 
     @Override
     public void act(float delta) {

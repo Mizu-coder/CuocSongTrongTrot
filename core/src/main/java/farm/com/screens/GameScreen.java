@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.*;
 import farm.com.Character;
 import farm.com.actors.Weather;
+import farm.com.animals.AnimalActor;
 import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
@@ -40,7 +41,9 @@ public class GameScreen implements Screen {
     Array<Chicken> chickens;
     Array<Pig> pigs;
     Array<Cow> cows;
+    AnimalActor animalActor;
 
+    boolean nextDay = false;
     int day;
     int timing;
 
@@ -57,6 +60,8 @@ public class GameScreen implements Screen {
         chickens = new Array<>();
         pigs = new Array<>();
         cows = new Array<>();
+
+        seasonType = SeasonType.WINTER;
 
     }
     @Override
@@ -128,6 +133,7 @@ public class GameScreen implements Screen {
         timing++;
         if(timing % (60*3) == 0){
             newDay();
+            nextDay = false;
         }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
@@ -192,6 +198,7 @@ public class GameScreen implements Screen {
         layout3.setText(game.font, "" + game.seedp);
         layout4.setText(game.font, "" + game.seedt);
         layout5.setText(game.font, "" + game.seedb);
+        da.setText(game.font,"Day "+ day);
 
         if(day % 3 == 0){
 
@@ -208,6 +215,11 @@ public class GameScreen implements Screen {
         staticStage.act();
         staticStage.draw();
         game.batch.begin();
+
+        if(nextDay == true){
+            game.font.draw(game.batch, da,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        }
+
         float x = Gdx.graphics.getWidth() - 175;
         float y = Gdx.graphics.getHeight() - 5;
         game.font.draw(game.batch, layout,x,y);
@@ -385,8 +397,9 @@ public class GameScreen implements Screen {
     }
 
     public void newDay(){
-        new Day(0,0,stage);
+        new Day(0,0,staticStage);
         day ++;
+        nextDay = true;
         for(Chicken c: chickens){
             c.age++;
         }
