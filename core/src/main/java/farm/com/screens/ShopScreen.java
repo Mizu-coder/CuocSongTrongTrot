@@ -1,16 +1,22 @@
-package farm.com;
+package farm.com.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 public class ShopScreen implements Screen {
+    Master game;
+    public ShopScreen(Master game){
+        this.game = game;
+    }
     @Override
     public void show() {
-        
+
     }
 
     @Override
     public void render(float v) {
-
+        ScreenUtils.clear(Color.BLACK);
     }
 
     @Override

@@ -1,24 +1,37 @@
-package farm.com;
+package farm.com.seeds;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import farm.com.GameState;
+import farm.com.MyActor;
+import farm.com.ShowInfo;
+import farm.com.Utils;
+import farm.com.enums.PlantType;
+import farm.com.screens.Master;
 
-public class Plants extends MyActor{
+public class Plants extends MyActor {
     Master game;
     float time;
     boolean isWatered = false;
     Animation<TextureRegion> animation;
-    Plants(float x, float y, Stage s, Master game) {
+    public PlantType plantType = PlantType.PUMKIN;
+    ShowInfo infoSeed;
+    public Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
+        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)game.seedpu, 10);
+        infoSeed.remove();
+
         if (game.type == 0){
         }
         if (game.type == 1) {
+            plantType = PlantType.PUMKIN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 0, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 0, 16, 16);
@@ -28,6 +41,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f,frames);
         }
         if (game.type == 2) {
+            plantType = PlantType.CARROT;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16, 16, 16);
@@ -37,6 +51,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 3) {
+            plantType = PlantType.POTATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 2, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16 * 2, 16, 16);
@@ -46,6 +61,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 4) {
+            plantType = PlantType.TOMATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 3, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 16 * 3, 16, 16);
@@ -55,6 +71,7 @@ public class Plants extends MyActor{
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
         if (game.type == 5) {
+            plantType = PlantType.BEAN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 4, 16, 16 * 3);
             frames[1] = Utils.getRegionPlants(16, 16 * 4, 16, 16 * 3);
@@ -71,19 +88,52 @@ public class Plants extends MyActor{
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if(game.water){
-                    isWatered = true;
-                    game.water = false;
-                    addAction(Actions.sequence(
-                        Actions.delay(3),
-                        Actions.run(
-                            () -> {
-                                time += Gdx.graphics.getDeltaTime();
-                                textureRegion = animation.getKeyFrame(time);
+                if (game.sun < 100 && game.rai < 100) {
+                    if (game.water) {
+                        isWatered = true;
+                        game.water = false;
+                        addAction(Actions.sequence(
+                            Actions.delay(1),
+                            Actions.run(
+                                () -> {
+                                    time += Gdx.graphics.getDeltaTime();
+                                    textureRegion = animation.getKeyFrame(time);
+                                }
+                            )
+                        ));
+                    }
+                    if(animation.isAnimationFinished(time)){
+                        switch (plantType){
+                            case PUMKIN -> {
+                                game.seedpu += 3;
+                                infoSeed.fadeOut();
+                                remove();
                             }
-                        )
-                    ));
+                            case CARROT -> {
+                                game.seedc += 2;
+                                infoSeed.fadeOut();
+                                remove();
+                            }
+                            case POTATO -> {
+                                game.seedp += 5;
+                                infoSeed.fadeOut();
+                                remove();
+                            }
+                            case TOMATO -> {
+                                game.seedt += 5;
+                                infoSeed.fadeOut();
+                                remove();
+                            }
+                            case BEAN -> {
+                                game.seedb += 6;
+                                infoSeed.fadeOut();
+                                remove();
+                            }
+                        }
+
+                    }
                 }
+
             }
         });
     }
@@ -91,5 +141,11 @@ public class Plants extends MyActor{
     @Override
     public void act(float delta) {
         super.act(delta);
+        if(animation.isAnimationFinished(time)){
+            if(infoSeed.getStage() == null){
+                getStage().addActor(infoSeed);
+                infoSeed.setPosition(getX()+ getWidth() - 2, getY() + getHeight() - 8);
+            }
+        }
     }
 }

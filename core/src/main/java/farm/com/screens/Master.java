@@ -1,17 +1,13 @@
-package farm.com;
+package farm.com.screens;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.*;
+import farm.com.actors.Weather;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
@@ -23,18 +19,22 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
 
-    int type = 0;
-    int seedc = 5;
-    int seedb = 5;
-    int seedp = 5;
-    int seedt = 5;
-    int seedpu = 5;
+    public int type = 0;
+    public int seedc = 5;
+    public int seedb = 5;
+    public int seedp = 5;
+    public int seedt = 5;
+    public int seedpu = 5;
 
-    int timing = 0;
+    public int sun = 0;
+    public int rai = 0;
 
-    boolean water = false;
+    public boolean water = false;
     GameScreen gameScreen;
     MenuScreen menuScreen;
+    public Weather weather;
+    public Season season;
+
     @Override
     public void create() {
 

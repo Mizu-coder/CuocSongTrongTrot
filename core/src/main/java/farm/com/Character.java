@@ -5,13 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
+import farm.com.screens.Master;
 
 
 public class Character extends MyActor{
 
     Master game;
-    Character(float x, float y, Stage s,Master game) {
+    public Character(float x, float y, Stage s,Master game) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("farmer.png"));
         setSize(textureRegion.getRegionWidth()/2, textureRegion.getRegionHeight()/2);

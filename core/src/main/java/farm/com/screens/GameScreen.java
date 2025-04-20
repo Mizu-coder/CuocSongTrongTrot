@@ -1,4 +1,4 @@
-package farm.com;
+package farm.com.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -13,6 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.*;
+import farm.com.Character;
+import farm.com.actors.Weather;
+import farm.com.animals.AnimalActor;
+import farm.com.animals.Chicken;
+import farm.com.animals.Cow;
+import farm.com.animals.Pig;
+import farm.com.enums.SeasonType;
+import farm.com.seeds.*;
+
+import static farm.com.enums.SeasonType.*;
 
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
@@ -33,11 +44,17 @@ public class GameScreen implements Screen {
     Array<Cage> cages;
     Array<Chicken> chickens;
     Array<Pig> pigs;
+    Array<Cow> cows;
+    AnimalActor animalActor;
+
+    Shop shop;
+
+    boolean nextDay = false;
     int day;
     int timing;
 
-    static final int WIDTH = 960;
-    static final int HEIGHT = 1080;
+    public static final int WIDTH = 960;
+    public static final int HEIGHT = 1080;
 
     public GameScreen(Master game) {
         this.game = game;
@@ -48,6 +65,7 @@ public class GameScreen implements Screen {
         cages = new Array<>();
         chickens = new Array<>();
         pigs = new Array<>();
+        cows = new Array<>();
 
     }
     @Override
@@ -55,10 +73,7 @@ public class GameScreen implements Screen {
         generateMap();
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
-        timing = day;
-
-        //Mùa
-        new Weather_Summer(200 , 980,stage, 1);
+        timing = 0;
 
 
         // Vài đống rơm
@@ -104,12 +119,16 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
 
+        shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
+
+        shop.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(new ShopScreen(game));
+            }
+        });
+
         Gdx.input.setInputProcessor(multiplexer);
 
-        new Cow(413,886,stage);
-
-        pigs.add(new Pig(400,800,stage));
-        chickens.add(new Chicken(420,770,stage,game));
 
     }
 
@@ -119,12 +138,12 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
-        Shop.addListener(new ClickListener(){
-            public void clicked(InputEvent event, float x, float y){
-                game.setScreen(game.menuScreen);
-                Shop.remove();
-            }
-        });
+
+        timing++;
+        if(timing % (60*3) == 0){
+            newDay();
+            nextDay = false;
+        }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
@@ -146,39 +165,61 @@ public class GameScreen implements Screen {
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
             System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
+            float x = onSoils(mousePosition.x, mousePosition.y);
 
-            if(game.type == 1 && game.seedpu > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)){
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedpu -= 1;
-                layout.setText(game.font, "" + game.seedpu);
-            }
-            if(game.type == 2 && game.seedc > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedc -= 1;
-                layout2.setText(game.font, "" + game.seedc);
-            }
-            if(game.type == 3&& game.seedp > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedp -= 1;
-                layout3.setText(game.font, "" + game.seedp);
-            }
-            if(game.type == 4 && game.seedt > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16, stage,game));
-                game.seedt -= 1;
-                layout4.setText(game.font, "" + game.seedt);
-            }
-            if(game.type == 5 && game.seedb > 0 && onSoils(mousePosition.x, mousePosition.y) && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                listPlants.add(new Plants(mousePosition.x-16, mousePosition.y-16*2, stage,game));
-                game.seedb -= 1;
-                layout5.setText(game.font, "" + game.seedb);
+            if(x > 0) {
+                if(mousePosition.x < x + 48){
+                    x = x + 16;
+                } else {
+                    x = x + 48;
+                }
+
+                if (game.type == 1 && game.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedpu -= 1;
+
+                }
+                if (game.type == 2 && game.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedc -= 1;
+
+                }
+                if (game.type == 3 && game.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedp -= 1;
+
+                }
+                if (game.type == 4 && game.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    game.seedt -= 1;
+
+                }
+                if (game.type == 5 && game.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game));
+                    game.seedb -= 1;
+
+                }
             }
         }
+
+        layout.setText(game.font, "" + game.seedpu);
+        layout2.setText(game.font, "" + game.seedc);
+        layout3.setText(game.font, "" + game.seedp);
+        layout4.setText(game.font, "" + game.seedt);
+        layout5.setText(game.font, "" + game.seedb);
+        da.setText(game.font,"Day "+ day);
+
 
         stage.act();
         stage.draw();
         staticStage.act();
         staticStage.draw();
         game.batch.begin();
+
+        if(nextDay == true){
+            game.font.draw(game.batch, da,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        }
+
         float x = Gdx.graphics.getWidth() - 175;
         float y = Gdx.graphics.getHeight() - 5;
         game.font.draw(game.batch, layout,x,y);
@@ -191,6 +232,7 @@ public class GameScreen implements Screen {
         x += 40;
         game.font.draw(game.batch, layout5,x,y);
         game.batch.end();
+
     }
 
     @Override
@@ -219,6 +261,14 @@ public class GameScreen implements Screen {
         float x = 0;
         float y = 0;
 
+        float px = 111;
+        float py = 366;
+
+        float cx = 755;
+        float cy = 323;
+
+        float cox = 116;
+        float coy = 142;
 
         // Hàng cây
         x = Gdx.graphics.getWidth() / 2.5f;
@@ -269,8 +319,6 @@ public class GameScreen implements Screen {
         x = Gdx.graphics.getWidth() - 200;
         y = Gdx.graphics.getHeight() - 40;
 
-        new Shop(x, y, staticStage, game);
-
         new PumkinSeed(x, y, staticStage,game);
 
         x += 40;
@@ -281,6 +329,44 @@ public class GameScreen implements Screen {
         new Tomato(x, y, staticStage,game);
         x += 40;
         new Bean(x, y, staticStage,game);
+        game.weather = new Weather(0,0, staticStage,game);
+        game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
+        game.season = new Season(0,0, staticStage);
+
+        cows.add(new Cow(cox,coy,stage,game));
+        cox -= 32;
+        coy -= 32;
+        cows.add(new Cow(cox,coy,stage,game));
+        cox += 64;
+        coy += 32;
+        cows.add(new Cow(cox,coy,stage,game));
+        cox -= 96;
+        coy -= 96;
+        cows.add(new Cow(cox,coy,stage,game));
+
+
+        pigs.add(new Pig(px,py,stage,game));
+        px += 32;
+        py += 32;
+        pigs.add(new Pig(px,py,stage,game));
+        px -= 64;
+        py += 32;
+        pigs.add(new Pig(px,py,stage,game));
+        px += 32;
+        py -= 128;
+        pigs.add(new Pig(px,py,stage,game));
+
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx -= 32;
+        cy -= 32;
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx += 32;
+        cy -= 32*3;
+        chickens.add(new Chicken(cx,cy,stage,game));
+        cx += 32;
+        cy += 32;
+        chickens.add(new Chicken(cx,cy,stage,game));
+
     }
     private void genBackground(){
         float x = 0;
@@ -294,13 +380,13 @@ public class GameScreen implements Screen {
             x += 32;
         }
     }
-    private boolean onSoils(float x, float y){
+    private float onSoils(float x, float y){
         for (Soil s: soils) {
             if(s.getBound().contains(x, y)){
-                return true;
+                return s.getX();
             }
         }
-        return false;
+        return -1;
     }
     private boolean isFree(float x, float y){
         for (Plants p: listPlants) {
@@ -309,5 +395,29 @@ public class GameScreen implements Screen {
             }
         }
         return true;
+    }
+
+    public void newDay(){
+        new Day(0,0,staticStage);
+        day ++;
+        nextDay = true;
+        for(Chicken c: chickens){
+            c.age++;
+        }
+        for(Pig p: pigs){
+            p.age++;
+        }
+        for(Cow c: cows){
+            c.age++;
+        }
+        game.weather.ranDomWeatherType();
+        if(day % 3 == 0){
+            switch (game.season.seasonType){
+                case SPRING -> game.season.seasonType = SUMMER;
+                case AUTUMN -> game.season.seasonType = WINTER;
+                case SUMMER -> game.season.seasonType = AUTUMN;
+                case WINTER -> game.season.seasonType = SPRING;
+            }
+        }
     }
 }
