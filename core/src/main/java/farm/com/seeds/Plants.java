@@ -28,6 +28,8 @@ public class Plants extends MyActor {
         infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)game.seedpu, 10);
         infoSeed.remove();
 
+        if (game.type == 0){
+        }
         if (game.type == 1) {
             plantType = PlantType.PUMKIN;
             TextureRegion[] frames = new TextureRegion[5];

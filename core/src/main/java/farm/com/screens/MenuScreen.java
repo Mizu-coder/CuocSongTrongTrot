@@ -16,6 +16,7 @@ import farm.com.Start;
 
 public class MenuScreen implements Screen {
     Texture background;
+    Shop shop;
     Stage stage;
     OrthographicCamera camera;
     Master game;
@@ -28,6 +29,7 @@ public class MenuScreen implements Screen {
     public MenuScreen(Master game){
         this.game = game;
         stage = new Stage();
+
         background = new Texture("menu.png");
 //        start = new Texture("start.png");
         camera = new OrthographicCamera();
