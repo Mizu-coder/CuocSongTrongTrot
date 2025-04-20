@@ -9,23 +9,27 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
 import farm.com.GameState;
+import farm.com.ShowInfo;
+import farm.com.enums.AnimalNames;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
 public class Chicken extends AnimalActor {
-    int time;
+    float time;
     Animation<TextureRegion> animation;
     Master game;
     GameScreen gameScreen;
+    Egg egg;
     public Chicken(float x, float y, Stage s, Master game) {
         super(x, y, s);
         TextureRegion[] frames = new TextureRegion[2];
         this.game = game;
+        name = AnimalNames.CHICKEN;
         gameScreen = new GameScreen(game);
         frames[0] = Utils.chic(0,0,8,8);
-        frames[1] = Utils.chic(16,0,8,8);
-        animation = new Animation(0.5f, frames);
+        frames[1] = Utils.chic(8,0,8,8);
+        animation = new Animation<>(0.5f, frames);
         time = 0;
         textureRegion = animation.getKeyFrame(time);
         setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
@@ -58,31 +62,32 @@ public class Chicken extends AnimalActor {
 
                     }
 
-//                    if(age > 5){
-//                        GameState.meatTotal += meat;
-//                        infoMeat.fadeOut();
-//                        energyBar.remove();
-//                        remove();
-//                    }
+                    if(age > 5){
+                        GameState.egg++;
+                        egg.remove();
+                        energyBar.remove();
+                        age = 1;
+                        new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+1 egg", 8).fadeOut();
+                    }
                 }
             });
+
+            egg = new Egg(getX()+ getWidth() - 2, getY() + getHeight() - 8, getStage());
+            egg.remove();
         }
 
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        time += Gdx.graphics.getDeltaTime();
-        textureRegion = animation.getKeyFrame(time);
-
-    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        time += delta;
+        textureRegion = animation.getKeyFrame(time);
         if(age >= 3){
-            textureRegion = Utils.chike(0,0,8,8);
             textureRegion = Utils.chike(8,0,8,8);
+            if(egg.getStage() == null){
+                getStage().addActor(egg);
+            }
         }
+
     }
 }

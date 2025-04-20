@@ -7,6 +7,8 @@ import farm.com.MyActor;
 import farm.com.ShowInfo;
 
 public class AnimalActor extends MyActor {
+
+    farm.com.enums.AnimalNames name;
     float energy = 100;
     float minusEnerGy = 0;
     float cost = 100;
@@ -21,11 +23,6 @@ public class AnimalActor extends MyActor {
     EnergyBar energyBar;
     AnimalActor(float x, float y, Stage s) {
         super(x, y, s);
-
-       infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, getStage(), "+" + (int)meat + " kg meat", 10);
-        infoMeat.remove(); // xoa khooi san khau de hide
-        infoMilk = new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4,getStage(), "+" + (int)milk + " bucket milk", 10);
-        infoMilk.remove();
     }
 
     @Override
@@ -36,6 +33,9 @@ public class AnimalActor extends MyActor {
         } else {
             energy = 0;
             energyBar.remove();
+            if(infoMeat.getStage() != null){
+                infoMeat.remove();
+            }
             remove();
         }
         energyBar.setSize(getWidth() * energy/100, 4);
@@ -43,12 +43,6 @@ public class AnimalActor extends MyActor {
             energyBar.setColor(Color.YELLOW);
             if(energy < 30) {
                 energyBar.setColor(Color.RED);
-            }
-        }
-        if(age > 3){
-            if(infoMeat.getStage() == null){
-                getStage().addActor(infoMeat);
-                infoMeat.setPosition(getX()+ getWidth() - 2, getY() + getHeight() - 8);
             }
         }
     }

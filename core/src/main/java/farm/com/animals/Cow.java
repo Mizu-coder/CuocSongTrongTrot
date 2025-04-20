@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.*;
+import farm.com.enums.AnimalNames;
 import farm.com.screens.Master;
 
 import java.util.Random;
@@ -16,9 +17,11 @@ public class Cow extends AnimalActor {
     float time;
     Animation<TextureRegion> animation;
     Master game;
+    BucketMilk bucketMilk;
     public Cow(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
+        name = AnimalNames.COW;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.cow(0,0,16,16);
          frames[1] = Utils.cow(16,0,16,16);
@@ -60,17 +63,21 @@ public class Cow extends AnimalActor {
                     }
                     if(energy >= 50){
                         if(age > 5){
-                            if(game.clicked){
-                                game.hadMilk = true;
-                                GameState.milkTotal += milk;
-                                infoMilk.fadeOut();
-                                energy -= 20;
-                            }
+                            bucketMilk.remove();
+                            game.hadMilk = true;
+                            GameState.milkTotal += milk;
+                            new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+" + (int) milk + " bucket milk", 8).fadeOut();
+                            energy -= 20;
+                            age = 1;
                         }
                     }
 
                 }
             });
+
+            bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, game);
+            bucketMilk.remove();
+        energy = 500;
     }
 
 
@@ -82,6 +89,9 @@ public class Cow extends AnimalActor {
 
         if(age > 3){
             textureRegion = Utils.cow(32,0,16,16);
+            if(bucketMilk.getStage() == null){
+                getStage().addActor(bucketMilk);
+            }
         }
     }
 }

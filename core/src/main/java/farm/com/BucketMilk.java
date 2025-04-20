@@ -27,11 +27,11 @@ public class BucketMilk extends MyActor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(game.clicked == true){
-            Vector2 mousePosition = new Vector2();
-            mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
-            getStage().getViewport().unproject(mousePosition);
-            setPosition(mousePosition.x, mousePosition.y);
-        }
+//        if(game.clicked == true){
+//            Vector2 mousePosition = new Vector2();
+//            mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
+//            getStage().getViewport().unproject(mousePosition);
+//            setPosition(mousePosition.x, mousePosition.y);
+//        }
     }
 }

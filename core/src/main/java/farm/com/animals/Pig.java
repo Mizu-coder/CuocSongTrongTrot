@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
 import farm.com.GameState;
+import farm.com.ShowInfo;
+import farm.com.enums.AnimalNames;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
@@ -19,6 +21,7 @@ public class Pig extends AnimalActor {
     public Pig(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
+        name = AnimalNames.PIG;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.piglet(0,0,8,8);
         frames[1] = Utils.piglet(8,0,8,8);
@@ -60,14 +63,17 @@ public class Pig extends AnimalActor {
                             energy += 10;
                         }
                     }
-//                    if(age > 5){
-//                        GameState.meatTotal += meat;
-//                        infoMeat.fadeOut();
-//                        energyBar.remove();
-//                        remove();
-//                    }
+                    if(age > 5){
+                        GameState.totalPork += meat;
+                        infoMeat.fadeOut();
+                        energyBar.remove();
+                        remove();
+                    }
                 }
             });
+
+        infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, s, "+" + (int) meat + " kg meat", 8);
+        infoMeat.remove();
 
     }
 
@@ -80,6 +86,11 @@ public class Pig extends AnimalActor {
            // textureRegion = Utils.pig(0,0,16,8);
             textureRegion = animationBig.getKeyFrame(time);
             setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+        }
+        if(age > 3){
+            if(infoMeat.getStage() == null){
+                getStage().addActor(infoMeat);
+            }
         }
 
     }

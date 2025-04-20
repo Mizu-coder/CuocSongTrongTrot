@@ -43,7 +43,7 @@ public class ShowInfo extends Actor {
         font = fontGenerator.generateFont(fontParameter);
         fontGenerator.dispose();
 
-        setPosition(Gdx.graphics.getWidth()/2,  Gdx.graphics.getHeight()/2);
+        setPosition(x,  y);
         setColor(1, 1, 1, 1); // Đảm bảo alpha ban đầu là 1 (không trong suốt)
 
         toFront();
