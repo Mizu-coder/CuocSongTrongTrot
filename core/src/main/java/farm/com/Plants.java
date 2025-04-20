@@ -16,6 +16,8 @@ public class Plants extends MyActor{
     Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
+        if (game.type == 0){
+        }
         if (game.type == 1) {
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 0, 16, 16);

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -54,6 +56,10 @@ public class GameScreen implements Screen {
         famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
         day = 1;
         timing = day;
+
+        //Mùa
+        new Weather_Summer(200 , 980,stage, 1);
+
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
@@ -112,6 +118,13 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
+
+        Shop.addListener(new ClickListener(){
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(game.menuScreen);
+                Shop.remove();
+            }
+        });
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
@@ -206,6 +219,7 @@ public class GameScreen implements Screen {
         float x = 0;
         float y = 0;
 
+
         // Hàng cây
         x = Gdx.graphics.getWidth() / 2.5f;
         y = HEIGHT - 100;
@@ -219,7 +233,7 @@ public class GameScreen implements Screen {
         y = Gdx.graphics.getHeight()/1.65f + HEIGHT / 2;
         Master.home = new Home(x, y, stage,game);
 
-        // Giêngs
+        // Giếng
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
@@ -254,6 +268,9 @@ public class GameScreen implements Screen {
 
         x = Gdx.graphics.getWidth() - 200;
         y = Gdx.graphics.getHeight() - 40;
+
+        new Shop(x, y, staticStage, game);
+
         new PumkinSeed(x, y, staticStage,game);
 
         x += 40;
