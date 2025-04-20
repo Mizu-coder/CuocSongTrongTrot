@@ -75,7 +75,8 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         generateMap();
-        famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
+        famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
+        famer.setSize(50,50);
         day = 1;
         timing = 0;
 

@@ -26,7 +26,7 @@ public class Pig extends AnimalActor {
         animation.setPlayMode(Animation.PlayMode.LOOP);
         time = 0;
         textureRegion = animation.getKeyFrame(time);
-        setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+        setSize(textureRegion.getRegionWidth()*4,textureRegion.getRegionHeight()*4);
 
         TextureRegion[] frames1 = new TextureRegion[2];
         frames1[0] = Utils.pig(0,0,16,8);
