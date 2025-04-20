@@ -58,12 +58,12 @@ public class Chicken extends AnimalActor {
 
                     }
 
-                    if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
-                        energyBar.remove();
-                        remove();
-                    }
+//                    if(age > 5){
+//                        GameState.meatTotal += meat;
+//                        infoMeat.fadeOut();
+//                        energyBar.remove();
+//                        remove();
+//                    }
                 }
             });
         }

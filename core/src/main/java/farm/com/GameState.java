@@ -1,7 +1,9 @@
 package farm.com;
 
 public class GameState {
-    public static float money = 100;
-    public static float meatTotal = 0;
+    public static float money = 100000;
+    public static int milk = 0;
+    public static int egg = 0;
+    public static int totalPork = 0;
 
 }

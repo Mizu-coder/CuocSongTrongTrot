@@ -287,6 +287,7 @@ public class GameScreen implements Screen {
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
+        new BucketMilk(Master.well.getX(), Master.well.getY() + 16, stage);
         x = Gdx.graphics.getWidth()/2 + 180 ;
         y = 150 + HEIGHT / 2;
         Master.lake = new Lake(x, y, stage);

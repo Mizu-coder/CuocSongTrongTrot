@@ -10,7 +10,7 @@ public class AnimalActor extends MyActor {
     float energy = 100;
     float minusEnerGy = 0;
     float cost = 100;
-    float meat = 99;
+    float meat = 0;
     float sellingPrice = 100;
     public int age;
 

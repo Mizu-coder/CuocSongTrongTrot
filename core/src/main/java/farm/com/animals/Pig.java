@@ -60,12 +60,12 @@ public class Pig extends AnimalActor {
                             energy += 10;
                         }
                     }
-                    if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
-                        energyBar.remove();
-                        remove();
-                    }
+//                    if(age > 5){
+//                        GameState.meatTotal += meat;
+//                        infoMeat.fadeOut();
+//                        energyBar.remove();
+//                        remove();
+//                    }
                 }
             });
 

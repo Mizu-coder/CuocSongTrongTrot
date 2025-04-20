@@ -3,11 +3,14 @@ package farm.com.animals;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.*;
 import farm.com.screens.Master;
+
+import java.util.Random;
 
 public class Cow extends AnimalActor {
     float time;
@@ -56,12 +59,12 @@ public class Cow extends AnimalActor {
                         }
                     }
 
-                    if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
-                        energyBar.remove();
-                        remove();
-                    }
+//                    if(age > 5){
+//                        GameState.totalBeef += meat;
+//                        infoMeat.fadeOut();
+//                        energyBar.remove();
+//                        remove();
+//                    }
                 }
             });
     }
