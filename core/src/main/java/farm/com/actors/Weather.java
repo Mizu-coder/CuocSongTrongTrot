@@ -17,7 +17,7 @@ public class Weather extends MyActor {
         super(x, y, s);
         this.game = game;
         textureRegionRain = new TextureRegion(new Texture("rain.png"));
-        textureRegionSunny = new TextureRegion(new Texture("sunny.jpg"));
+        textureRegionSunny = new TextureRegion(new Texture("sunny.png"));
         textureRegion = textureRegionRain;
         weatherType = WeatherType.values()[MathUtils.random(0, WeatherType.values().length -1)];
         ranDomWeatherType();

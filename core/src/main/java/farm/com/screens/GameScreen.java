@@ -38,6 +38,7 @@ public class GameScreen implements Screen {
     GlyphLayout layout4;
     GlyphLayout layout5;
     GlyphLayout da;
+    GlyphLayout money;
     Character famer;
     Array<Soil> soils;
     Array<Plants> listPlants;
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
     AnimalActor animalActor;
 
     Shop shop;
+    Coin coin;
 
     boolean nextDay = false;
     int day;
@@ -55,6 +57,8 @@ public class GameScreen implements Screen {
 
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
+
+    GameState gameState;
 
     public GameScreen(Master game) {
         this.game = game;
@@ -71,7 +75,8 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         generateMap();
-        famer = new Character(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2 + HEIGHT/2,stage,game);
+        famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
+        famer.setSize(50,50);
         day = 1;
         timing = 0;
 
@@ -80,6 +85,8 @@ public class GameScreen implements Screen {
         new Cock(250, HEIGHT - 200, stage, 3);
         new Cock(280, 230, stage, 3);
         new Cock(870, 620, stage, 2);
+
+        gameState = new GameState();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -90,6 +97,7 @@ public class GameScreen implements Screen {
         layout4 = new GlyphLayout();
         layout5 = new GlyphLayout();
         da = new GlyphLayout();
+        money = new GlyphLayout();
 
         layout.setText(game.font, "" + game.seedpu);
         layout.width = 0.4f;
@@ -115,10 +123,13 @@ public class GameScreen implements Screen {
         da.width = 0.4f;
         da.height = 0.4f;
 
+        money.setText(game.font,"" + gameState.money);
+
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
 
+        coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
 
         shop.addListener(new ClickListener(){
@@ -140,7 +151,7 @@ public class GameScreen implements Screen {
 
 
         timing++;
-        if(timing % (60*3) == 0){
+        if(timing % (60*24) == 0){
             newDay();
             nextDay = false;
         }
@@ -215,6 +226,8 @@ public class GameScreen implements Screen {
         staticStage.act();
         staticStage.draw();
         game.batch.begin();
+
+        game.font.draw(game.batch,money,coin.getX() + 16,coin.getY());
 
         if(nextDay == true){
             game.font.draw(game.batch, da,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);

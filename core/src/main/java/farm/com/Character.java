@@ -23,18 +23,22 @@ public class Character extends MyActor{
         int speedX = 0;
         int speedY = 0;
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+           textureRegion = new TextureRegion(new Texture("farmer2.png"));
            speedX = -2;
            speedY = 0;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            textureRegion = new TextureRegion(new Texture("farmer3.png"));
            speedX = 2;
            speedY = 0;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            textureRegion = new TextureRegion(new Texture("farmer1.png"));
             speedX = 0;
             speedY = 2;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            textureRegion = new TextureRegion(new Texture("farmer.png"));
             speedX = 0;
             speedY = -2;
         }
