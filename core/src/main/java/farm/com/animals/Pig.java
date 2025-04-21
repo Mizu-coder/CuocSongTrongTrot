@@ -2,6 +2,7 @@ package farm.com.animals;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -65,16 +66,14 @@ public class Pig extends AnimalActor {
                     }
                     if(age > 5){
                         GameState.totalPork += meat;
-                        infoMeat.fadeOut();
+                        if(infoMeat != null){
+                            infoMeat.fadeOut();
+                        }
                         energyBar.remove();
                         remove();
                     }
                 }
             });
-
-        infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, s, "+" + (int) meat + " kg meat", 8);
-        infoMeat.remove();
-
     }
 
     @Override
@@ -88,8 +87,9 @@ public class Pig extends AnimalActor {
             setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
         }
         if(age > 3){
-            if(infoMeat.getStage() == null){
-                getStage().addActor(infoMeat);
+            if(infoMeat == null){
+                meat = 100 - MathUtils.random(0, 50);
+                infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, getStage(), "+" + (int) meat + " kg meat", 5);
             }
         }
 
