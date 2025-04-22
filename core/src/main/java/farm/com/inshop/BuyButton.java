@@ -15,7 +15,7 @@ import farm.com.enums.BuyTypeButton;
 import farm.com.screens.GameScreen;
 
 public class BuyButton extends MyActor {
-    int cost = 0;
+    public int cost = 0;
     BuyTypeButton type = BuyTypeButton.CHICKEN;
     Sound ting;
     public BuyButton(float x, float y, Stage s) {
@@ -37,6 +37,9 @@ public class BuyButton extends MyActor {
                         }
                         case CHICKEN -> {
                             GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                        }
+                        case MEDICINE -> {
+                            GameState.soKimTiem += 1;
                         }
                     }
                 }

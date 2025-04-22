@@ -10,7 +10,7 @@ public class EggButton extends SellButton {
     public EggButton(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("Chick_sell.png"));
-        setSize(64, 32);
+        setSize(64, 64);
         cost = 5;
         type = SellTypeButton.EGG;
     }

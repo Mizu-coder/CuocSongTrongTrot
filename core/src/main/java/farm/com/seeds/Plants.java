@@ -87,7 +87,7 @@ public class Plants extends MyActor {
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                if (game.sun < 100 && game.rai < 100) {
+                if (game.sun < 3 && game.rai < 3) {
                     if (game.water) {
                         isWatered = true;
                         game.water = false;

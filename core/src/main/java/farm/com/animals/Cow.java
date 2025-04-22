@@ -30,7 +30,7 @@ public class Cow extends AnimalActor {
         textureRegion = animation.getKeyFrame(time);
         time = 0;
 
-        setSize(textureRegion.getRegionWidth()*4,textureRegion.getRegionHeight()*4);
+        setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
         minusEnerGy = 1f/40;
@@ -91,8 +91,10 @@ public class Cow extends AnimalActor {
         time += delta;
         textureRegion = animation.getKeyFrame(time);
 
-        if(age > 3){
+        if(age >= 4){
             textureRegion = Utils.cow(32,0,16,16);
+        }
+        if (age > 5){
             if(bucketMilk.getStage() == null && getStage() != null){
                 getStage().addActor(bucketMilk);
             }

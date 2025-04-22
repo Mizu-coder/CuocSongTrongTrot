@@ -87,12 +87,12 @@ public class Pig extends AnimalActor {
         super.act(delta);
         time += delta;
         textureRegion = animation.getKeyFrame(time);
-        if(age >= 2){
+        if(age >= 4){
            // textureRegion = Utils.pig(0,0,16,8);
             textureRegion = animationBig.getKeyFrame(time);
-            setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
         }
-        if(age > 3){
+        if(age >= 5){
             if(infoMeat == null){
                 meat = 100 - MathUtils.random(0, 50);
                 infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, getStage(), "+" + (int) meat + " kg meat", 5);

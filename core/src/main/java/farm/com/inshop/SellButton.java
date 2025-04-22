@@ -20,19 +20,31 @@ public class SellButton extends MyActor {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameState.money += cost;
-                ting.play();
-                switch (type){
-                    case EGG -> {
-                        GameState.egg--;
-                    }
-                    case MILK -> {
-                        GameState.milkTotal--;
-                    }
-                    case PORK -> {
-                        GameState.totalPork--;
-                    }
+                if(GameState.totalPork > 0 || GameState.egg > 0 || GameState.milkTotal >0) {
+                    GameState.money += cost;
                 }
+                ting.play();
+
+
+                    switch (type) {
+                        case EGG -> {
+                            if(GameState.egg > 0){
+                                GameState.egg--;
+                            }
+
+                        }
+                        case MILK -> {
+                            if (GameState.milkTotal > 0) {
+                                GameState.milkTotal--;
+                            }
+                        }
+                        case PORK -> {
+                            if (GameState.totalPork > 0) {
+                                GameState.totalPork--;
+                            }
+                        }
+                    }
+
             }
         });
     }

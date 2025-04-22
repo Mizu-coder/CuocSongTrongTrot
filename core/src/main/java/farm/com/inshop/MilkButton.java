@@ -11,7 +11,7 @@ public class MilkButton extends SellButton {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("Cow_sell.png"));
         setSize(64, 32);
-        cost = 10;
+        cost = 70;
         type = SellTypeButton.MILK;
     }
 }

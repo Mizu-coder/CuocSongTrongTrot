@@ -69,7 +69,7 @@ public class Chicken extends AnimalActor {
                         GameState.egg++;
                         egg.remove();
                         energyBar.remove();
-                        age = 1;
+                        age = 3;
                         new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+1 egg", 8).fadeOut();
                     }
                 }
@@ -87,6 +87,8 @@ public class Chicken extends AnimalActor {
         textureRegion = animation.getKeyFrame(time);
         if(age >= 3){
             textureRegion = Utils.chike(8,0,8,8);
+        }
+        if(age >= 5){
             if(egg.getStage() == null && getStage() != null){
                 getStage().addActor(egg);
             }

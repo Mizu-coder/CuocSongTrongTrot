@@ -11,7 +11,7 @@ public class PorkButton extends SellButton {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("Pig_sell.png"));
         setSize(64, 32);
-        cost = 10;
+        cost = 50;
         type = SellTypeButton.PORK;
     }
 }

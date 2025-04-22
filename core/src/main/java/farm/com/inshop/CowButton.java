@@ -10,7 +10,7 @@ public class CowButton extends BuyButton {
         super(x, y, s);
         textureRegion = Utils.cow(0,0,16,16);
         setSize(textureRegion.getRegionWidth()*2, textureRegion.getRegionHeight()*2);
-        cost = 1000;
+        cost = 300;
         type = BuyTypeButton.COW;
     }
 }

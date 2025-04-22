@@ -26,13 +26,17 @@ public class ShopScreen implements Screen {
     Stage stage;
     OrthographicCamera camera;
     GlyphLayout layout;
+
     GameState gameState;
+
     PorkButton porkButton;
     MilkButton milkButton;
     EggButton eggButton;
+
     ChickenButton chickenButton;
     PigButton pigButton;
     CowButton cowButton;
+    MedicineButton medicineButton;
 
     TextButton back;
     MyActor col;
@@ -72,6 +76,7 @@ public class ShopScreen implements Screen {
         chickenButton = new ChickenButton( 600, 450, stage);
         pigButton = new PigButton(600, 380, stage);
         cowButton = new CowButton(600, 310, stage);
+        medicineButton = new MedicineButton(600, 240, stage);
 
         stage.addActor(back);
 
@@ -124,13 +129,22 @@ public class ShopScreen implements Screen {
         layout.setText(game.font,"Buy");
         game.font.draw(game.batch, layout, 700, 500);
 
+        layout.setText(game.font,"" + pigButton.cost);
+        game.font.draw(game.batch, layout, 500, 400);
+        layout.setText(game.font,"" + chickenButton.cost);
+        game.font.draw(game.batch, layout, 500, 470);
+        layout.setText(game.font,"" + cowButton.cost);
+        game.font.draw(game.batch, layout, 500, 330);
+        layout.setText(game.font,"" + medicineButton.cost);
+        game.font.draw(game.batch, layout, 500, 260);
+
         layout.setText(game.font,"" + GameState.totalPork);
         game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 80);
 
-        layout.setText(game.font,"" + GameState.egg);
+        layout.setText(game.font,"" + GameState.milkTotal);
         game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 180);
 
-        layout.setText(game.font,"" + GameState.milkTotal);
+        layout.setText(game.font,"" + GameState.egg);
         game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 280);
 
         game.batch.end();

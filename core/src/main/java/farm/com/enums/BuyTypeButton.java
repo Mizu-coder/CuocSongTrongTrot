@@ -3,5 +3,6 @@ package farm.com.enums;
 public enum BuyTypeButton {
     CHICKEN,
     PIG,
-    COW
+    COW,
+    MEDICINE
 }
