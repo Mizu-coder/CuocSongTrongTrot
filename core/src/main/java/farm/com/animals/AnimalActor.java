@@ -3,7 +3,9 @@ package farm.com.animals;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import farm.com.EnergyBar;
 import farm.com.MyActor;
 import farm.com.ShowInfo;
@@ -27,8 +29,42 @@ public class AnimalActor extends MyActor {
     float timeForIll = 0;
     float timeforIllMax = 5;
     int hour = 0;
+    boolean touched = false;
+    float lastX = 0;
+    float lastY = 0;
     AnimalActor(float x, float y, Stage s) {
         super(x, y, s);
+
+        addListener(new DragListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if(!touched){
+                    touched = true;
+                    lastX = x;
+                    lastY = y;
+                }
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                super.touchDragged(event, x, y, pointer);
+                if(touched) {
+                    float deltaX = x - lastX;
+                    float deltaY = y - lastY;
+                    moveBy(deltaX, deltaY);
+
+                    lastX = x;
+                    lastY = y;
+                }
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                touched = false;
+            }
+        });
     }
 
     @Override
