@@ -43,9 +43,9 @@ public class GameScreen implements Screen {
     Array<Soil> soils;
     Array<Plants> listPlants;
     Array<Cage> cages;
-    Array<Chicken> chickens;
-    Array<Pig> pigs;
-    Array<Cow> cows;
+    public static Array<Chicken> chickens;
+    public static Array<Pig> pigs;
+    public static Array<Cow> cows;
     AnimalActor animalActor;
 
     Shop shop;
@@ -67,9 +67,15 @@ public class GameScreen implements Screen {
         soils = new Array<>();
         listPlants = new Array<>();
         cages = new Array<>();
-        chickens = new Array<>();
-        pigs = new Array<>();
-        cows = new Array<>();
+        if(chickens == null) {
+            chickens = new Array<>();
+        }
+        if(pigs == null){
+            pigs = new Array<>();
+        }
+        if(cows == null) {
+            cows = new Array<>();
+        }
 
     }
     @Override
@@ -151,7 +157,7 @@ public class GameScreen implements Screen {
 
 
         timing++;
-        if(timing % (60*24) == 0){
+        if(timing % (60*3) == 0){
             newDay();
             nextDay = false;
         }
@@ -227,7 +233,7 @@ public class GameScreen implements Screen {
         staticStage.draw();
         game.batch.begin();
 
-        game.font.draw(game.batch,money,coin.getX() + 16,coin.getY());
+        game.font.draw(game.batch,money,coin.getX() + 48,coin.getY() + 2*coin.getHeight()/3);
 
         if(nextDay == true){
             game.font.draw(game.batch, da,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
@@ -300,7 +306,7 @@ public class GameScreen implements Screen {
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
-        new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage,game);
+        new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
         x = Gdx.graphics.getWidth()/2 + 180 ;
         y = 150 + HEIGHT / 2;
         Master.lake = new Lake(x, y, stage);
@@ -347,39 +353,57 @@ public class GameScreen implements Screen {
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
         game.season = new Season(0,0, staticStage);
 
-        cows.add(new Cow(cox,coy,stage,game));
-        cox -= 32;
-        coy -= 32;
-        cows.add(new Cow(cox,coy,stage,game));
-        cox += 64;
-        coy += 32;
-        cows.add(new Cow(cox,coy,stage,game));
-        cox -= 96;
-        coy -= 96;
-        cows.add(new Cow(cox,coy,stage,game));
+        if(cows.isEmpty()) {
+            cows.add(new Cow(cox, coy, stage));
+            cox -= 32;
+            coy -= 32;
+            cows.add(new Cow(cox, coy, stage));
+            cox += 64;
+            coy += 32;
+            cows.add(new Cow(cox, coy, stage));
+            cox -= 96;
+            coy -= 96;
+            cows.add(new Cow(cox, coy, stage));
+        } else {
+            for (Cow c: cows) {
+                stage.addActor(c);
+            }
+        }
 
 
-        pigs.add(new Pig(px,py,stage,game));
-        px += 32;
-        py += 32;
-        pigs.add(new Pig(px,py,stage,game));
-        px -= 64;
-        py += 32;
-        pigs.add(new Pig(px,py,stage,game));
-        px += 32;
-        py -= 128;
-        pigs.add(new Pig(px,py,stage,game));
+        if(pigs.isEmpty()) {
+            pigs.add(new Pig(px, py, stage));
+            px += 32;
+            py += 32;
+            pigs.add(new Pig(px, py, stage));
+            px -= 64;
+            py += 32;
+            pigs.add(new Pig(px, py, stage));
+            px += 32;
+            py -= 128;
+            pigs.add(new Pig(px, py, stage));
+        } else {
+            for (Pig p: pigs) {
+                stage.addActor(p);
+            }
+        }
 
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx -= 32;
-        cy -= 32;
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx += 32;
-        cy -= 32*3;
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx += 32;
-        cy += 32;
-        chickens.add(new Chicken(cx,cy,stage,game));
+        if(chickens.isEmpty()) {
+            chickens.add(new Chicken(cx, cy, stage));
+            cx -= 32;
+            cy -= 32;
+            chickens.add(new Chicken(cx, cy, stage));
+            cx += 32;
+            cy -= 32 * 3;
+            chickens.add(new Chicken(cx, cy, stage));
+            cx += 32;
+            cy += 32;
+            chickens.add(new Chicken(cx, cy, stage));
+        } else {
+            for (Chicken c: chickens) {
+                stage.addActor(c);
+            }
+        }
 
     }
     private void genBackground(){

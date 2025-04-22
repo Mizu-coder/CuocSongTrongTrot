@@ -19,12 +19,12 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
 
-    public int type = 0;
-    public int seedc = 5;
-    public int seedb = 5;
-    public int seedp = 5;
-    public int seedt = 5;
-    public int seedpu = 5;
+    public static int type = 0;
+    public static int seedc = 5;
+    public static int seedb = 5;
+    public static int seedp = 5;
+    public static int seedt = 5;
+    public static int seedpu = 5;
 
     public int sun = 0;
     public int rai = 0;

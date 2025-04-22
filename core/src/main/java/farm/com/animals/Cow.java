@@ -16,11 +16,9 @@ import java.util.Random;
 public class Cow extends AnimalActor {
     float time;
     Animation<TextureRegion> animation;
-    Master game;
     BucketMilk bucketMilk;
-    public Cow(float x, float y, Stage s, Master game) {
+    public Cow(float x, float y, Stage s) {
         super(x, y, s);
-        this.game = game;
         name = AnimalNames.COW;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.cow(0,0,16,16);
@@ -40,31 +38,30 @@ public class Cow extends AnimalActor {
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if (energy < 100) {
-                        if (game.type == 1) {
-                            game.seedpu -= 1;
+                        if (Master.type == 1) {
+                            Master.seedpu -= 1;
                             energy += 50;
                         }
-                        if (game.type == 2) {
-                            game.seedc -= 1;
+                        if (Master.type == 2) {
+                            Master.seedc -= 1;
                             energy += 20;
                         }
-                        if (game.type == 3) {
-                            game.seedp -= 1;
+                        if (Master.type == 3) {
+                            Master.seedp -= 1;
                             energy += 10;
                         }
-                        if (game.type == 4) {
-                            game.seedt -= 1;
+                        if (Master.type == 4) {
+                            Master.seedt -= 1;
                             energy += 10;
                         }
-                        if (game.type == 5) {
-                            game.seedb -= 1;
+                        if (Master.type == 5) {
+                            Master.seedb -= 1;
                             energy += 10;
                         }
                     }
                     if(energy >= 50){
                         if(age > 5){
                             bucketMilk.remove();
-                            game.hadMilk = true;
                             GameState.milkTotal += milk;
                             new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+" + (int) milk + " bucket milk", 8).fadeOut();
                             energy -= 20;
@@ -75,7 +72,7 @@ public class Cow extends AnimalActor {
                 }
             });
 
-            bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, game);
+            bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s);
             bucketMilk.remove();
         energy = 500;
     }

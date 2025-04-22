@@ -17,11 +17,9 @@ public class Pig extends AnimalActor {
     float time;
     Animation<TextureRegion> animation;
     Animation<TextureRegion> animationBig;
-    Master game;
 
-    public Pig(float x, float y, Stage s, Master game) {
+    public Pig(float x, float y, Stage s) {
         super(x, y, s);
-        this.game = game;
         name = AnimalNames.PIG;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.piglet(0,0,8,8);
@@ -43,24 +41,24 @@ public class Pig extends AnimalActor {
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if (energy < 100) {
-                        if (game.type == 1) {
-                            game.seedpu -= 1;
+                        if (Master.type == 1) {
+                            Master.seedpu -= 1;
                             energy += 50;
                         }
-                        if (game.type == 2) {
-                            game.seedc -= 1;
+                        if (Master.type == 2) {
+                            Master.seedc -= 1;
                             energy += 20;
                         }
-                        if (game.type == 3) {
-                            game.seedp -= 1;
+                        if (Master.type == 3) {
+                            Master.seedp -= 1;
                             energy += 10;
                         }
-                        if (game.type == 4) {
-                            game.seedt -= 1;
+                        if (Master.type == 4) {
+                            Master.seedt -= 1;
                             energy += 10;
                         }
-                        if (game.type == 5) {
-                            game.seedb -= 1;
+                        if (Master.type == 5) {
+                            Master.seedb -= 1;
                             energy += 10;
                         }
                     }

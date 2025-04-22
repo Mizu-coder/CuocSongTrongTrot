@@ -33,7 +33,7 @@ public class AnimalActor extends MyActor {
         } else {
             energy = 0;
             energyBar.remove();
-            if(infoMeat.getStage() != null){
+            if(infoMeat != null && infoMeat.getStage() != null){
                 infoMeat.remove();
             }
             remove();
