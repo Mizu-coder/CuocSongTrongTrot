@@ -1,10 +1,13 @@
 package farm.com.animals;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import farm.com.EnergyBar;
 import farm.com.MyActor;
 import farm.com.ShowInfo;
+import farm.com.screens.GameScreen;
 
 public class AnimalActor extends MyActor {
 
@@ -18,9 +21,12 @@ public class AnimalActor extends MyActor {
     public int age;
 
     ShowInfo infoMeat;
-    ShowInfo infoMilk;
-
     EnergyBar energyBar;
+
+    boolean ill = false;
+    float timeForIll = 0;
+    float timeforIllMax = 5;
+    int hour = 0;
     AnimalActor(float x, float y, Stage s) {
         super(x, y, s);
     }
@@ -28,6 +34,7 @@ public class AnimalActor extends MyActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        hour++;
         if(energy > 0) {
             energy -= minusEnerGy;
         } else {
@@ -44,6 +51,24 @@ public class AnimalActor extends MyActor {
             if(energy < 30) {
                 energyBar.setColor(Color.RED);
             }
+        }
+        if(ill){
+            setColor(0,1, 0, 1);
+            timeForIll += delta;
+            if(timeForIll > timeforIllMax){
+                energyBar.remove();
+                remove();
+            }
+        } else {
+            setColor(1,1, 1, 1);
+            if(age > 3 && hour % (60*2) == 0){
+                if(MathUtils.random(1, 50) < 3){
+                    ill = true;
+                }
+            }
+        }
+        if(getStage() != null && energyBar.getStage() == null){
+            getStage().addActor(energyBar);
         }
     }
 

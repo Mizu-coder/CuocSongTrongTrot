@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.*;
 import farm.com.enums.AnimalNames;
+import farm.com.enums.ChooseType;
 import farm.com.screens.Master;
 
 import java.util.Random;
@@ -37,26 +38,32 @@ public class Cow extends AnimalActor {
 
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
+                    if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){
+                        ill = false;
+                        GameState.soKimTiem--;
+                    }
                     if (energy < 100) {
-                        if (Master.type == 1) {
-                            Master.seedpu -= 1;
-                            energy += 50;
-                        }
-                        if (Master.type == 2) {
-                            Master.seedc -= 1;
-                            energy += 20;
-                        }
-                        if (Master.type == 3) {
-                            Master.seedp -= 1;
-                            energy += 10;
-                        }
-                        if (Master.type == 4) {
-                            Master.seedt -= 1;
-                            energy += 10;
-                        }
-                        if (Master.type == 5) {
-                            Master.seedb -= 1;
-                            energy += 10;
+                        switch (Master.type){
+                            case PUMKIN -> {
+                                GameState.seedpu -= 1;
+                                energy += 50;
+                            }
+                            case CAROT -> {
+                                GameState.seedc -= 1;
+                                energy += 20;
+                            }
+                            case POTATO -> {
+                                GameState.seedp -= 1;
+                                energy += 10;
+                            }
+                            case TOMATO -> {
+                                GameState.seedt -= 1;
+                                energy += 10;
+                            }
+                            case BEAN -> {
+                                GameState.seedb -= 1;
+                                energy += 10;
+                            }
                         }
                     }
                     if(energy >= 50){
@@ -86,7 +93,7 @@ public class Cow extends AnimalActor {
 
         if(age > 3){
             textureRegion = Utils.cow(32,0,16,16);
-            if(bucketMilk.getStage() == null){
+            if(bucketMilk.getStage() == null && getStage() != null){
                 getStage().addActor(bucketMilk);
             }
         }

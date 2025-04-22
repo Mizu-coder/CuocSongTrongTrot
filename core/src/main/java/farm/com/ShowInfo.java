@@ -47,7 +47,9 @@ public class ShowInfo extends Actor {
         setColor(1, 1, 1, 1); // Đảm bảo alpha ban đầu là 1 (không trong suốt)
 
         toFront();
-        s.addActor(this);
+        if(s != null){
+            s.addActor(this);
+        }
     }
 
     @Override

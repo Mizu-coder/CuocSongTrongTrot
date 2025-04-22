@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import farm.com.*;
 import farm.com.actors.Weather;
+import farm.com.enums.ChooseType;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
@@ -19,12 +20,7 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
 
-    public static int type = 0;
-    public static int seedc = 5;
-    public static int seedb = 5;
-    public static int seedp = 5;
-    public static int seedt = 5;
-    public static int seedpu = 5;
+    public static ChooseType type = ChooseType.NOTHING;
 
     public int sun = 0;
     public int rai = 0;
@@ -36,7 +32,6 @@ public class Master extends Game {
     public Season season;
 
     public boolean clicked = false;
-    public boolean hadMilk = false;
 
     @Override
     public void create() {

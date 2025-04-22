@@ -12,6 +12,7 @@ import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.ShowInfo;
 import farm.com.Utils;
+import farm.com.enums.ChooseType;
 import farm.com.enums.PlantType;
 import farm.com.screens.Master;
 
@@ -25,12 +26,10 @@ public class Plants extends MyActor {
     public Plants(float x, float y, Stage s, Master game) {
         super(x, y, s);
         this.game = game;
-        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)game.seedpu, 10);
+        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)GameState.seedpu, 10);
         infoSeed.remove();
 
-        if (game.type == 0){
-        }
-        if (game.type == 1) {
+        if (Master.type.equals(ChooseType.PUMKIN)) {
             plantType = PlantType.PUMKIN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 0, 16, 16);
@@ -40,7 +39,7 @@ public class Plants extends MyActor {
             frames[4] = Utils.getRegionPlants(64, 0, 16, 16);
             animation = new Animation<TextureRegion>(0.01f,frames);
         }
-        if (game.type == 2) {
+        if (Master.type.equals(ChooseType.CAROT)) {
             plantType = PlantType.CARROT;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16, 16, 16);
@@ -50,7 +49,7 @@ public class Plants extends MyActor {
             frames[4] = Utils.getRegionPlants(16 * 4, 16, 16, 16);
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
-        if (game.type == 3) {
+        if (Master.type.equals(ChooseType.POTATO)) {
             plantType = PlantType.POTATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 2, 16, 16);
@@ -60,7 +59,7 @@ public class Plants extends MyActor {
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 2, 16, 16);
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
-        if (game.type == 4) {
+        if (Master.type.equals(ChooseType.TOMATO)) {
             plantType = PlantType.TOMATO;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 3, 16, 16);
@@ -70,7 +69,7 @@ public class Plants extends MyActor {
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 3, 16, 16);
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
-        if (game.type == 5) {
+        if (Master.type.equals(ChooseType.BEAN)) {
             plantType = PlantType.BEAN;
             TextureRegion[] frames = new TextureRegion[5];
             frames[0] = Utils.getRegionPlants(0, 16 * 4, 16, 16 * 3);
@@ -105,27 +104,27 @@ public class Plants extends MyActor {
                     if(animation.isAnimationFinished(time)){
                         switch (plantType){
                             case PUMKIN -> {
-                                game.seedpu += 3;
+                                GameState.seedpu += 3;
                                 infoSeed.fadeOut();
                                 remove();
                             }
                             case CARROT -> {
-                                game.seedc += 2;
+                                GameState.seedc += 2;
                                 infoSeed.fadeOut();
                                 remove();
                             }
                             case POTATO -> {
-                                game.seedp += 5;
+                                GameState.seedp += 5;
                                 infoSeed.fadeOut();
                                 remove();
                             }
                             case TOMATO -> {
-                                game.seedt += 5;
+                                GameState.seedt += 5;
                                 infoSeed.fadeOut();
                                 remove();
                             }
                             case BEAN -> {
-                                game.seedb += 6;
+                                GameState.seedb += 6;
                                 infoSeed.fadeOut();
                                 remove();
                             }

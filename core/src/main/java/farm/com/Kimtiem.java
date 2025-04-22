@@ -1,21 +1,22 @@
-package farm.com.seeds;
+package farm.com;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import farm.com.MyActor;
-import farm.com.Utils;
 import farm.com.enums.ChooseType;
 import farm.com.screens.Master;
 
-public class Bean extends MyActor {
-    public Bean(float x, float y, Stage s) {
+public class Kimtiem extends MyActor{
+    public Kimtiem(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = Utils.seedpacket(16*4,16,16,16);
-        setSize(textureRegion.getRegionWidth()*2, textureRegion.getRegionHeight()*2);
+        textureRegion = new TextureRegion(new Texture("kimtiem.png"));
+        setSize(32, 32);
+
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                Master.type = ChooseType.BEAN;
+                Master.type = ChooseType.KIMTIEM;
             }
         });
     }

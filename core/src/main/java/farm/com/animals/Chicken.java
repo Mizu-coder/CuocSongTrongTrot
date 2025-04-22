@@ -11,6 +11,7 @@ import farm.com.EnergyBar;
 import farm.com.GameState;
 import farm.com.ShowInfo;
 import farm.com.enums.AnimalNames;
+import farm.com.enums.ChooseType;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 import farm.com.Utils;
@@ -34,26 +35,32 @@ public class Chicken extends AnimalActor {
         minusEnerGy = 1f/60;
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
+                    if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){
+                        ill = false;
+                        GameState.soKimTiem--;
+                    }
                     if (energy < 100) {
-                        if (Master.type == 1) {
-                            Master.seedpu -= 1;
-                            energy += 50;
-                        }
-                        if (Master.type == 2) {
-                            Master.seedc -= 1;
-                            energy += 20;
-                        }
-                        if (Master.type == 3) {
-                            Master.seedp -= 1;
-                            energy += 10;
-                        }
-                        if (Master.type == 4) {
-                            Master.seedt -= 1;
-                            energy += 10;
-                        }
-                        if (Master.type == 5) {
-                            Master.seedb -= 1;
-                            energy += 10;
+                        switch (Master.type){
+                            case PUMKIN -> {
+                                GameState.seedpu -= 1;
+                                energy += 50;
+                            }
+                            case CAROT -> {
+                                GameState.seedc -= 1;
+                                energy += 20;
+                            }
+                            case POTATO -> {
+                                GameState.seedp -= 1;
+                                energy += 10;
+                            }
+                            case TOMATO -> {
+                                GameState.seedt -= 1;
+                                energy += 10;
+                            }
+                            case BEAN -> {
+                                GameState.seedb -= 1;
+                                energy += 10;
+                            }
                         }
 
                     }
@@ -80,7 +87,7 @@ public class Chicken extends AnimalActor {
         textureRegion = animation.getKeyFrame(time);
         if(age >= 3){
             textureRegion = Utils.chike(8,0,8,8);
-            if(egg.getStage() == null){
+            if(egg.getStage() == null && getStage() != null){
                 getStage().addActor(egg);
             }
         }
