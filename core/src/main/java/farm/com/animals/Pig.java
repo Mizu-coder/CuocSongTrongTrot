@@ -17,6 +17,7 @@ public class Pig extends AnimalActor {
     Animation<TextureRegion> animation;
     Animation<TextureRegion> animationBig;
     Master game;
+    GameState gameState;
 
     public Pig(float x, float y, Stage s, Master game) {
         super(x, y, s);
@@ -65,15 +66,18 @@ public class Pig extends AnimalActor {
                     }
                     if(age > 5){
                         GameState.totalPork += meat;
-                        infoMeat.fadeOut();
+                        infoMeat.remove();
+                        new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, s, "+ 1 " +" kg meat", 8).fadeOut();
+
                         energyBar.remove();
                         remove();
                     }
                 }
             });
 
-        infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, s, "+" + (int) meat + " kg meat", 8);
+        infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, s, "+" + "meat", 8);
         infoMeat.remove();
+
 
     }
 
@@ -87,7 +91,7 @@ public class Pig extends AnimalActor {
             textureRegion = animationBig.getKeyFrame(time);
             setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
         }
-        if(age > 3){
+        if(age > 5){
             if(infoMeat.getStage() == null){
                 getStage().addActor(infoMeat);
             }

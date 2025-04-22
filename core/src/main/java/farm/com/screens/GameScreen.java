@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
     Shop shop;
 
     boolean nextDay = false;
-    int day;
+    public int day;
     int timing;
 
     public static final int WIDTH = 960;
@@ -143,6 +143,18 @@ public class GameScreen implements Screen {
         if(timing % (60*3) == 0){
             newDay();
             nextDay = false;
+        }
+        if(game.boughtCO == true){
+            new Cow(MathUtils.random(10,290),MathUtils.random(20,200),stage,game);
+            game.boughtCO = false;
+        }
+        if(game.boughtC == true){
+            new Chicken(MathUtils.random(700,900),MathUtils.random(200,360),stage,game);
+            game.boughtC = false;
+        }
+        if(game.boughtP == true){
+            new Pig(MathUtils.random(20,200),MathUtils.random(290,450),stage,game);
+            game.boughtP = false;
         }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {

@@ -64,7 +64,6 @@ public class Cow extends AnimalActor {
                     if(energy >= 50){
                         if(age > 5){
                             bucketMilk.remove();
-                            game.hadMilk = true;
                             GameState.milkTotal += milk;
                             new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+" + (int) milk + " bucket milk", 8).fadeOut();
                             energy -= 20;

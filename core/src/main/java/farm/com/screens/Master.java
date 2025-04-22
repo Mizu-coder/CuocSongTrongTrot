@@ -36,7 +36,9 @@ public class Master extends Game {
     public Season season;
 
     public boolean clicked = false;
-    public boolean hadMilk = false;
+    public boolean boughtCO = false;
+    public boolean boughtC = false;
+    public boolean boughtP = false;
 
     @Override
     public void create() {
