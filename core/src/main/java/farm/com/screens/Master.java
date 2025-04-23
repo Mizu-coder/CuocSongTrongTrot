@@ -26,7 +26,7 @@ public class Master extends Game {
     public int rai = 0;
 
     public boolean water = false;
-    GameScreen gameScreen;
+    public GameScreen gameScreen;
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;

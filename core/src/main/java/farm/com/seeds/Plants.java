@@ -14,16 +14,17 @@ import farm.com.ShowInfo;
 import farm.com.Utils;
 import farm.com.enums.ChooseType;
 import farm.com.enums.PlantType;
+import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Plants extends MyActor {
     Master game;
-    float time;
+    public float time;
     boolean isWatered = false;
     Animation<TextureRegion> animation;
     public PlantType plantType = PlantType.PUMKIN;
     ShowInfo infoSeed;
-    public Plants(float x, float y, Stage s, Master game) {
+    public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
         this.game = game;
         infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)GameState.seedpu, 10);
@@ -81,7 +82,7 @@ public class Plants extends MyActor {
         }
 
 
-        time = 0;
+        this.time = time;
         textureRegion = animation.getKeyFrame(time);
         setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
 
@@ -95,8 +96,8 @@ public class Plants extends MyActor {
                             Actions.delay(1),
                             Actions.run(
                                 () -> {
-                                    time += Gdx.graphics.getDeltaTime();
-                                    textureRegion = animation.getKeyFrame(time);
+                                    Plants.this.time += Gdx.graphics.getDeltaTime();
+                                    textureRegion = animation.getKeyFrame(Plants.this.time);
                                 }
                             )
                         ));
@@ -106,26 +107,31 @@ public class Plants extends MyActor {
                             case PUMKIN -> {
                                 GameState.seedpu += 3;
                                 infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case CARROT -> {
                                 GameState.seedc += 2;
                                 infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case POTATO -> {
                                 GameState.seedp += 5;
                                 infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case TOMATO -> {
                                 GameState.seedt += 5;
                                 infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case BEAN -> {
                                 GameState.seedb += 6;
                                 infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                         }

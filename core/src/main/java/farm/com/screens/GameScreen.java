@@ -20,6 +20,7 @@ import farm.com.animals.AnimalActor;
 import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
+import farm.com.buttons.Save;
 import farm.com.enums.ChooseType;
 import farm.com.enums.SeasonType;
 import farm.com.seeds.*;
@@ -36,13 +37,13 @@ public class GameScreen implements Screen {
     GlyphLayout layout;
     Character famer;
     Array<Soil> soils;
-    Array<Plants> listPlants;
+    public static Array<Plants> listPlants = new Array<>();;
     Array<Cage> cages;
-    public static Array<Chicken> chickens;
-    public static Array<Pig> pigs;
-    public static Array<Cow> cows;
-    AnimalActor animalActor;
+    public static Array<Chicken> chickens = new Array<>();;
+    public static Array<Pig> pigs = new Array<>();;
+    public static Array<Cow> cows = new Array<>();;
 
+    Save save;
     Shop shop;
     Coin coin;
     int day;
@@ -51,24 +52,12 @@ public class GameScreen implements Screen {
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
 
-    GameState gameState;
-
     public GameScreen(Master game) {
         this.game = game;
         stage = new Stage();
         staticStage = new Stage();
         soils = new Array<>();
-        listPlants = new Array<>();
         cages = new Array<>();
-        if(chickens == null) {
-            chickens = new Array<>();
-        }
-        if(pigs == null){
-            pigs = new Array<>();
-        }
-        if(cows == null) {
-            cows = new Array<>();
-        }
 
     }
     @Override
@@ -100,6 +89,14 @@ public class GameScreen implements Screen {
 
         coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
+        save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
+
+        save.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Utils.saveGame(game);
+            }
+        });
 
         shop.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
@@ -154,27 +151,27 @@ public class GameScreen implements Screen {
                 }
 
                 if (Master.type.equals(ChooseType.PUMKIN) && GameState.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedpu -= 1;
 
                 }
                 if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedc -= 1;
 
                 }
                 if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedp -= 1;
 
                 }
                 if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedt -= 1;
 
                 }
                 if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game));
+                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game, 0));
                     GameState.seedb -= 1;
 
                 }
@@ -273,7 +270,7 @@ public class GameScreen implements Screen {
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
-        new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
+        //new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
         x = Gdx.graphics.getWidth()/2 + 180 ;
         y = 150 + HEIGHT / 2;
         Master.lake = new Lake(x, y, stage);
@@ -323,6 +320,12 @@ public class GameScreen implements Screen {
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
         game.season = new Season(0,0, staticStage);
+
+        if(!listPlants.isEmpty()){
+            for (Plants p: listPlants) {
+                stage.addActor(p);
+            }
+        }
 
         if(cows.isEmpty()) {
             cows.add(new Cow(cox, coy, stage));

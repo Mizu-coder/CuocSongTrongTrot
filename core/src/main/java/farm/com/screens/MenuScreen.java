@@ -12,8 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import farm.com.Shop;
-import farm.com.Start;
+import farm.com.buttons.Guide;
+import farm.com.buttons.Start;
+import farm.com.Utils;
+import farm.com.buttons.Continue;
 
 public class MenuScreen implements Screen {
     Texture background;
@@ -21,6 +23,8 @@ public class MenuScreen implements Screen {
     OrthographicCamera camera;
     Master game;
     Start start;
+    Continue bContinue;
+    Guide guide;
     GlyphLayout layout;
 
     Music music;
@@ -41,12 +45,29 @@ public class MenuScreen implements Screen {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = game.font;
         style.fontColor = Color.WHITE;
-        start = new Start(Gdx.graphics.getWidth()/3+32, 140,stage);
+        start = new Start(Gdx.graphics.getWidth()/3+32, 200,stage);
+        bContinue = new Continue(Gdx.graphics.getWidth()/3+100, 160, stage);
+        guide = new Guide(Gdx.graphics.getWidth()/3+100, 120, stage);
         Gdx.input.setInputProcessor(stage);
         start.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(game.gameScreen);
                 start.remove();
+            }
+        });
+
+        bContinue.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Utils.loadGame(game);
+                game.setScreen(game.gameScreen);
+            }
+        });
+
+        guide.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new GuideScreen(game));
             }
         });
 

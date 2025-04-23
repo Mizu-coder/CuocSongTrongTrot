@@ -39,44 +39,11 @@ public class Chicken extends AnimalActor {
                         ill = false;
                         GameState.soKimTiem--;
                     }
-                    if (energy < 100) {
-                        switch (Master.type){
-                            case PUMKIN -> {
-                                GameState.seedpu -= 1;
-                                energy += 50;
-                            }
-                            case CAROT -> {
-                                GameState.seedc -= 1;
-                                energy += 20;
-                            }
-                            case POTATO -> {
-                                GameState.seedp -= 1;
-                                energy += 10;
-                            }
-                            case TOMATO -> {
-                                GameState.seedt -= 1;
-                                energy += 10;
-                            }
-                            case BEAN -> {
-                                GameState.seedb -= 1;
-                                energy += 10;
-                            }
-                        }
-
-                    }
-
-                    if(age > 5){
-                        GameState.egg++;
-                        egg.remove();
-                        energyBar.remove();
-                        age = 3;
-                        new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+1 egg", 8).fadeOut();
-                    }
+                    feed();
                 }
             });
 
-            egg = new Egg(getX()+ getWidth() - 2, getY() + getHeight() - 8, getStage());
-            egg.remove();
+            egg = new Egg(getX()+ getWidth() - 2, getY() + getHeight() - 8, this);
         }
 
 

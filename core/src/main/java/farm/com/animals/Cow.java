@@ -42,45 +42,11 @@ public class Cow extends AnimalActor {
                         ill = false;
                         GameState.soKimTiem--;
                     }
-                    if (energy < 100) {
-                        switch (Master.type){
-                            case PUMKIN -> {
-                                GameState.seedpu -= 1;
-                                energy += 50;
-                            }
-                            case CAROT -> {
-                                GameState.seedc -= 1;
-                                energy += 20;
-                            }
-                            case POTATO -> {
-                                GameState.seedp -= 1;
-                                energy += 10;
-                            }
-                            case TOMATO -> {
-                                GameState.seedt -= 1;
-                                energy += 10;
-                            }
-                            case BEAN -> {
-                                GameState.seedb -= 1;
-                                energy += 10;
-                            }
-                        }
-                    }
-                    if(energy >= 50){
-                        if(age > 5){
-                            bucketMilk.remove();
-                            GameState.milkTotal += milk;
-                            new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s, "+" + (int) milk + " bucket milk", 8).fadeOut();
-                            energy -= 20;
-                            age = 1;
-                        }
-                    }
-
+                    feed();
                 }
             });
 
-            bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, s);
-            bucketMilk.remove();
+        bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, this);
         energy = 500;
     }
 

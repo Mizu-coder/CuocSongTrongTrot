@@ -7,18 +7,20 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import farm.com.EnergyBar;
+import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.ShowInfo;
 import farm.com.screens.GameScreen;
+import farm.com.screens.Master;
 
 public class AnimalActor extends MyActor {
 
     farm.com.enums.AnimalNames name;
-    float energy = 100;
+    public float energy = 100;
     float minusEnerGy = 0;
     float cost = 100;
     float meat = 0;
-    int milk = 1;
+    public int milk = 1;
     float sellingPrice = 100;
     public int age;
 
@@ -82,6 +84,7 @@ public class AnimalActor extends MyActor {
             remove();
         }
         energyBar.setSize(getWidth() * energy/100, 4);
+        energyBar.setPosition(getX(), getY() + getHeight() + 4);
         if(energy < 50){
             energyBar.setColor(Color.YELLOW);
             if(energy < 30) {
@@ -105,6 +108,43 @@ public class AnimalActor extends MyActor {
         }
         if(getStage() != null && energyBar.getStage() == null){
             getStage().addActor(energyBar);
+        }
+    }
+
+    public void feed(){
+        if (energy < 100) {
+            switch (Master.type){
+                case PUMKIN -> {
+                    if(GameState.seedpu > 0){
+                        GameState.seedpu -= 1;
+                        energy += 50;
+                    }
+                }
+                case CAROT -> {
+                    if(GameState.seedc > 0) {
+                        GameState.seedc -= 1;
+                        energy += 20;
+                    }
+                }
+                case POTATO -> {
+                    if(GameState.seedp > 0) {
+                        GameState.seedp -= 1;
+                        energy += 10;
+                    }
+                }
+                case TOMATO -> {
+                    if(GameState.seedt > 0) {
+                        GameState.seedt -= 1;
+                        energy += 10;
+                    }
+                }
+                case BEAN -> {
+                    if(GameState.seedb > 0) {
+                        GameState.seedb -= 1;
+                        energy += 10;
+                    }
+                }
+            }
         }
     }
 

@@ -45,31 +45,7 @@ public class Pig extends AnimalActor {
                         ill = false;
                         GameState.soKimTiem--;
                     }
-
-                    if (energy < 100) {
-                        switch (Master.type){
-                            case PUMKIN -> {
-                                GameState.seedpu -= 1;
-                                energy += 50;
-                            }
-                            case CAROT -> {
-                                GameState.seedc -= 1;
-                                energy += 20;
-                            }
-                            case POTATO -> {
-                                GameState.seedp -= 1;
-                                energy += 10;
-                            }
-                            case TOMATO -> {
-                                GameState.seedt -= 1;
-                                energy += 10;
-                            }
-                            case BEAN -> {
-                                GameState.seedb -= 1;
-                                energy += 10;
-                            }
-                        }
-                    }
+                    feed();
                     if(age > 5){
                         GameState.totalPork += meat;
                         if(infoMeat != null){
