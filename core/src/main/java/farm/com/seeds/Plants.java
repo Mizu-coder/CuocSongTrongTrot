@@ -102,7 +102,7 @@ public class Plants extends MyActor {
                             )
                         ));
                     }
-                    if(animation.isAnimationFinished(time)){
+                    if(animation.isAnimationFinished(Plants.this.time)){
                         switch (plantType){
                             case PUMKIN -> {
                                 GameState.seedpu += 3;
