@@ -52,9 +52,11 @@ public class Character extends MyActor{
         if(getBound().overlaps(Master.home.getBound())) {
             return true;
         }
-       // if(getBound().overlaps(Master.cages.getBound())) {
-       //     return true;
-      //  }
+        for (Cage c: game.gameScreen.cages){
+            if(getBound().overlaps(c.getBound())) {
+                return true;
+            }
+        }
         if(getBound().overlaps(Master.tree.getBound())) {
             return true;
         }
