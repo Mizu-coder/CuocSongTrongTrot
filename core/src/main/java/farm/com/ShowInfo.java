@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class ShowInfo extends Actor {
-    private String text;
+    public String text;
     private BitmapFont font;
 
     public ShowInfo(float x, float y, Stage s, String words, int size) {
