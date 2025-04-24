@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -39,7 +41,7 @@ public class GameScreen implements Screen {
     Character famer;
     Array<Soil> soils;
     public static Array<Plants> listPlants = new Array<>();;
-    Array<Cage> cages;
+    public Array<Cage> cages;
     public static Array<Chicken> chickens = new Array<>();;
     public static Array<Pig> pigs = new Array<>();;
     public static Array<Cow> cows = new Array<>();;
@@ -51,6 +53,8 @@ public class GameScreen implements Screen {
     int timing;
 
     PlantType plantType;
+
+    private ShowInfo info;
 
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
@@ -107,9 +111,41 @@ public class GameScreen implements Screen {
             }
         });
 
+        info = new ShowInfo(0,0, null, "", 6);
+        stage.addListener(new InputListener() {
+            private Actor lastActor = null;
+
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                Actor actor = stage.hit(x, y, true);
+
+                if (lastActor != null && lastActor instanceof MyActor && lastActor != actor) {
+                  info.remove();
+                }
+
+                if (actor instanceof Plants) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 16);
+                    stage.addActor(info);
+                }
+                if (actor instanceof AnimalActor) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 32);
+                    stage.addActor(info);
+                }
+
+                if (actor instanceof Well || actor instanceof Lake) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), y);
+                    stage.addActor(info);
+                }
+
+                lastActor = actor;
+                return super.mouseMoved(event, x, y);
+            }
+        });
+
         Gdx.input.setInputProcessor(multiplexer);
-
-
     }
 
     @Override

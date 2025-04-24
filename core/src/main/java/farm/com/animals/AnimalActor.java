@@ -148,4 +148,26 @@ public class AnimalActor extends MyActor {
         }
     }
 
+    @Override
+    public String toString() {
+        String info = "";
+        switch (name){
+            case CHICKEN -> info = "Gà, nuôi đẻ trứng \n ";
+            case PIG -> info = "Lợn, nuôi lấy thịt \n ";
+            case COW -> info = "Bò, nuôi để vắt sữa! \n ";
+        }
+        if(energy > 50){
+            info += "Chưa cần ăn vì đang no. ";
+        } else {
+            info += "Đang đói, cần cho ăn. ";
+        }
+
+        if(ill){
+            info += "Trạng thái: ốm, cần tiêm thuốc";
+        } else {
+            info += "Trạng thái: khỏe mạnh";
+        }
+
+        return info;
+    }
 }

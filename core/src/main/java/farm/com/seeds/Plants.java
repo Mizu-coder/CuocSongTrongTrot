@@ -24,6 +24,7 @@ public class Plants extends MyActor {
     Animation<TextureRegion> animation;
     public PlantType plantType = PlantType.PUMKIN;
     ShowInfo infoSeed;
+
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
         this.game = game;
@@ -102,7 +103,7 @@ public class Plants extends MyActor {
                             )
                         ));
                     }
-                    if(animation.isAnimationFinished(time)){
+                    if(animation.isAnimationFinished(Plants.this.time)){
                         switch (plantType){
                             case PUMKIN -> {
                                 GameState.seedpu += 3;
@@ -152,5 +153,28 @@ public class Plants extends MyActor {
                 infoSeed.setPosition(getX()+ getWidth() - 2, getY() + getHeight() - 8);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        String info = "";
+        switch (plantType){
+            case PUMKIN -> {
+                info = "Bí ngô, thu hoạch quả";
+            }
+            case POTATO -> {
+                info = "Khoai tây, thu hoạch củ";
+            }
+            case CARROT -> {
+                info = "Cà rốt, thu hoạch củ";
+            }
+            case TOMATO -> {
+                info = "Cà chua, thu hoạch quả";
+            }
+            case BEAN -> {
+                info = "Đỗ, thu hoạch quả";
+            }
+        }
+        return info;
     }
 }

@@ -18,4 +18,9 @@ public class Well extends MyActor{
             }
         });
     }
+
+    @Override
+    public String toString() {
+        return "Giếng, click vào đây để lấy nước tưới cây!";
+    }
 }
