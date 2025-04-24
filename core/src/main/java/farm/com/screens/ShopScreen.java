@@ -137,13 +137,13 @@ public class ShopScreen implements Screen {
         game.font.draw(game.batch, layout, 500, 260);
 
         layout.setText(game.font,"" + GameState.totalPork);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 80);
+        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 60);
 
         layout.setText(game.font,"" + GameState.milkTotal);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 180);
+        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 160);
 
         layout.setText(game.font,"" + GameState.egg);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 280);
+        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 260);
 
         game.batch.end();
     }

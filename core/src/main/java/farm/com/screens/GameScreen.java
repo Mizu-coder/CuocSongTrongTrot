@@ -24,6 +24,7 @@ import farm.com.animals.Cow;
 import farm.com.animals.Pig;
 import farm.com.buttons.Save;
 import farm.com.enums.ChooseType;
+import farm.com.enums.PlantType;
 import farm.com.enums.SeasonType;
 import farm.com.seeds.*;
 
@@ -50,6 +51,8 @@ public class GameScreen implements Screen {
     Coin coin;
     int day;
     int timing;
+
+    PlantType plantType;
 
     private ShowInfo info;
 
@@ -153,7 +156,7 @@ public class GameScreen implements Screen {
 
 
         timing++;
-        if(timing % (60*5) == 0){
+        if(timing % (60*3) == 0){
             newDay();
         }
 
@@ -187,6 +190,7 @@ public class GameScreen implements Screen {
                 }
 
                 if (Master.type.equals(ChooseType.PUMKIN) && GameState.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+//                    plantType = P
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedpu -= 1;
 

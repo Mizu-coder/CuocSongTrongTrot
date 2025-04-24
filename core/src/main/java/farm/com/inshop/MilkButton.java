@@ -9,8 +9,8 @@ import farm.com.enums.SellTypeButton;
 public class MilkButton extends SellButton {
     public MilkButton(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = new TextureRegion(new Texture("Cow_sell.png"));
-        setSize(64, 32);
+        textureRegion = new TextureRegion(new Texture("bucket.png"));
+        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
         cost = 70;
         type = SellTypeButton.MILK;
     }

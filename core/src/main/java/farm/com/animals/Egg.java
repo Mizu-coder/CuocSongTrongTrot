@@ -19,7 +19,7 @@ public class Egg extends MyActor {
             public void clicked(InputEvent event, float x, float y) {
                 if(chicken.age > 5){
                     GameState.egg++;
-                    chicken.age = 1;
+                    chicken.age = 3;
                     new ShowInfo(getX()+ getWidth() +4,  getY()+ getHeight() + 4, chicken.getStage(), "+1 egg", 8).fadeOut();
                     remove();
                 }

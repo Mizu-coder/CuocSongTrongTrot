@@ -12,6 +12,6 @@ public class Save extends MyActor {
     public Save(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("save.png"));
-        setSize(64, 32);
+        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 }

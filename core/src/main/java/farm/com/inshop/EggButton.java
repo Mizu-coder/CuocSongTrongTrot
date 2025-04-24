@@ -9,7 +9,7 @@ import farm.com.enums.SellTypeButton;
 public class EggButton extends SellButton {
     public EggButton(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = new TextureRegion(new Texture("Chick_sell.png"));
+        textureRegion = new TextureRegion(new Texture("egg.png"));
         setSize(64, 64);
         cost = 5;
         type = SellTypeButton.EGG;
