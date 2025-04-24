@@ -11,15 +11,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.MyActor;
+import farm.com.Tutorial;
 import farm.com.buttons.Guide;
 
 public class GuideScreen implements Screen {
     Master game;
     Stage stage;
+    Tutorial tutorial;
 
     public GuideScreen(Master game){
         this.game = game;
         stage = new Stage();
+
+        tutorial = new Tutorial(0,0,stage);
 
         MyActor guide = new MyActor(0,0, stage);
         guide.textureRegion = new TextureRegion(new Texture("guidetext.png"));

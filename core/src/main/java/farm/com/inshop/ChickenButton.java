@@ -13,7 +13,7 @@ public class ChickenButton extends BuyButton {
         super(x, y, s);
         textureRegion = Utils.chic(0,0,8,8);
         setSize(textureRegion.getRegionWidth()*4, textureRegion.getRegionHeight()*4);
-        cost = 50;
+        cost = 100;
         type = BuyTypeButton.CHICKEN;
     }
 }

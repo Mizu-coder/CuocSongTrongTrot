@@ -35,6 +35,7 @@ public class MenuScreen implements Screen {
         stage = new Stage();
 
         background = new Texture("menu.png");
+
 //        start = new Texture("start.png");
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -71,9 +72,9 @@ public class MenuScreen implements Screen {
             }
         });
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
-        music.setLooping(true);
-        music.play();
+//        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
+//        music.setLooping(true);
+//        music.play();
     }
 
     @Override
