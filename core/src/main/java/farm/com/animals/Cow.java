@@ -3,19 +3,24 @@ package farm.com.animals;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.*;
+import farm.com.enums.AnimalNames;
+import farm.com.enums.ChooseType;
 import farm.com.screens.Master;
+
+import java.util.Random;
 
 public class Cow extends AnimalActor {
     float time;
     Animation<TextureRegion> animation;
-    Master game;
-    public Cow(float x, float y, Stage s, Master game) {
+    BucketMilk bucketMilk;
+    public Cow(float x, float y, Stage s) {
         super(x, y, s);
-        this.game = game;
+        name = AnimalNames.COW;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.cow(0,0,16,16);
          frames[1] = Utils.cow(16,0,16,16);
@@ -25,7 +30,7 @@ public class Cow extends AnimalActor {
         textureRegion = animation.getKeyFrame(time);
         time = 0;
 
-        setSize(textureRegion.getRegionWidth()*4,textureRegion.getRegionHeight()*4);
+        setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
         minusEnerGy = 1f/40;
@@ -33,37 +38,16 @@ public class Cow extends AnimalActor {
 
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    if (energy < 100) {
-                        if (game.type == 1) {
-                            game.seedpu -= 1;
-                            energy += 50;
-                        }
-                        if (game.type == 2) {
-                            game.seedc -= 1;
-                            energy += 20;
-                        }
-                        if (game.type == 3) {
-                            game.seedp -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 4) {
-                            game.seedt -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 5) {
-                            game.seedb -= 1;
-                            energy += 10;
-                        }
+                    if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){
+                        ill = false;
+                        GameState.soKimTiem--;
                     }
-
-                    if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
-                        energyBar.remove();
-                        remove();
-                    }
+                    feed();
                 }
             });
+
+        bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, this);
+        energy = 100;
     }
 
 
@@ -73,8 +57,13 @@ public class Cow extends AnimalActor {
         time += delta;
         textureRegion = animation.getKeyFrame(time);
 
-        if(age > 3){
+        if(age >= 4){
             textureRegion = Utils.cow(32,0,16,16);
+        }
+        if (age > 5){
+            if(bucketMilk.getStage() == null && getStage() != null){
+                getStage().addActor(bucketMilk);
+            }
         }
     }
 }

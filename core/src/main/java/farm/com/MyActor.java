@@ -10,7 +10,9 @@ public class MyActor extends Actor {
     public TextureRegion textureRegion;
     public MyActor(float x, float y, Stage s){
         setPosition(x, y);
-        s.addActor(this);
+        if(s != null) {
+            s.addActor(this);
+        }
         textureRegion = Utils.getRegion(0, 0, 1,1);
     }
 

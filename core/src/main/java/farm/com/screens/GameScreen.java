@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -20,6 +22,9 @@ import farm.com.animals.AnimalActor;
 import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
+import farm.com.buttons.Save;
+import farm.com.enums.ChooseType;
+import farm.com.enums.PlantType;
 import farm.com.enums.SeasonType;
 import farm.com.seeds.*;
 
@@ -33,43 +38,33 @@ public class GameScreen implements Screen {
     OrthographicCamera camera;
     Master game;
     GlyphLayout layout;
-    GlyphLayout layout2;
-    GlyphLayout layout3;
-    GlyphLayout layout4;
-    GlyphLayout layout5;
-    GlyphLayout da;
-    GlyphLayout money;
     Character famer;
     Array<Soil> soils;
-    Array<Plants> listPlants;
-    Array<Cage> cages;
-    Array<Chicken> chickens;
-    Array<Pig> pigs;
-    Array<Cow> cows;
-    AnimalActor animalActor;
+    public static Array<Plants> listPlants = new Array<>();;
+    public Array<Cage> cages;
+    public static Array<Chicken> chickens = new Array<>();;
+    public static Array<Pig> pigs = new Array<>();;
+    public static Array<Cow> cows = new Array<>();;
 
+    Save save;
     Shop shop;
     Coin coin;
-
-    boolean nextDay = false;
     int day;
     int timing;
 
+    PlantType plantType;
+
+    private ShowInfo info;
+
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
-
-    GameState gameState;
 
     public GameScreen(Master game) {
         this.game = game;
         stage = new Stage();
         staticStage = new Stage();
         soils = new Array<>();
-        listPlants = new Array<>();
         cages = new Array<>();
-        chickens = new Array<>();
-        pigs = new Array<>();
-        cows = new Array<>();
 
     }
     @Override
@@ -86,44 +81,14 @@ public class GameScreen implements Screen {
         new Cock(280, 230, stage, 3);
         new Cock(870, 620, stage, 2);
 
-        gameState = new GameState();
-
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         layout = new GlyphLayout();
-        layout2 = new GlyphLayout();
-        layout3 = new GlyphLayout();
-        layout4 = new GlyphLayout();
-        layout5 = new GlyphLayout();
-        da = new GlyphLayout();
-        money = new GlyphLayout();
 
-        layout.setText(game.font, "" + game.seedpu);
+        layout.setText(game.font, "" + GameState.seedpu);
         layout.width = 0.4f;
         layout.height = 0.4f;
-
-        layout2.setText(game.font, "" + game.seedc);
-        layout2.width = 0.4f;
-        layout2.height = 0.4f;
-
-        layout3.setText(game.font, "" + game.seedp);
-        layout3.width = 0.4f;
-        layout3.height = 0.4f;
-
-        layout4.setText(game.font, "" + game.seedt);
-        layout4.width = 0.4f;
-        layout4.height = 0.4f;
-
-        layout5.setText(game.font, "" + game.seedb);
-        layout5.width = 0.4f;
-        layout5.height = 0.4f;
-
-        da.setText(game.font,"Day "+ day);
-        da.width = 0.4f;
-        da.height = 0.4f;
-
-        money.setText(game.font,"" + gameState.money);
 
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
@@ -131,6 +96,14 @@ public class GameScreen implements Screen {
 
         coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
+        save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
+
+        save.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Utils.saveGame(game);
+            }
+        });
 
         shop.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
@@ -138,9 +111,41 @@ public class GameScreen implements Screen {
             }
         });
 
+        info = new ShowInfo(0,0, null, "", 6);
+        stage.addListener(new InputListener() {
+            private Actor lastActor = null;
+
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                Actor actor = stage.hit(x, y, true);
+
+                if (lastActor != null && lastActor instanceof MyActor && lastActor != actor) {
+                  info.remove();
+                }
+
+                if (actor instanceof Plants) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 16);
+                    stage.addActor(info);
+                }
+                if (actor instanceof AnimalActor) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 32);
+                    stage.addActor(info);
+                }
+
+                if (actor instanceof Well || actor instanceof Lake) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), y);
+                    stage.addActor(info);
+                }
+
+                lastActor = actor;
+                return super.mouseMoved(event, x, y);
+            }
+        });
+
         Gdx.input.setInputProcessor(multiplexer);
-
-
     }
 
     @Override
@@ -151,9 +156,8 @@ public class GameScreen implements Screen {
 
 
         timing++;
-        if(timing % (60*24) == 0){
+        if(timing % (60*3) == 0){
             newDay();
-            nextDay = false;
         }
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
@@ -185,41 +189,34 @@ public class GameScreen implements Screen {
                     x = x + 48;
                 }
 
-                if (game.type == 1 && game.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
-                    game.seedpu -= 1;
+                if (Master.type.equals(ChooseType.PUMKIN) && GameState.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+//                    plantType = P
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
+                    GameState.seedpu -= 1;
 
                 }
-                if (game.type == 2 && game.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
-                    game.seedc -= 1;
+                if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
+                    GameState.seedc -= 1;
 
                 }
-                if (game.type == 3 && game.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
-                    game.seedp -= 1;
+                if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
+                    GameState.seedp -= 1;
 
                 }
-                if (game.type == 4 && game.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game));
-                    game.seedt -= 1;
+                if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
+                    GameState.seedt -= 1;
 
                 }
-                if (game.type == 5 && game.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
-                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game));
-                    game.seedb -= 1;
+                if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                    listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game, 0));
+                    GameState.seedb -= 1;
 
                 }
             }
         }
-
-        layout.setText(game.font, "" + game.seedpu);
-        layout2.setText(game.font, "" + game.seedc);
-        layout3.setText(game.font, "" + game.seedp);
-        layout4.setText(game.font, "" + game.seedt);
-        layout5.setText(game.font, "" + game.seedb);
-        da.setText(game.font,"Day "+ day);
-
 
         stage.act();
         stage.draw();
@@ -227,23 +224,36 @@ public class GameScreen implements Screen {
         staticStage.draw();
         game.batch.begin();
 
-        game.font.draw(game.batch,money,coin.getX() + 16,coin.getY());
+        layout.setText(game.font, "" + GameState.money);
+        game.font.draw(game.batch, layout,coin.getX() + 48,coin.getY() + 2*coin.getHeight()/3);
 
-        if(nextDay == true){
-            game.font.draw(game.batch, da,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
-        }
 
-        float x = Gdx.graphics.getWidth() - 175;
+
+        float x = Gdx.graphics.getWidth() - 215;
         float y = Gdx.graphics.getHeight() - 5;
+
+        layout.setText(game.font, "" + GameState.soKimTiem);
         game.font.draw(game.batch, layout,x,y);
+
         x += 40;
-        game.font.draw(game.batch, layout2,x,y);
+        layout.setText(game.font, "" + GameState.seedpu);
+        game.font.draw(game.batch, layout,x,y);
+
         x += 40;
-        game.font.draw(game.batch, layout3,x,y);
+        layout.setText(game.font, "" + GameState.seedc);
+        game.font.draw(game.batch, layout,x,y);
+
         x += 40;
-        game.font.draw(game.batch, layout4,x,y);
+        layout.setText(game.font, "" + GameState.seedp);
+        game.font.draw(game.batch, layout,x,y);
+
         x += 40;
-        game.font.draw(game.batch, layout5,x,y);
+        layout.setText(game.font, "" + GameState.seedt);
+        game.font.draw(game.batch, layout,x,y);
+
+        x += 40;
+        layout.setText(game.font, "" + GameState.seedb);
+        game.font.draw(game.batch, layout,x,y);
         game.batch.end();
 
     }
@@ -300,6 +310,7 @@ public class GameScreen implements Screen {
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
+        //new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
         x = Gdx.graphics.getWidth()/2 + 180 ;
         y = 150 + HEIGHT / 2;
         Master.lake = new Lake(x, y, stage);
@@ -329,56 +340,84 @@ public class GameScreen implements Screen {
         }
 
 
-        x = Gdx.graphics.getWidth() - 200;
+        x = Gdx.graphics.getWidth() - 240;
         y = Gdx.graphics.getHeight() - 40;
 
-        new PumkinSeed(x, y, staticStage,game);
+        new Kimtiem(x, y, staticStage);
 
         x += 40;
-        new CarrotSeed(x, y, staticStage,game);
+
+        new PumkinSeed(x, y, staticStage);
+
         x += 40;
-        new Potato(x,y,staticStage,game);
+        new CarrotSeed(x, y, staticStage);
         x += 40;
-        new Tomato(x, y, staticStage,game);
+        new Potato(x,y,staticStage);
         x += 40;
-        new Bean(x, y, staticStage,game);
+        new Tomato(x, y, staticStage);
+        x += 40;
+        new Bean(x, y, staticStage);
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
         game.season = new Season(0,0, staticStage);
 
-        cows.add(new Cow(cox,coy,stage,game));
-        cox -= 32;
-        coy -= 32;
-        cows.add(new Cow(cox,coy,stage,game));
-        cox += 64;
-        coy += 32;
-        cows.add(new Cow(cox,coy,stage,game));
-        cox -= 96;
-        coy -= 96;
-        cows.add(new Cow(cox,coy,stage,game));
+        if(!listPlants.isEmpty()){
+            for (Plants p: listPlants) {
+                stage.addActor(p);
+            }
+        }
+
+        if(cows.isEmpty()) {
+            cows.add(new Cow(cox, coy, stage));
+            cox -= 32;
+            coy -= 32;
+            cows.add(new Cow(cox, coy, stage));
+            cox += 64;
+            coy += 32;
+            cows.add(new Cow(cox, coy, stage));
+            cox -= 96;
+            coy -= 96;
+            cows.add(new Cow(cox, coy, stage));
+        } else {
+            for (Cow c: cows) {
+                stage.addActor(c);
+            }
+        }
 
 
-        pigs.add(new Pig(px,py,stage,game));
-        px += 32;
-        py += 32;
-        pigs.add(new Pig(px,py,stage,game));
-        px -= 64;
-        py += 32;
-        pigs.add(new Pig(px,py,stage,game));
-        px += 32;
-        py -= 128;
-        pigs.add(new Pig(px,py,stage,game));
+        if(pigs.isEmpty()) {
+            pigs.add(new Pig(px, py, stage));
+            px += 32;
+            py += 32;
+            pigs.add(new Pig(px, py, stage));
+            px -= 64;
+            py += 32;
+            pigs.add(new Pig(px, py, stage));
+            px += 32;
+            py -= 128;
+            pigs.add(new Pig(px, py, stage));
+        } else {
+            for (Pig p: pigs) {
+                stage.addActor(p);
+            }
+        }
 
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx -= 32;
-        cy -= 32;
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx += 32;
-        cy -= 32*3;
-        chickens.add(new Chicken(cx,cy,stage,game));
-        cx += 32;
-        cy += 32;
-        chickens.add(new Chicken(cx,cy,stage,game));
+        if(chickens.isEmpty()) {
+            chickens.add(new Chicken(cx, cy, stage));
+            cx -= 32;
+            cy -= 32;
+            chickens.add(new Chicken(cx, cy, stage));
+            cx += 32;
+            cy -= 32 * 3;
+            chickens.add(new Chicken(cx, cy, stage));
+            cx += 32;
+            cy += 32;
+            chickens.add(new Chicken(cx, cy, stage));
+        } else {
+            for (Chicken c: chickens) {
+                stage.addActor(c);
+            }
+        }
 
     }
     private void genBackground(){
@@ -411,9 +450,9 @@ public class GameScreen implements Screen {
     }
 
     public void newDay(){
-        new Day(0,0,staticStage);
-        day ++;
-        nextDay = true;
+        day++;
+        new Day(0,0,staticStage, day);
+
         for(Chicken c: chickens){
             c.age++;
         }
@@ -432,5 +471,6 @@ public class GameScreen implements Screen {
                 case WINTER -> game.season.seasonType = SPRING;
             }
         }
+       // famer.setPosition(200, 900);
     }
 }

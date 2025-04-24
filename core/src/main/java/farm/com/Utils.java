@@ -1,7 +1,12 @@
 package farm.com;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Json;
+import farm.com.screens.Master;
+import farm.com.utils.GameStateForSave;
 
 public class Utils {
     private static Texture chic = new Texture("Chicken_run.png");
@@ -41,5 +46,23 @@ public class Utils {
         return new TextureRegion(chic,x,y,width,height);
     }
 
+    public static void saveGame(Master game) {
+        GameStateForSave saveGame = new GameStateForSave(game);
+        Json json = new Json();
+        String jsonString = json.toJson(saveGame);
+
+        FileHandle fileHandle = Gdx.files.local("data.json") ;
+        fileHandle.writeString(jsonString,false, "UTF-8");
+    }
+    public static void loadGame(Master game) {
+        FileHandle file = Gdx.files.local("data.json");
+        if (!file.exists()) {
+            // do nothing
+        } else {
+            Json json = new Json();
+            GameStateForSave saveGame = json.fromJson(GameStateForSave.class, file.readString("UTF-8"));
+            GameState.loadData(game, saveGame);
+        }
+    }
 
 }

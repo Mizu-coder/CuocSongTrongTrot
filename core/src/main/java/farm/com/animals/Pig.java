@@ -2,11 +2,15 @@ package farm.com.animals;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
 import farm.com.GameState;
+import farm.com.ShowInfo;
+import farm.com.enums.AnimalNames;
+import farm.com.enums.ChooseType;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
@@ -14,11 +18,10 @@ public class Pig extends AnimalActor {
     float time;
     Animation<TextureRegion> animation;
     Animation<TextureRegion> animationBig;
-    Master game;
 
-    public Pig(float x, float y, Stage s, Master game) {
+    public Pig(float x, float y, Stage s) {
         super(x, y, s);
-        this.game = game;
+        name = AnimalNames.PIG;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.piglet(0,0,8,8);
         frames[1] = Utils.piglet(8,0,8,8);
@@ -38,37 +41,21 @@ public class Pig extends AnimalActor {
         minusEnerGy = 1f/30;
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    if (energy < 100) {
-                        if (game.type == 1) {
-                            game.seedpu -= 1;
-                            energy += 50;
-                        }
-                        if (game.type == 2) {
-                            game.seedc -= 1;
-                            energy += 20;
-                        }
-                        if (game.type == 3) {
-                            game.seedp -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 4) {
-                            game.seedt -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 5) {
-                            game.seedb -= 1;
-                            energy += 10;
-                        }
+                    if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){
+                        ill = false;
+                        GameState.soKimTiem--;
                     }
+                    feed();
                     if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
+                        GameState.totalPork += meat;
+                        if(infoMeat != null){
+                            infoMeat.fadeOut();
+                        }
                         energyBar.remove();
                         remove();
                     }
                 }
             });
-
     }
 
     @Override
@@ -76,10 +63,16 @@ public class Pig extends AnimalActor {
         super.act(delta);
         time += delta;
         textureRegion = animation.getKeyFrame(time);
-        if(age >= 2){
+        if(age >= 4){
            // textureRegion = Utils.pig(0,0,16,8);
             textureRegion = animationBig.getKeyFrame(time);
-            setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
+        }
+        if(age >= 5){
+            if(infoMeat == null){
+                meat = 100 - MathUtils.random(0, 50);
+                infoMeat = new ShowInfo(getX() + getWidth() + 4, getY() + getHeight() + 4, getStage(), "+" + (int) meat + " kg meat", 5);
+            }
         }
 
     }

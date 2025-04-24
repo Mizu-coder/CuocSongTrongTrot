@@ -9,23 +9,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.EnergyBar;
 import farm.com.GameState;
+import farm.com.ShowInfo;
+import farm.com.enums.AnimalNames;
+import farm.com.enums.ChooseType;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
 public class Chicken extends AnimalActor {
-    int time;
+    float time;
     Animation<TextureRegion> animation;
-    Master game;
-    GameScreen gameScreen;
-    public Chicken(float x, float y, Stage s, Master game) {
+    Egg egg;
+    public Chicken(float x, float y, Stage s) {
         super(x, y, s);
         TextureRegion[] frames = new TextureRegion[2];
-        this.game = game;
-        gameScreen = new GameScreen(game);
+        name = AnimalNames.CHICKEN;
         frames[0] = Utils.chic(0,0,8,8);
-        frames[1] = Utils.chic(16,0,8,8);
-        animation = new Animation(0.5f, frames);
+        frames[1] = Utils.chic(8,0,8,8);
+        animation = new Animation<>(0.5f, frames);
         time = 0;
         textureRegion = animation.getKeyFrame(time);
         setSize(textureRegion.getRegionWidth()*4,textureRegion.getRegionHeight()*4);
@@ -34,55 +35,31 @@ public class Chicken extends AnimalActor {
         minusEnerGy = 1f/60;
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
-                    if (energy < 100) {
-                        if (game.type == 1) {
-                            game.seedpu -= 1;
-                            energy += 50;
-                        }
-                        if (game.type == 2) {
-                            game.seedc -= 1;
-                            energy += 20;
-                        }
-                        if (game.type == 3) {
-                            game.seedp -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 4) {
-                            game.seedt -= 1;
-                            energy += 10;
-                        }
-                        if (game.type == 5) {
-                            game.seedb -= 1;
-                            energy += 10;
-                        }
-
+                    if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){
+                        ill = false;
+                        GameState.soKimTiem--;
                     }
-
-                    if(age > 5){
-                        GameState.meatTotal += meat;
-                        infoMeat.fadeOut();
-                        energyBar.remove();
-                        remove();
-                    }
+                    feed();
                 }
             });
+
+            egg = new Egg(getX()+ getWidth() - 2, getY() + getHeight() - 8, this);
         }
 
-
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        time += Gdx.graphics.getDeltaTime();
-        textureRegion = animation.getKeyFrame(time);
-
-    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        time += delta;
+        textureRegion = animation.getKeyFrame(time);
         if(age >= 3){
-            textureRegion = Utils.chike(0,0,8,8);
             textureRegion = Utils.chike(8,0,8,8);
         }
+        if(age >= 5){
+            if(egg.getStage() == null && getStage() != null){
+                getStage().addActor(egg);
+            }
+        }
+
     }
 }
