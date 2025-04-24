@@ -47,7 +47,7 @@ public class Cow extends AnimalActor {
             });
 
         bucketMilk = new BucketMilk(getX()+ getWidth() +4,  getY()+ getHeight() + 4, this);
-        energy = 500;
+        energy = 100;
     }
 
 

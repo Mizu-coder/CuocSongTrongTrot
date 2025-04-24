@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -28,7 +29,8 @@ public class Plants extends MyActor {
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
         this.game = game;
-        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + (int)GameState.seedpu, 10);
+        int seed = MathUtils.random(5, 10);
+        infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + seed, 10);
         infoSeed.remove();
 
         if (Master.type.equals(ChooseType.PUMKIN)) {
@@ -106,31 +108,31 @@ public class Plants extends MyActor {
                     if(animation.isAnimationFinished(Plants.this.time)){
                         switch (plantType){
                             case PUMKIN -> {
-                                GameState.seedpu += 3;
+                                GameState.seedpu += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case CARROT -> {
-                                GameState.seedc += 2;
+                                GameState.seedc += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case POTATO -> {
-                                GameState.seedp += 5;
+                                GameState.seedp += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case TOMATO -> {
-                                GameState.seedt += 5;
+                                GameState.seedt += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();
                             }
                             case BEAN -> {
-                                GameState.seedb += 6;
+                                GameState.seedb += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 remove();

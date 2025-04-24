@@ -23,10 +23,10 @@ public class GuideScreen implements Screen {
         this.game = game;
         stage = new Stage();
 
-        tutorial = new Tutorial(0,0,stage);
+        tutorial = new Tutorial(50,50,stage);
 
         MyActor guide = new MyActor(0,0, stage);
-        guide.textureRegion = new TextureRegion(new Texture("guidetext.png"));
+       // guide.textureRegion = new TextureRegion(new Texture("guidetext.png"));
         guide.setSize(guide.textureRegion.getRegionWidth(), guide.textureRegion.getRegionHeight());
 
 

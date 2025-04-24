@@ -8,7 +8,7 @@ public class Tutorial extends MyActor{
     public Tutorial(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("hd.png"));
-        setSize(textureRegion.getRegionWidth()/1.75f, textureRegion.getRegionHeight()/1.5f);
+        setSize(textureRegion.getRegionWidth()*0.75f, textureRegion.getRegionHeight()*0.75f);
 
     }
 }
