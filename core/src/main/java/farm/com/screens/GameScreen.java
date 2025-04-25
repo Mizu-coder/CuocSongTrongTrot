@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.*;
 import farm.com.Character;
+import farm.com.actors.LoApTrung;
 import farm.com.actors.Weather;
 import farm.com.animals.AnimalActor;
 import farm.com.animals.Chicken;
@@ -46,13 +47,12 @@ public class GameScreen implements Screen {
     public static Array<Pig> pigs = new Array<>();;
     public static Array<Cow> cows = new Array<>();;
 
+    LoApTrung loAp;
     Save save;
     Shop shop;
     Coin coin;
     int day;
     int timing;
-
-    PlantType plantType;
 
     private ShowInfo info;
 
@@ -97,6 +97,8 @@ public class GameScreen implements Screen {
         coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
+        loAp = new LoApTrung(700, 20*20, stage);
+
 
         save.addListener(new ClickListener(){
             @Override
@@ -108,6 +110,13 @@ public class GameScreen implements Screen {
         shop.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 game.setScreen(new ShopScreen(game));
+            }
+        });
+
+        loAp.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new LoApTrungScreen(game));
             }
         });
 
@@ -137,6 +146,12 @@ public class GameScreen implements Screen {
                 if (actor instanceof Well || actor instanceof Lake) {
                     info.text = actor.toString();
                     info.setPosition(actor.getX(), y);
+                    stage.addActor(info);
+                }
+
+                if (actor instanceof LoApTrung) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 8);
                     stage.addActor(info);
                 }
 
@@ -328,7 +343,6 @@ public class GameScreen implements Screen {
         cages.add(new Cage(0,0, stage, 8));
         cages.add(new Cage(0, 32 * 8, stage, 5));
         cages.add(new Cage(700, 20 * 8, stage, 5));
-
 
         // Duong di trong nong trai
         x = 460;

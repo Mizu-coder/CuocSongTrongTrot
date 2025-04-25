@@ -38,10 +38,29 @@ public class Master extends Game {
 
         batch = new SpriteBatch();
 
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Lonely Cake.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("vietnam.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter fontParameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
         fontParameters.size = 20;
         fontParameters.color = Color.YELLOW;
+        fontParameters.characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+            + "0123456789"
+            + "ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨƠƯỲÝ"
+            + "àáâãèéêìíòóôõùúăđĩơưỳý"
+            + "ĂÂÊÔƠƯăâêôơư"
+            + "ẠẢẤẦẨẪẬẮẰẲẴẶ"
+            + "ẸẺẾỀỂỄỆ"
+            + "ỊỈÍÌ"
+            + "ỌỎỐỒỔỖỘỚỜỞỠỢ"
+            + "ỤỦỨỪỬỮỰ"
+            + "ỲỶỸỴ"
+            + "áàảãạăắằẳẵặâấầẩẫậ"
+            + "éèẻẽẹêếềểễệ"
+            + "íìỉĩị"
+            + "óòỏõọôốồổỗộơớờởỡợ"
+            + "úùủũụưứừửữự"
+            + "ýỳỷỹỵ"
+            + "!@#$%^&*()-_=+[]{};:'\",.<>?/\\|";
+
         font = fontGenerator.generateFont(fontParameters);
         fontGenerator.dispose();
         gameScreen = new GameScreen(this);

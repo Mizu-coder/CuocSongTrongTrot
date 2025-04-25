@@ -10,6 +10,6 @@ public class Guide extends MyActor {
         super(x, y, s);
 
         textureRegion = new TextureRegion(new Texture("guide.png"));
-        setSize(64, 32);
+        setSize(textureRegion.getRegionWidth()*0.7f, textureRegion.getRegionHeight()*0.7f);
     }
 }

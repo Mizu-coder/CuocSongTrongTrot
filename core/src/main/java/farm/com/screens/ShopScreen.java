@@ -50,7 +50,7 @@ public class ShopScreen implements Screen {
 
         col = new MyActor(Gdx.graphics.getWidth()/2, 40, stage);
         col.textureRegion = new TextureRegion(new Texture("energy.png"));
-        col.setSize(2, 460);
+        col.setSize(2, 450);
         col.setColor(Color.YELLOW);
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
@@ -120,6 +120,10 @@ public class ShopScreen implements Screen {
         stage.draw();
 
         game.batch.begin();
+
+        layout.setText(game.font,"SHOP MANAGER");
+        game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2, Gdx.graphics.getHeight() - layout.height);
+
         layout.setText(game.font,"$" + GameState.money);
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth() - layout.width, Gdx.graphics.getHeight() - layout.height );
         layout.setText(game.font,"Sell");

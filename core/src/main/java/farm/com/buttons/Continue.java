@@ -13,6 +13,6 @@ public class Continue extends MyActor {
         super(x, y, s);
 
         textureRegion = new TextureRegion(new Texture("continue.png"));
-        setSize(64, 32);
+        setSize(textureRegion.getRegionWidth()*0.7f, textureRegion.getRegionHeight()*0.7f);
     }
 }
