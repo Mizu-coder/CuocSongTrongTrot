@@ -13,6 +13,6 @@ public class Continue extends MyActor {
         super(x, y, s);
 
         textureRegion = new TextureRegion(new Texture("continue.jpg"));
-        setSize(64, 32);
+        setSize(100, 32);
     }
 }

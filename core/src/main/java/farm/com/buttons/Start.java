@@ -9,6 +9,6 @@ public class Start extends MyActor {
     public Start(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("start.jpg"));
-        setSize(64,32);
+        setSize(100,32);
     }
 }
