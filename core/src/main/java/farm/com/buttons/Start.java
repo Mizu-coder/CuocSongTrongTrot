@@ -8,8 +8,7 @@ import farm.com.MyActor;
 public class Start extends MyActor {
     public Start(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = new TextureRegion(new Texture("start.png"));
-        setSize(textureRegion.getRegionWidth()/2, textureRegion.getRegionHeight()/2);
-
+        textureRegion = new TextureRegion(new Texture("start.jpg"));
+        setSize(64,32);
     }
 }
