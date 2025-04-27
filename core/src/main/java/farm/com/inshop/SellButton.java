@@ -13,6 +13,9 @@ public class SellButton extends MyActor {
     int cost = 0;
     SellTypeButton type;
     Sound ting;
+    boolean pork = false;
+    boolean egg = false;
+    boolean milk = false;
     public SellButton(float x, float y, Stage s) {
         super(x, y, s);
 
@@ -20,27 +23,46 @@ public class SellButton extends MyActor {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(GameState.totalPork > 0 || GameState.egg > 0 || GameState.milkTotal >0) {
-                    GameState.money += cost;
+                if(pork == true){
+                    if(GameState.totalPork > 0  ) {
+                        GameState.money += cost;
+                        pork = false;
+                    }
                 }
-                ting.play();
 
+                if(egg == true){
+                    if (GameState.egg > 0 ){
+                        GameState.money += cost;
+                        egg = false;
+                    }
+                }
+                if(milk == true){
+                    if (GameState.milkTotal >0){
+                        GameState.money += cost;
+                        milk = false;
+                    }
+                }
+
+                ting.play();
 
                     switch (type) {
                         case EGG -> {
                             if(GameState.egg > 0){
                                 GameState.egg--;
+                                egg = true;
                             }
 
                         }
                         case MILK -> {
                             if (GameState.milkTotal > 0) {
                                 GameState.milkTotal--;
+                                milk = true;
                             }
                         }
                         case PORK -> {
                             if (GameState.totalPork > 0) {
                                 GameState.totalPork--;
+                                pork = true;
                             }
                         }
                     }
