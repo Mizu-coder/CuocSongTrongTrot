@@ -171,7 +171,7 @@ public class GameScreen implements Screen {
 
 
         timing++;
-        if(timing % (60*24) == 0){
+        if(timing % (60*3) == 0){
             newDay();
         }
 
