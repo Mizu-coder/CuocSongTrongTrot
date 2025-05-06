@@ -14,11 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.Utils;
 import farm.com.inshop.*;
+import farm.com.utils.Cell;
 
 public class LoApTrungScreen implements Screen {
     Master game;
@@ -29,6 +31,9 @@ public class LoApTrungScreen implements Screen {
     Texture chicken;
 
     TextButton back;
+
+    MyActor putInButton;
+    Array<Cell> cells;
 
     public LoApTrungScreen(Master game){
         this.game = game;
@@ -52,6 +57,10 @@ public class LoApTrungScreen implements Screen {
 
         egg = new Texture("egg.png");
         chicken = new Texture("gacon.png");
+
+        putInButton = new MyActor(50, Gdx.graphics.getHeight() - 100, stage);
+        putInButton.textureRegion = new TextureRegion(new Texture("farmer.png"));
+        putInButton.setSize(64, 64);
 
 
         stage.addActor(back);

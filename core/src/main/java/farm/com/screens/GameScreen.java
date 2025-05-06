@@ -197,7 +197,7 @@ public class GameScreen implements Screen {
             System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
             float x = onSoils(mousePosition.x, mousePosition.y);
 
-            if(x > 0) {
+            if(x >= 0) {
                 if(mousePosition.x < x + 48){
                     x = x + 16;
                 } else {
