@@ -20,16 +20,17 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
 
+
     public static ChooseType type = ChooseType.NOTHING;
 
     public int sun = 0;
     public int rai = 0;
 
-    public boolean water = false;
     public GameScreen gameScreen;
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;
+    public WateringCan wateringCan;
 
     public boolean clicked = false;
 

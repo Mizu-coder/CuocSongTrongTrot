@@ -7,5 +7,6 @@ public enum ChooseType {
     TOMATO,
     BEAN,
     KIMTIEM,
-    NOTHING
+    NOTHING,
+    WATER
 }
