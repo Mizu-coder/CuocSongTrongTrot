@@ -204,28 +204,28 @@ public class GameScreen implements Screen {
                     x = x + 48;
                 }
 
-                if (Master.type.equals(ChooseType.PUMKIN) && GameState.seedpu > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                if (Master.type.equals(ChooseType.PUMKIN) && GameState.seedpu > 0 && isFree(mousePosition.x, mousePosition.y)) {
 //                    plantType = P
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedpu -= 1;
 
                 }
-                if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedc -= 1;
 
                 }
-                if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedp -= 1;
 
                 }
-                if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedt -= 1;
 
                 }
-                if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && !game.water && isFree(mousePosition.x, mousePosition.y)) {
+                if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game, 0));
                     GameState.seedb -= 1;
 
@@ -325,6 +325,12 @@ public class GameScreen implements Screen {
         x = 200;
         y = 303 + HEIGHT / 2;
         Master.well = new Well(x, y, stage,game);
+        Master.well.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.WATER);
+            }
+        });
         //new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
         x = Gdx.graphics.getWidth()/2 + 180 ;
         y = 150 + HEIGHT / 2;
@@ -361,16 +367,41 @@ public class GameScreen implements Screen {
 
         x += 40;
 
-        new PumkinSeed(x, y, staticStage);
+        new PumkinSeed(x, y, staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.PUMKIN);
+            }
+        });
 
         x += 40;
-        new CarrotSeed(x, y, staticStage);
+        new CarrotSeed(x, y, staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.CAROT);
+            }
+        });;
         x += 40;
-        new Potato(x,y,staticStage);
+        new Potato(x,y,staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.POTATO);
+            }
+        });
         x += 40;
-        new Tomato(x, y, staticStage);
+        new Tomato(x, y, staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.TOMATO);
+            }
+        });
         x += 40;
-        new Bean(x, y, staticStage);
+        new Bean(x, y, staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.BEAN);
+            }
+        });
         game.weather = new Weather(0,0, staticStage,game);
         game.weather.setPosition(Gdx.graphics.getWidth() - game.weather.getWidth(), 0);
         game.season = new Season(0,0, staticStage);
@@ -486,5 +517,44 @@ public class GameScreen implements Screen {
             }
         }
        // famer.setPosition(200, 900);
+    }
+
+    private void changeType(ChooseType type){
+        switch (type){
+            case BEAN -> {
+                Master.type = ChooseType.BEAN;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
+            }
+            case PUMKIN ->{
+                Master.type = ChooseType.PUMKIN;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
+            }
+            case CAROT ->{
+                Master.type = ChooseType.CAROT;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
+            }
+            case POTATO ->{
+                Master.type = ChooseType.POTATO;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
+            }
+            case TOMATO -> {
+                Master.type = ChooseType.TOMATO;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
+            }
+            case WATER -> {
+                Master.type = ChooseType.WATER;
+                game.wateringCan = new WateringCan(0,0,stage,game);
+            }
+        }
     }
 }

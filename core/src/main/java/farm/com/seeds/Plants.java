@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import farm.com.GameState;
-import farm.com.MyActor;
-import farm.com.ShowInfo;
-import farm.com.Utils;
+import farm.com.*;
 import farm.com.enums.ChooseType;
 import farm.com.enums.PlantType;
 import farm.com.screens.GameScreen;
@@ -21,7 +18,6 @@ import farm.com.screens.Master;
 public class Plants extends MyActor {
     Master game;
     public float time;
-    boolean isWatered = false;
     Animation<TextureRegion> animation;
     public PlantType plantType = PlantType.PUMKIN;
     ShowInfo infoSeed;
@@ -92,9 +88,9 @@ public class Plants extends MyActor {
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
                 if (game.sun < 3 && game.rai < 3) {
-                    if (game.water) {
-                        isWatered = true;
-                        game.water = false;
+                    if (Master.type.equals(ChooseType.WATER)) {
+
+                        game.wateringCan.time = 1;
                         addAction(Actions.sequence(
                             Actions.delay(1),
                             Actions.run(
