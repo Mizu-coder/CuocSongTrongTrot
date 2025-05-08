@@ -8,7 +8,7 @@ import farm.com.MyActor;
 
 public class Cell {
     public boolean state = false;
-    private Vector2 position;
+    public Vector2 position;
 
     public Cell(boolean state, Vector2 position) {
         this.state = state;

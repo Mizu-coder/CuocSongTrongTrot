@@ -20,6 +20,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.Utils;
+import farm.com.actors.TrungDeAp;
+import farm.com.animals.Chicken;
 import farm.com.inshop.*;
 import farm.com.utils.Cell;
 
@@ -63,6 +65,32 @@ public class LoApTrungScreen implements Screen {
         putInButton = new MyActor(50, Gdx.graphics.getHeight() - 100, stage);
         putInButton.textureRegion = new TextureRegion(new Texture("farmer.png"));
         putInButton.setSize(64, 64);
+        putInButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(GameState.egg > 0) {
+                    for (Cell c : cells) {
+                        if (!c.state) {
+
+                            TrungDeAp trungDeAp = new TrungDeAp(c.position.x, c.position.y, stage);
+                            trungDeAp.addListener(new ClickListener(){
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    if(trungDeAp.time > trungDeAp.TIMEUP){
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                                        c.state = false;
+                                        trungDeAp.remove();
+                                    }
+                                }
+                            });
+                            c.state = true;
+                            GameState.egg--;
+                            break;
+                        }
+                    }
+                }
+            }
+        });
 
         float x = 80;
         float y = Gdx.graphics.getHeight() - 250;
@@ -90,9 +118,6 @@ public class LoApTrungScreen implements Screen {
     public void render(float v) {
         ScreenUtils.clear(Color.BLACK);
 
-        stage.act();
-        stage.draw();
-
         game.batch.begin();
 
         game.batch.draw(oga, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - 100);
@@ -101,6 +126,9 @@ public class LoApTrungScreen implements Screen {
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2, Gdx.graphics.getHeight() - 2*layout.height );
 
         game.batch.end();
+
+        stage.act();
+        stage.draw();
     }
 
     @Override
