@@ -19,6 +19,7 @@ public class Master extends Game {
     public static Home home;
     public static Well well;
     public static Tree tree;
+    public static Finger finger;
 
 
     public static ChooseType type = ChooseType.NOTHING;

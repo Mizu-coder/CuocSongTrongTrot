@@ -27,6 +27,7 @@ import farm.com.buttons.Save;
 import farm.com.enums.ChooseType;
 import farm.com.enums.PlantType;
 import farm.com.enums.SeasonType;
+import farm.com.enums.Text;
 import farm.com.seeds.*;
 
 import static farm.com.enums.SeasonType.*;
@@ -51,8 +52,10 @@ public class GameScreen implements Screen {
     Save save;
     Shop shop;
     Coin coin;
-    int day;
+    public int day;
     int timing;
+    Text text = Text.GIEO;
+    ChooseType chooseType = ChooseType.NOTHING;
 
     private ShowInfo info;
 
@@ -74,6 +77,15 @@ public class GameScreen implements Screen {
         famer.setSize(50,50);
         day = 1;
         timing = 0;
+        switch (text) {
+            case GIEO -> {
+                Master.finger = new Finger(290, 750, stage);
+            }
+        }
+
+
+
+
 
 
         // Vài đống rơm
@@ -93,7 +105,6 @@ public class GameScreen implements Screen {
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
-
         coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
@@ -154,6 +165,11 @@ public class GameScreen implements Screen {
                     info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 8);
                     stage.addActor(info);
                 }
+                if(actor instanceof Finger){
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 8);
+                    stage.addActor(info);
+                }
 
                 lastActor = actor;
                 return super.mouseMoved(event, x, y);
@@ -168,12 +184,28 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
+        switch (text) {
+            case LAYNUOC -> {
+                Master.finger = new Finger(330, 850, stage);
+                Master.finger.setRotation(180);
+            }
+            case TUOI ->{
+                Master.finger = new Finger(290,750,stage);
+                Master.finger.setRotation(0);
+            }
+        }
+        Master.well.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+              Master.finger.remove();
+            }
+        });
 
         timing++;
         if(timing % (60*3) == 0){
             newDay();
         }
+
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
             stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
@@ -208,27 +240,52 @@ public class GameScreen implements Screen {
 //                    plantType = P
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedpu -= 1;
-
+                    switch (text){
+                        case GIEO -> {
+                            Master.finger.remove();
+                            text = Text.LAYNUOC;
+                        }
+                    }
                 }
                 if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedc -= 1;
-
+                    switch (text){
+                        case GIEO -> {
+                            Master.finger.remove();
+                            text = Text.LAYNUOC;
+                        }
+                    }
                 }
                 if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedp -= 1;
-
+                    switch (text){
+                        case GIEO -> {
+                            Master.finger.remove();
+                            text = Text.LAYNUOC;
+                        }
+                    }
                 }
                 if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedt -= 1;
-
+                    switch (text){
+                        case GIEO -> {
+                            Master.finger.remove();
+                            text = Text.LAYNUOC;
+                        }
+                    }
                 }
                 if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game, 0));
                     GameState.seedb -= 1;
-
+                    switch (text){
+                        case GIEO -> {
+                            Master.finger.remove();
+                            text = Text.LAYNUOC;
+                        }
+                    }
                 }
             }
         }
@@ -554,6 +611,7 @@ public class GameScreen implements Screen {
             case WATER -> {
                 Master.type = ChooseType.WATER;
                 game.wateringCan = new WateringCan(0,0,stage,game);
+                text = Text.TUOI;
             }
         }
     }
