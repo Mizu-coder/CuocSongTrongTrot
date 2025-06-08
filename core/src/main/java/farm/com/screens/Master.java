@@ -32,6 +32,7 @@ public class Master extends Game {
     public Weather weather;
     public Season season;
     public WateringCan wateringCan;
+    public static Misson misson;
 
     public boolean clicked = false;
 

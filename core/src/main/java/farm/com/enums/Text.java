@@ -4,6 +4,7 @@ public enum Text {
     GIEO,
     LAYNUOC,
     TUOI,
-    NOTHING
+    NOTHING,
+    COMPLETE
 
 }

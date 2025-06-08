@@ -24,10 +24,7 @@ import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
 import farm.com.buttons.Save;
-import farm.com.enums.ChooseType;
-import farm.com.enums.PlantType;
-import farm.com.enums.SeasonType;
-import farm.com.enums.Text;
+import farm.com.enums.*;
 import farm.com.seeds.*;
 
 import static farm.com.enums.SeasonType.*;
@@ -61,7 +58,6 @@ public class GameScreen implements Screen {
 
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
-
     public GameScreen(Master game) {
         this.game = game;
         stage = new Stage();
@@ -109,6 +105,8 @@ public class GameScreen implements Screen {
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
         loAp = new LoApTrung(700, 20*20, stage);
+
+        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-70, staticStage);
 
 
         save.addListener(new ClickListener(){
@@ -167,7 +165,12 @@ public class GameScreen implements Screen {
                 }
                 if(actor instanceof Finger){
                     info.text = actor.toString();
-                    info.setPosition(actor.getX(), actor.getY() + actor.getHeight() + 8);
+                    info.setPosition(actor.getX(), actor.getY() );
+                    stage.addActor(info);
+                }
+                if (actor instanceof Misson) {
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(), actor.getY());
                     stage.addActor(info);
                 }
 
@@ -184,27 +187,12 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-        switch (text) {
-            case LAYNUOC -> {
-                Master.finger = new Finger(330, 850, stage);
-                Master.finger.setRotation(180);
-            }
-            case TUOI ->{
-                Master.finger = new Finger(290,750,stage);
-                Master.finger.setRotation(0);
-            }
-        }
-        Master.well.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-              Master.finger.remove();
-            }
-        });
-
         timing++;
         if(timing % (60*3) == 0){
             newDay();
+            Master.misson.giaoNV();
         }
+
 
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
@@ -240,52 +228,27 @@ public class GameScreen implements Screen {
 //                    plantType = P
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedpu -= 1;
-                    switch (text){
-                        case GIEO -> {
-                            Master.finger.remove();
-                            text = Text.LAYNUOC;
-                        }
-                    }
+                    Master.finger.changeText();
                 }
                 if (Master.type.equals(ChooseType.CAROT) && GameState.seedc > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedc -= 1;
-                    switch (text){
-                        case GIEO -> {
-                            Master.finger.remove();
-                            text = Text.LAYNUOC;
-                        }
-                    }
+                    Master.finger.changeText();
                 }
                 if (Master.type.equals(ChooseType.POTATO) && GameState.seedp > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedp -= 1;
-                    switch (text){
-                        case GIEO -> {
-                            Master.finger.remove();
-                            text = Text.LAYNUOC;
-                        }
-                    }
+                    Master.finger.changeText();
                 }
                 if (Master.type.equals(ChooseType.TOMATO) && GameState.seedt > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16, stage, game, 0));
                     GameState.seedt -= 1;
-                    switch (text){
-                        case GIEO -> {
-                            Master.finger.remove();
-                            text = Text.LAYNUOC;
-                        }
-                    }
+                    Master.finger.changeText();
                 }
                 if (Master.type.equals(ChooseType.BEAN) && GameState.seedb > 0 && isFree(mousePosition.x, mousePosition.y)) {
                     listPlants.add(new Plants(x, mousePosition.y - 16 * 2, stage, game, 0));
                     GameState.seedb -= 1;
-                    switch (text){
-                        case GIEO -> {
-                            Master.finger.remove();
-                            text = Text.LAYNUOC;
-                        }
-                    }
+                    Master.finger.changeText();
                 }
             }
         }
@@ -573,7 +536,7 @@ public class GameScreen implements Screen {
                 case WINTER -> game.season.seasonType = SPRING;
             }
         }
-       // famer.setPosition(200, 900);
+        // famer.setPosition(200, 900);
     }
 
     private void changeType(ChooseType type){
@@ -611,7 +574,7 @@ public class GameScreen implements Screen {
             case WATER -> {
                 Master.type = ChooseType.WATER;
                 game.wateringCan = new WateringCan(0,0,stage,game);
-                text = Text.TUOI;
+                Master.finger.tuoi();
             }
         }
     }

@@ -10,8 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.*;
+import farm.com.animals.Chicken;
+import farm.com.animals.Cow;
+import farm.com.animals.Pig;
 import farm.com.enums.ChooseType;
 import farm.com.enums.PlantType;
+import farm.com.enums.Text;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
@@ -21,6 +25,7 @@ public class Plants extends MyActor {
     Animation<TextureRegion> animation;
     public PlantType plantType = PlantType.PUMKIN;
     ShowInfo infoSeed;
+    Text text = Text.GIEO;
 
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
@@ -104,33 +109,88 @@ public class Plants extends MyActor {
                     if(animation.isAnimationFinished(Plants.this.time)){
                         switch (plantType){
                             case PUMKIN -> {
+                                text = Text.COMPLETE;
                                 GameState.seedpu += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                switch (text){
+                                    case COMPLETE -> {
+                                        GameState.money += 600;
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        text = Text.NOTHING;
+                                        Master.finger.remove();
+                                    }
+                                }
                                 remove();
                             }
                             case CARROT -> {
+                                text = Text.COMPLETE;
                                 GameState.seedc += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                switch (text){
+                                    case COMPLETE -> {
+                                        GameState.money += 600;
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        text = Text.NOTHING;
+                                        Master.finger.remove();
+                                    }
+                                }
                                 remove();
                             }
                             case POTATO -> {
+                                text = Text.COMPLETE;
                                 GameState.seedp += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                switch (text){
+                                    case COMPLETE -> {
+                                        GameState.money += 600;
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        text = Text.NOTHING;
+                                        Master.finger.remove();
+                                    }
+                                }
                                 remove();
                             }
                             case TOMATO -> {
+                                text = Text.COMPLETE;
                                 GameState.seedt += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                switch (text){
+                                    case COMPLETE -> {
+                                        GameState.money += 600;
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        text = Text.NOTHING;
+                                        Master.finger.remove();
+                                    }
+                                }
                                 remove();
                             }
                             case BEAN -> {
+                                text = Text.COMPLETE;
                                 GameState.seedb += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                switch (text){
+                                    case COMPLETE -> {
+                                        GameState.money += 600;
+                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                        text = Text.NOTHING;
+                                        Master.finger.remove();
+                                    }
+                                }
                                 remove();
                             }
                         }
