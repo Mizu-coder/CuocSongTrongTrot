@@ -67,9 +67,9 @@ public class ShopScreen implements Screen {
             }
         });
 
-        porkButton = new PorkButton( 10, Gdx.graphics.getHeight() - 100, stage);
-        milkButton = new MilkButton( 10, Gdx.graphics.getHeight() - 200, stage);
-        eggButton = new EggButton( 10, Gdx.graphics.getHeight() - 300, stage);
+        porkButton = new PorkButton( 10, Gdx.graphics.getHeight() - 100, stage,game);
+        milkButton = new MilkButton( 10, Gdx.graphics.getHeight() - 200, stage, game);
+        eggButton = new EggButton( 10, Gdx.graphics.getHeight() - 300, stage,game);
 
         chickenButton = new ChickenButton( 600, 450, stage);
         pigButton = new PigButton(600, 380, stage);

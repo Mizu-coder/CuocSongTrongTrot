@@ -35,6 +35,7 @@ public class Master extends Game {
     public static Misson misson;
 
     public boolean clicked = false;
+    private boolean sell = false;
 
     @Override
     public void create() {
@@ -81,4 +82,5 @@ public class Master extends Game {
     public void dispose() {
 
     }
+
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.enums.SellTypeButton;
+import farm.com.screens.Master;
 
 public class SellButton extends MyActor {
     int cost = 0;
@@ -16,8 +17,12 @@ public class SellButton extends MyActor {
     boolean pork = false;
     boolean egg = false;
     boolean milk = false;
-    public SellButton(float x, float y, Stage s) {
+    private int t;
+    private boolean sell = false;
+    Master game;
+    public SellButton(float x, float y, Stage s, Master game) {
         super(x, y, s);
+        this.game = game;
 
         ting = Gdx.audio.newSound(Gdx.files.internal("ting.wav"));
         addListener(new ClickListener(){
@@ -27,6 +32,7 @@ public class SellButton extends MyActor {
                     if(GameState.totalPork > 0  ) {
                         GameState.money += cost;
                         pork = false;
+                        t += 1;
                     }
                 }
 
@@ -34,12 +40,14 @@ public class SellButton extends MyActor {
                     if (GameState.egg > 0 ){
                         GameState.money += cost;
                         egg = false;
+                        t += 1;
                     }
                 }
                 if(milk == true){
                     if (GameState.milkTotal >0){
                         GameState.money += cost;
                         milk = false;
+                        t += 1;
                     }
                 }
 
@@ -69,5 +77,10 @@ public class SellButton extends MyActor {
 
             }
         });
+    }
+    public void tinhLanBan() {
+        if (t >= 5) {
+            GameState.money += 400;
+        }
     }
 }

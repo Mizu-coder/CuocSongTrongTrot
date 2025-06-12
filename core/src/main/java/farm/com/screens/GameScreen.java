@@ -3,6 +3,7 @@ package farm.com.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.MathUtils;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +27,7 @@ import farm.com.animals.Cow;
 import farm.com.animals.Pig;
 import farm.com.buttons.Save;
 import farm.com.enums.*;
+import farm.com.inshop.SellButton;
 import farm.com.seeds.*;
 
 import static farm.com.enums.SeasonType.*;
@@ -45,6 +48,8 @@ public class GameScreen implements Screen {
     public static Array<Pig> pigs = new Array<>();;
     public static Array<Cow> cows = new Array<>();;
 
+    public static Boolean go = false;
+
     LoApTrung loAp;
     Save save;
     Shop shop;
@@ -54,7 +59,15 @@ public class GameScreen implements Screen {
     Text text = Text.GIEO;
     ChooseType chooseType = ChooseType.NOTHING;
 
+    Khung khung;
+
+     SellButton sellButton;
+
     private ShowInfo info;
+
+    TextButton back;
+
+    NV nv;
 
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
@@ -64,11 +77,25 @@ public class GameScreen implements Screen {
         staticStage = new Stage();
         soils = new Array<>();
         cages = new Array<>();
+        sellButton = new SellButton(10000,10000,stage,game);
+
+
+
 
     }
     @Override
     public void show() {
         generateMap();
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = game.font;
+        style.fontColor = Color.RED;
+        khung = new Khung(1000,1000,staticStage);
+        back = new TextButton("Back", style);
+        back.setPosition(1000,1000);
+        staticStage.addActor(back);
+
+        nv = NV.NOTHING;
+
         famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
         famer.setSize(50,50);
         day = 1;
@@ -106,7 +133,7 @@ public class GameScreen implements Screen {
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
         loAp = new LoApTrung(700, 20*20, stage);
 
-        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-70, staticStage);
+        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage);
 
 
         save.addListener(new ClickListener(){
@@ -168,16 +195,27 @@ public class GameScreen implements Screen {
                     info.setPosition(actor.getX(), actor.getY() );
                     stage.addActor(info);
                 }
-                if (actor instanceof Misson) {
-                    info.text = actor.toString();
-                    info.setPosition(actor.getX(), actor.getY());
-                    stage.addActor(info);
-                }
 
                 lastActor = actor;
                 return super.mouseMoved(event, x, y);
             }
         });
+//        staticStage.addListener(new ClickListener(){
+//            private Actor lastActor = null;
+//            public boolean mouseMoved(InputEvent event, float x, float y) {
+//                Actor actor = staticStage.hit(x, y, true);
+//                if (lastActor != null && lastActor instanceof MyActor && lastActor != actor) {
+//                    info.remove();
+//                }
+//                if (actor instanceof Misson) {
+//                    info.text = actor.toString();
+//                    info.setPosition(actor.getX() - 16, actor.getY() - 32);
+//                    staticStage.addActor(info);
+//                }
+//                lastActor = actor;
+//                return super.mouseMoved(event, x, y);
+//            }
+//        });
 
         Gdx.input.setInputProcessor(multiplexer);
     }
@@ -188,9 +226,24 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (60*3) == 0){
+        sellButton.tinhLanBan();
+        if(timing % (120*3) == 0){
             newDay();
             Master.misson.giaoNV();
+
+        }
+
+        if(go == true){
+            back.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    khung.setPosition(1000,1000);
+                    back.setPosition(1000,1000);
+                    go = false;
+                }
+            });
+            khung.setPosition(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/14);
+            back.setPosition(khung.getWidth() + 50, 475);
         }
 
 
@@ -261,8 +314,16 @@ public class GameScreen implements Screen {
 
         layout.setText(game.font, "" + GameState.money);
         game.font.draw(game.batch, layout,coin.getX() + 48,coin.getY() + 2*coin.getHeight()/3);
+        if(go){
+            switch (nv){
+                case NOTHING -> {
+                    layout.setText(game.font, " Không có nhiệm vụ");
+                    game.font.draw(game.batch, layout,khung.getX() - 200, khung.getY()- 100);
+                }
 
 
+            }
+        }
 
         float x = Gdx.graphics.getWidth() - 215;
         float y = Gdx.graphics.getHeight() - 5;
