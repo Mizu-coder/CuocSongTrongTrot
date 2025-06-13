@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
     InputMultiplexer multiplexer;
     OrthographicCamera camera;
     Master game;
-    GlyphLayout layout;
+    public static GlyphLayout layout;
     Character famer;
     Array<Soil> soils;
     public static Array<Plants> listPlants = new Array<>();;
@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
     Text text = Text.GIEO;
     ChooseType chooseType = ChooseType.NOTHING;
 
-    Khung khung;
+    public static Khung khung;
 
      SellButton sellButton;
 
@@ -67,7 +67,8 @@ public class GameScreen implements Screen {
 
     TextButton back;
 
-    NV nv;
+
+    public static int complete = 0;
 
     public static final int WIDTH = 960;
     public static final int HEIGHT = 1080;
@@ -94,7 +95,6 @@ public class GameScreen implements Screen {
         back.setPosition(1000,1000);
         staticStage.addActor(back);
 
-        nv = NV.NOTHING;
 
         famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
         famer.setSize(50,50);
@@ -133,7 +133,7 @@ public class GameScreen implements Screen {
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
         loAp = new LoApTrung(700, 20*20, stage);
 
-        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage);
+        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage, game);
 
 
         save.addListener(new ClickListener(){
@@ -226,11 +226,10 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        sellButton.tinhLanBan();
         if(timing % (120*3) == 0){
             newDay();
             Master.misson.giaoNV();
-
+            Master.sohieu = (MathUtils.random(1,3));
         }
 
         if(go == true){
@@ -245,6 +244,8 @@ public class GameScreen implements Screen {
             khung.setPosition(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/14);
             back.setPosition(khung.getWidth() + 50, 475);
         }
+
+        Master.misson.thuongDV();
 
 
 
@@ -315,14 +316,7 @@ public class GameScreen implements Screen {
         layout.setText(game.font, "" + GameState.money);
         game.font.draw(game.batch, layout,coin.getX() + 48,coin.getY() + 2*coin.getHeight()/3);
         if(go){
-            switch (nv){
-                case NOTHING -> {
-                    layout.setText(game.font, " Không có nhiệm vụ");
-                    game.font.draw(game.batch, layout,khung.getX() - 200, khung.getY()- 100);
-                }
-
-
-            }
+            Master.misson.choNV();
         }
 
         float x = Gdx.graphics.getWidth() - 215;

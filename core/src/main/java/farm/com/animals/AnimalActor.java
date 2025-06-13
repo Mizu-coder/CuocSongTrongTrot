@@ -112,6 +112,7 @@ public class AnimalActor extends MyActor {
     }
 
     public void feed(){
+        GameScreen.complete += 1;
         if (energy < 100) {
             switch (Master.type){
                 case PUMKIN -> {

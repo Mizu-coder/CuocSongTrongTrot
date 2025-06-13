@@ -11,6 +11,7 @@ import farm.com.GameState;
 import farm.com.ShowInfo;
 import farm.com.enums.AnimalNames;
 import farm.com.enums.ChooseType;
+import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 import farm.com.Utils;
 
@@ -22,6 +23,7 @@ public class Pig extends AnimalActor {
     public Pig(float x, float y, Stage s) {
         super(x, y, s);
         name = AnimalNames.PIG;
+        Master.sohieu = 1;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.piglet(0,0,8,8);
         frames[1] = Utils.piglet(8,0,8,8);

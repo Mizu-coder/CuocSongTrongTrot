@@ -14,7 +14,7 @@ import farm.com.enums.ChooseType;
 public class Master extends Game {
     //public static Cage cages;
     public SpriteBatch batch;
-    BitmapFont font;
+    public static BitmapFont font;
     public static Lake lake;
     public static Home home;
     public static Well well;
@@ -26,6 +26,8 @@ public class Master extends Game {
 
     public int sun = 0;
     public int rai = 0;
+
+    public static int sohieu = 0;
 
     public GameScreen gameScreen;
     MenuScreen menuScreen;

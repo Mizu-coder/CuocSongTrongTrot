@@ -21,6 +21,7 @@ public class Cow extends AnimalActor {
     public Cow(float x, float y, Stage s) {
         super(x, y, s);
         name = AnimalNames.COW;
+        Master.sohieu = 2;
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = Utils.cow(0,0,16,16);
          frames[1] = Utils.cow(16,0,16,16);

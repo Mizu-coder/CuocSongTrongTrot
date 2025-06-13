@@ -24,6 +24,7 @@ public class Chicken extends AnimalActor {
         super(x, y, s);
         TextureRegion[] frames = new TextureRegion[2];
         name = AnimalNames.CHICKEN;
+        Master.sohieu = 3;
         frames[0] = Utils.chic(0,0,8,8);
         frames[1] = Utils.chic(8,0,8,8);
         animation = new Animation<>(0.5f, frames);

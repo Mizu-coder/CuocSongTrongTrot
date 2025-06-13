@@ -1,18 +1,28 @@
 package farm.com;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import farm.com.animals.Chicken;
+import farm.com.animals.Cow;
+import farm.com.animals.Pig;
 import farm.com.enums.NV;
+import farm.com.inshop.SellButton;
 import farm.com.screens.GameScreen;
+import farm.com.screens.Master;
 
 public class Misson extends MyActor{
     NV nv = NV.BAN;
-    public Misson(float x, float y, Stage s) {
+    Master game;
+    GameScreen gameScreen;
+    SellButton sellButton;
+    public Misson(float x, float y, Stage s,Master game) {
         super(x, y, s);
+        this.game = game;
         textureRegion = new TextureRegion(new Texture("misson.png"));
         setSize(84, 94);
         addListener(new ClickListener() {
@@ -20,6 +30,7 @@ public class Misson extends MyActor{
                 GameScreen.go = true;
             }
         });
+
     }
     @Override
     public String toString() {
@@ -41,5 +52,59 @@ public class Misson extends MyActor{
     }
     public void giaoNV(){
         nv = NV.values()[MathUtils.random(0, NV.values().length - 1)];
+    }
+    public void choNV(){
+        switch (nv){
+            case NOTHING -> {
+                gameScreen.layout.setText(game.font, " Không có nhiệm vụ");
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+            }
+            case DONGVAT -> {
+                gameScreen.layout.setText(game.font, " Cho động vật ăn 5 lần (con vật nào cũng được không bắt buộc 1 loài) " + gameScreen.complete +" /5");
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 60, gameScreen.khung.getY()+ 400);
+                gameScreen.layout.setText(game.font, "Phần thưởng 1 con vật bất kì");
+                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 60, gameScreen.khung.getY()+ 350);
+            }
+            case BAN -> {
+                gameScreen.layout.setText(game.font,"Bán 1 thứ bất kì" + gameScreen.complete +" /1");
+                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+                gameScreen.layout.setText(game.font,"Phần thưởng 400 xu");
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 360);
+            }
+            case CAY -> {
+                gameScreen.layout.setText(game.font, "Tưới và thu hoạch 5 cây" + gameScreen.complete +" /5");
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+                gameScreen.layout.setText(game.font,"Phần thưởng 5 hạt giống ngẫu nhiên");
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 360);
+            }
+        }
+    }
+    public void thuongDV(){
+        if(GameScreen.complete == 5){
+            switch (nv){
+                case DONGVAT -> {
+                    System.out.println(22);
+                    if (Master.sohieu == 1){
+                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                    }
+                    if (Master.sohieu == 2){
+                        System.out.println(2);
+                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                    }
+                    if (Master.sohieu == 3){
+                        System.out.println(3);
+                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                    }
+                }
+            }
+        }
+
+    }
+    public void thuongBan(){
+        switch (nv){
+            case BAN -> {
+                sellButton.tinhLanBan();
+            }
+        }
     }
 }
