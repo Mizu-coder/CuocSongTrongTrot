@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.BAN;
+    NV nv = NV.DONGVAT;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -24,6 +24,7 @@ public class Misson extends MyActor{
         super(x, y, s);
         this.game = game;
         textureRegion = new TextureRegion(new Texture("misson.png"));
+        sellButton = new SellButton(1000,1000,s,game);
         setSize(84, 94);
         addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -80,11 +81,11 @@ public class Misson extends MyActor{
         }
     }
     public void thuongDV(){
-        if(GameScreen.complete == 5){
+        if(GameScreen.complete >= 5){
             switch (nv){
                 case DONGVAT -> {
-                    System.out.println(22);
                     if (Master.sohieu == 1){
+                        System.out.println(1);
                         GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
                     }
                     if (Master.sohieu == 2){
@@ -98,13 +99,7 @@ public class Misson extends MyActor{
                 }
             }
         }
+    }
 
-    }
-    public void thuongBan(){
-        switch (nv){
-            case BAN -> {
-                sellButton.tinhLanBan();
-            }
-        }
-    }
+
 }

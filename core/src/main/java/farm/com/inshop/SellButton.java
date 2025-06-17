@@ -29,25 +29,37 @@ public class SellButton extends MyActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(pork == true){
+                    System.out.println(2);
                     if(GameState.totalPork > 0  ) {
                         GameState.money += cost;
                         pork = false;
                         t += 1;
+                        if (t >= 5) {
+                            GameState.money += 400;
+                        }
                     }
                 }
 
                 if(egg == true){
+                    System.out.println(0);
                     if (GameState.egg > 0 ){
                         GameState.money += cost;
                         egg = false;
                         t += 1;
+                        if (t >= 5) {
+                            GameState.money += 400;
+                        }
                     }
                 }
                 if(milk == true){
+                    System.out.println(1);
                     if (GameState.milkTotal >0){
                         GameState.money += cost;
                         milk = false;
                         t += 1;
+                        if (t >= 5) {
+                            GameState.money += 400;
+                        }
                     }
                 }
 
@@ -78,9 +90,5 @@ public class SellButton extends MyActor {
             }
         });
     }
-    public void tinhLanBan() {
-        if (t >= 5) {
-            GameState.money += 400;
-        }
-    }
+
 }

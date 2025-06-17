@@ -226,7 +226,7 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (120*3) == 0){
+        if(timing % (600*3) == 0){
             newDay();
             Master.misson.giaoNV();
             Master.sohieu = (MathUtils.random(1,3));
@@ -245,7 +245,6 @@ public class GameScreen implements Screen {
             back.setPosition(khung.getWidth() + 50, 475);
         }
 
-        Master.misson.thuongDV();
 
 
 

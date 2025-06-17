@@ -1,6 +1,7 @@
 package farm.com.animals;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,11 +11,12 @@ import farm.com.EnergyBar;
 import farm.com.GameState;
 import farm.com.MyActor;
 import farm.com.ShowInfo;
+import farm.com.enums.NV;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class AnimalActor extends MyActor {
-
+    NV nv = NV.NOTHING;
     farm.com.enums.AnimalNames name;
     public float energy = 100;
     float minusEnerGy = 0;
