@@ -28,8 +28,8 @@ public class SellButton extends MyActor {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(pork == true){
-                    System.out.println(2);
+                if(pork){
+
                     if(GameState.totalPork > 0  ) {
                         GameState.money += cost;
                         pork = false;
@@ -40,8 +40,7 @@ public class SellButton extends MyActor {
                     }
                 }
 
-                if(egg == true){
-                    System.out.println(0);
+                if(egg){
                     if (GameState.egg > 0 ){
                         GameState.money += cost;
                         egg = false;
@@ -51,8 +50,7 @@ public class SellButton extends MyActor {
                         }
                     }
                 }
-                if(milk == true){
-                    System.out.println(1);
+                if(milk){
                     if (GameState.milkTotal >0){
                         GameState.money += cost;
                         milk = false;

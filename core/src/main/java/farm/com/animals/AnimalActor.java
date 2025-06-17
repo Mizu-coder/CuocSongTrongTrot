@@ -114,37 +114,44 @@ public class AnimalActor extends MyActor {
     }
 
     public void feed(){
-        GameScreen.complete += 1;
+
+
+
         if (energy < 100) {
             switch (Master.type){
                 case PUMKIN -> {
                     if(GameState.seedpu > 0){
                         GameState.seedpu -= 1;
                         energy += 50;
+                        Master.misson.thuongDV();
                     }
                 }
                 case CAROT -> {
                     if(GameState.seedc > 0) {
                         GameState.seedc -= 1;
                         energy += 20;
+                        Master.misson.thuongDV();
                     }
                 }
                 case POTATO -> {
                     if(GameState.seedp > 0) {
                         GameState.seedp -= 1;
                         energy += 10;
+                        Master.misson.thuongDV();
                     }
                 }
                 case TOMATO -> {
                     if(GameState.seedt > 0) {
                         GameState.seedt -= 1;
                         energy += 10;
+                        Master.misson.thuongDV();
                     }
                 }
                 case BEAN -> {
                     if(GameState.seedb > 0) {
                         GameState.seedb -= 1;
                         energy += 10;
+                        Master.misson.thuongDV();
                     }
                 }
             }

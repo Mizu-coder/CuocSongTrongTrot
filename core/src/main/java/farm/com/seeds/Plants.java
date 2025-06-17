@@ -14,6 +14,7 @@ import farm.com.animals.Chicken;
 import farm.com.animals.Cow;
 import farm.com.animals.Pig;
 import farm.com.enums.ChooseType;
+import farm.com.enums.NV;
 import farm.com.enums.PlantType;
 import farm.com.enums.Text;
 import farm.com.screens.GameScreen;
@@ -26,6 +27,7 @@ public class Plants extends MyActor {
     public PlantType plantType = PlantType.PUMKIN;
     ShowInfo infoSeed;
     Text text = Text.GIEO;
+    NV nv = NV.NOTHING;
 
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
@@ -94,7 +96,6 @@ public class Plants extends MyActor {
             public void clicked(InputEvent event, float x, float y) {
                 if (game.sun < 3 && game.rai < 3) {
                     if (Master.type.equals(ChooseType.WATER)) {
-
                         game.wateringCan.time = 1;
                         addAction(Actions.sequence(
                             Actions.delay(1),
@@ -113,6 +114,7 @@ public class Plants extends MyActor {
                                 GameState.seedpu += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
                                         GameState.money += 600;
@@ -123,6 +125,8 @@ public class Plants extends MyActor {
                                         Master.finger.remove();
                                     }
                                 }
+                                Master.misson.thuongCay();
+
                                 remove();
                             }
                             case CARROT -> {
@@ -130,6 +134,7 @@ public class Plants extends MyActor {
                                 GameState.seedc += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
                                         GameState.money += 600;
@@ -140,6 +145,7 @@ public class Plants extends MyActor {
                                         Master.finger.remove();
                                     }
                                 }
+                                Master.misson.thuongCay();
                                 remove();
                             }
                             case POTATO -> {
@@ -147,6 +153,7 @@ public class Plants extends MyActor {
                                 GameState.seedp += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
                                         GameState.money += 600;
@@ -157,6 +164,7 @@ public class Plants extends MyActor {
                                         Master.finger.remove();
                                     }
                                 }
+                                Master.misson.thuongCay();
                                 remove();
                             }
                             case TOMATO -> {
@@ -164,6 +172,7 @@ public class Plants extends MyActor {
                                 GameState.seedt += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
                                         GameState.money += 600;
@@ -174,6 +183,7 @@ public class Plants extends MyActor {
                                         Master.finger.remove();
                                     }
                                 }
+                                Master.misson.thuongCay();
                                 remove();
                             }
                             case BEAN -> {
@@ -181,6 +191,7 @@ public class Plants extends MyActor {
                                 GameState.seedb += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
                                         GameState.money += 600;
@@ -191,6 +202,7 @@ public class Plants extends MyActor {
                                         Master.finger.remove();
                                     }
                                 }
+                                Master.misson.thuongCay();
                                 remove();
                             }
                         }

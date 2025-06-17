@@ -13,5 +13,6 @@ public class Potato extends MyActor {
         super(x, y, s);
         textureRegion = Utils.seedpacket(16,16,16,16);
         setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+        Master.sohat = 3;
     }
 }

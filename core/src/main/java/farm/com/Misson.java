@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.DONGVAT;
+    NV nv = NV.CAY;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -81,23 +81,52 @@ public class Misson extends MyActor{
         }
     }
     public void thuongDV(){
-        if(GameScreen.complete >= 5){
+        switch (nv){
+            case DONGVAT -> {
+                GameScreen.complete += 1;
+            }
+        };
+        if(GameScreen.complete == 5){
             switch (nv){
                 case DONGVAT -> {
                     if (Master.sohieu == 1){
-                        System.out.println(1);
-                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), GameScreen.stage ));
                     }
                     if (Master.sohieu == 2){
-                        System.out.println(2);
-                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), GameScreen.stage));
                     }
                     if (Master.sohieu == 3){
-                        System.out.println(3);
-                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), null));
+                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), GameScreen.stage));
                     }
                 }
             }
+        }
+
+
+    }
+    public void thuongCay(){
+        if(GameScreen.complete == 5){
+            switch (nv){
+                case CAY -> {
+                    if (Master.sohat == 1){
+                        GameState.seedpu += 5;
+                    }
+                    if (Master.sohat == 2){
+                        GameState.seedc += 5;
+                    }
+                    if (Master.sohat == 3){
+                        GameState.seedp += 5;
+                    }
+                    if (Master.sohat == 4){
+                        GameState.seedt += 5;
+                    }
+                    if (Master.sohat == 5){
+                        GameState.seedb += 5;
+
+                    }
+                }
+            }
+
         }
     }
 

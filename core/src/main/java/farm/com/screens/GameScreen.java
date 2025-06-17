@@ -34,8 +34,8 @@ import static farm.com.enums.SeasonType.*;
 
 // Màn hình phần trồng trọt
 public class GameScreen implements Screen {
-    Stage stage;
-    Stage staticStage;
+    public static Stage stage;
+     Stage staticStage;
     InputMultiplexer multiplexer;
     OrthographicCamera camera;
     Master game;
@@ -226,13 +226,15 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (600*3) == 0){
+        if(timing % (1000*3) == 0){
             newDay();
-            Master.misson.giaoNV();
+//            Master.misson.giaoNV();
             Master.sohieu = (MathUtils.random(1,3));
+            Master.sohat = (MathUtils.random(1,5));
+            complete = 0;
         }
 
-        if(go == true){
+        if(go){
             back.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

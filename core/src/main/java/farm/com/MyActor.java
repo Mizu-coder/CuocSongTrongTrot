@@ -23,7 +23,7 @@ public class MyActor extends Actor {
         super.draw(batch, parentAlpha);
         if(GameScreen.go && getTouchable().equals(Touchable.enabled)){
             setTouchable(Touchable.disabled);
-        } else if (!GameScreen.go && getTouchable().equals(Touchable.disabled)) {
+        } else if (!GameScreen.go && getTouchable().equals(Touchable.disabled) && !(this instanceof WateringCan)) {
             setTouchable(Touchable.enabled);
         }
 

@@ -28,6 +28,7 @@ public class Master extends Game {
     public int rai = 0;
 
     public static int sohieu = 0;
+    public static int sohat = 0;
 
     public GameScreen gameScreen;
     MenuScreen menuScreen;
