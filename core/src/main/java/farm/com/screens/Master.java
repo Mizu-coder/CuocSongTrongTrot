@@ -30,6 +30,8 @@ public class Master extends Game {
     public static int sohieu = 0;
     public static int sohat = 0;
 
+    public static boolean nvb = true;
+
     public GameScreen gameScreen;
     MenuScreen menuScreen;
     public Weather weather;

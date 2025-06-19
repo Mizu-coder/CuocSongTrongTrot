@@ -117,12 +117,15 @@ public class Plants extends MyActor {
                                 GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
-                                        GameState.money += 600;
-                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        text = Text.NOTHING;
-                                        Master.finger.remove();
+                                        if(Master.nvb){
+                                            GameState.money += 600;
+                                            GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            text = Text.NOTHING;
+                                            Master.finger.remove();
+                                            Master.nvb = false;
+                                        }
                                     }
                                 }
                                 Master.misson.thuongCay();
@@ -137,12 +140,15 @@ public class Plants extends MyActor {
                                 GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
-                                        GameState.money += 600;
-                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        text = Text.NOTHING;
-                                        Master.finger.remove();
+                                        if(Master.nvb){
+                                            GameState.money += 600;
+                                            GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            text = Text.NOTHING;
+                                            Master.finger.remove();
+                                            Master.nvb = false;
+                                        }
                                     }
                                 }
                                 Master.misson.thuongCay();
@@ -156,12 +162,15 @@ public class Plants extends MyActor {
                                 GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
-                                        GameState.money += 600;
-                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        text = Text.NOTHING;
-                                        Master.finger.remove();
+                                        if(Master.nvb){
+                                            GameState.money += 600;
+                                            GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            text = Text.NOTHING;
+                                            Master.finger.remove();
+                                            Master.nvb = false;
+                                        }
                                     }
                                 }
                                 Master.misson.thuongCay();
@@ -175,12 +184,15 @@ public class Plants extends MyActor {
                                 GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
-                                        GameState.money += 600;
-                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        text = Text.NOTHING;
-                                        Master.finger.remove();
+                                        if(Master.nvb){
+                                            GameState.money += 600;
+                                            GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            text = Text.NOTHING;
+                                            Master.finger.remove();
+                                            Master.nvb = false;
+                                        }
                                     }
                                 }
                                 Master.misson.thuongCay();
@@ -194,12 +206,15 @@ public class Plants extends MyActor {
                                 GameScreen.complete += 1;
                                 switch (text){
                                     case COMPLETE -> {
-                                        GameState.money += 600;
-                                        GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
-                                        text = Text.NOTHING;
-                                        Master.finger.remove();
+                                        if(Master.nvb){
+                                            GameState.money += 600;
+                                            GameScreen.chickens.add(new Chicken(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.cows.add(new Cow(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            GameScreen.pigs.add(new Pig(MathUtils.random(50, Gdx.graphics.getWidth()), MathUtils.random(50, Gdx.graphics.getHeight()), getStage()));
+                                            text = Text.NOTHING;
+                                            Master.finger.remove();
+                                            Master.nvb = false;
+                                        }
                                     }
                                 }
                                 Master.misson.thuongCay();
