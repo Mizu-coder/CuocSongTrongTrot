@@ -200,23 +200,6 @@ public class GameScreen implements Screen {
                 return super.mouseMoved(event, x, y);
             }
         });
-//        staticStage.addListener(new ClickListener(){
-//            private Actor lastActor = null;
-//            public boolean mouseMoved(InputEvent event, float x, float y) {
-//                Actor actor = staticStage.hit(x, y, true);
-//                if (lastActor != null && lastActor instanceof MyActor && lastActor != actor) {
-//                    info.remove();
-//                }
-//                if (actor instanceof Misson) {
-//                    info.text = actor.toString();
-//                    info.setPosition(actor.getX() - 16, actor.getY() - 32);
-//                    staticStage.addActor(info);
-//                }
-//                lastActor = actor;
-//                return super.mouseMoved(event, x, y);
-//            }
-//        });
-
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -226,9 +209,9 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (1000*3) == 0){
+        if(timing % (60*100) == 0){
             newDay();
-//            Master.misson.giaoNV();
+            Master.misson.giaoNV();
             Master.sohieu = (MathUtils.random(1,3));
             Master.sohat = (MathUtils.random(1,5));
             complete = 0;

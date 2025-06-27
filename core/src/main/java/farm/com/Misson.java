@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.CAY;
+    NV nv = NV.NOTHING;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -74,9 +74,9 @@ public class Misson extends MyActor{
             }
             case CAY -> {
                 gameScreen.layout.setText(game.font, "Tưới và thu hoạch 5 cây" + gameScreen.complete +" /5");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 260, gameScreen.khung.getY()+ 400);
                 gameScreen.layout.setText(game.font,"Phần thưởng 5 hạt giống ngẫu nhiên");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 360);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 260, gameScreen.khung.getY()+ 360);
             }
         }
     }
