@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.NOTHING;
+    NV nv = NV.CAY;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
