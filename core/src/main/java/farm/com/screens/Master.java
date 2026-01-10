@@ -33,6 +33,7 @@ public class Master extends Game {
     public static boolean nvb = true;
 
     public GameScreen gameScreen;
+    public HomeScreen homeScreen;
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;
@@ -74,6 +75,7 @@ public class Master extends Game {
         fontGenerator.dispose();
         gameScreen = new GameScreen(this);
         menuScreen = new MenuScreen(this);
+        homeScreen = new HomeScreen(this);
         this.setScreen(menuScreen);
 
     }

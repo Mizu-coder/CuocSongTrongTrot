@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.CAY;
+    NV nv = NV.NOTHING;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -31,26 +31,8 @@ public class Misson extends MyActor{
                 GameScreen.go = true;
             }
         });
+    }
 
-    }
-    @Override
-    public String toString() {
-        switch (nv){
-            case DONGVAT -> {
-                return "Cho động vật ăn";
-            }
-            case CAY -> {
-                return "Trồng 5 cây";
-            }
-            case BAN -> {
-                return "Bán 5 thứ bất kì";
-            }
-            case NOTHING -> {
-                return "Khong co nhiem vu";
-            }
-        }
-        return "";
-    }
     public void giaoNV(){
         nv = NV.values()[MathUtils.random(0, NV.values().length - 1)];
     }

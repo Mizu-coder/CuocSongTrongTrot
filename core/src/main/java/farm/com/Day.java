@@ -9,7 +9,7 @@ import farm.com.screens.GameScreen;
 public class Day extends MyActor{
     public Day(float x, float y, Stage s, int day) {
         super(x, y, s);
-        setSize(GameScreen.WIDTH, GameScreen.HEIGHT);
+        setSize(GameScreen.WIDTH*1.75f, GameScreen.HEIGHT*1.75f);
         setColor(0,0,0,1);
         addAction(Actions.sequence(
             Actions.fadeOut(2),

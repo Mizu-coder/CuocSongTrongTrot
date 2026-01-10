@@ -72,9 +72,9 @@ public class MenuScreen implements Screen {
             }
         });
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
-        music.setLooping(true);
-        music.play();
+//        music = Gdx.audio.newMusic(Gdx.files.internal("Menu.mp3"));
+//        music.setLooping(true);
+//        music.play();
     }
 
     @Override

@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
     Save save;
     Shop shop;
     Coin coin;
-    public int day;
+    public int day = 1;
     int timing;
     Text text = Text.GIEO;
     ChooseType chooseType = ChooseType.NOTHING;
@@ -98,7 +98,6 @@ public class GameScreen implements Screen {
 
         famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
         famer.setSize(50,50);
-        day = 1;
         timing = 0;
         switch (text) {
             case GIEO -> {
@@ -209,7 +208,7 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (60*26) == 0){
+        if(timing % (60*5) == 0){
             newDay();
             Master.misson.giaoNV();
             Master.sohieu = (MathUtils.random(1,3));
@@ -234,11 +233,11 @@ public class GameScreen implements Screen {
 
 
         if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 <= famer.getX() && famer.getX() <= (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
-            stage.getCamera().position.x = famer.getX() + famer.getWidth() / 2;
+            stage.getCamera().position.x = famer.getX() + famer.getWidth() / 14f;
         } else if ((float) Gdx.graphics.getWidth() / 2 - famer.getWidth() / 2 > famer.getX()) {
             stage.getCamera().position.x = Gdx.graphics.getWidth() / 2f;
         } else if (famer.getX() > (float) (WIDTH - Gdx.graphics.getWidth() / 2) - famer.getWidth() / 2) {
-            stage.getCamera().position.x = WIDTH - Gdx.graphics.getWidth() / 2f;
+            stage.getCamera().position.x = WIDTH - Gdx.graphics.getWidth() / 14f;
         }
         if ((float) Gdx.graphics.getHeight() / 2 - famer.getHeight() / 2 <= famer.getY() && famer.getY() <= (HEIGHT - (float) Gdx.graphics.getHeight() / 2) - famer.getHeight() / 2) {
             stage.getCamera().position.y = famer.getY() + famer.getHeight() / 2;
@@ -377,8 +376,14 @@ public class GameScreen implements Screen {
 
         // Nhà
         x = 0;
-        y = Gdx.graphics.getHeight()/1.65f + HEIGHT / 2;
+        y = Gdx.graphics.getHeight()/2.75f + HEIGHT / 2;
         Master.home = new Home(x, y, stage,game);
+        Master.home.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.homeScreen);
+            }
+        });
 
         // Giếng
         x = 200;
@@ -390,8 +395,7 @@ public class GameScreen implements Screen {
                 changeType(ChooseType.WATER);
             }
         });
-        //new BucketMilk(Master.well.getX() + 64, Master.well.getY(), stage);
-        x = Gdx.graphics.getWidth()/2 + 180 ;
+        x = Gdx.graphics.getWidth()/1.5f + 180 ;
         y = 150 + HEIGHT / 2;
         Master.lake = new Lake(x, y, stage);
 
