@@ -18,6 +18,9 @@ public class MyActor extends Actor {
         textureRegion = Utils.getRegion(0, 0, 1,1);
     }
 
+    public MyActor() {
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);

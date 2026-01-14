@@ -10,6 +10,6 @@ public class Bed extends MyActor {
     public Bed(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("bed.jpg"));
-        setSize(textureRegion.getRegionWidth()/2,textureRegion.getRegionHeight()/2);
+        setSize(textureRegion.getRegionWidth()/4.95f,textureRegion.getRegionHeight()/4.5f);
     }
 }
