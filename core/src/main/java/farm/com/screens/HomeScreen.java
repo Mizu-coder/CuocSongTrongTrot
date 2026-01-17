@@ -39,7 +39,8 @@ public class HomeScreen implements Screen {
         tv = new TV(797,650,stage);
         heater = new Heater(1100,650,stage);
         chair = new Chair(516,630,stage);
-        main = new farm.com.Character(1508,945,stage,game);
+        main = new farm.com.Character(516,630,stage,game);
+        main.setSize(115,115);
     }
     @Override
     public void show() {
