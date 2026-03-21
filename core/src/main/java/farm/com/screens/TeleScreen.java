@@ -1,48 +1,46 @@
 package farm.com.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import farm.com.inhome.*;
 
-public class HomeScreen implements Screen {
+public class TeleScreen implements Screen {
     Master game;
     Stage stage;
-    Texture floor;
+    GlyphLayout layout;
     OrthographicCamera camera;
+    Texture options;
 
+    TextButton education;
 
-    farm.com.Character main;
-    public HomeScreen(Master game) {
+    public TeleScreen(Master game) {
         this.game = game;
         stage = new Stage();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        floor = new Texture("floor.jpg");
-        game.wallup = new Wallup(446,733,stage);
-        game.wallright = new Wallright(1250,330,stage);
-        game.wallLeft = new Wall_left(448,308,stage);
-        game.wallDL = new WallDL(520,255,stage);
-        game.wallDR = new WallDR(720,260,stage);
-        game.pic = new Pic(984,779,stage);
-        game.bed = new Bed(470,555,stage);
-        game.tv = new TV(1210,386,stage,game);
-        game.heater = new Heater(1100,660,stage);
-        game.sofa = new Sofa(471,340,stage);
-        game.sensor = new Sensor(615,136,stage);
-        main = new farm.com.Character(777,412,stage,game);
-        main.setSize(70,80);
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        layout = new GlyphLayout();
+        layout.setText(game.font,"");
+        stage = new Stage();
+        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
+        style.font = game.font;
+        style.fontColor = Color.WHITE;
+
+        education = new TextButton("Education",style);
+        education.setPosition(438,589);
+        education
+
+        options = new Texture("optv.jpg");
+        stage.addActor(education);
+
     }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -54,7 +52,8 @@ public class HomeScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        game.batch.draw(floor, 446,259, Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
+        game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2,Gdx.graphics.getHeight()/2 + 2*layout.height);
+        game.batch.draw(options,400,400);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
@@ -64,7 +63,6 @@ public class HomeScreen implements Screen {
             stage.getViewport().unproject(mousePosition);
             System.out.println("x = " + mousePosition.x + " y = " + mousePosition.y);
         }
-
     }
 
     @Override

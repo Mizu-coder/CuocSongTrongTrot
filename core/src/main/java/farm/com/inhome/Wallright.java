@@ -1,0 +1,14 @@
+package farm.com.inhome;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.MyActor;
+
+public class Wallright extends MyActor {
+    public Wallright(float x, float y, Stage s) {
+        super(x, y, s);
+        textureRegion = new TextureRegion(new Texture("wallright.png"));
+        setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
+    }
+}

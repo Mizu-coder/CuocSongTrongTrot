@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import farm.com.MyActor;
 
-public class Bed extends MyActor {
-    public Bed(float x, float y, Stage s) {
+public class Wallup extends MyActor {
+    public Wallup(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = new TextureRegion(new Texture("bed.png"));
-        setSize(textureRegion.getRegionWidth()/5.95f,textureRegion.getRegionHeight()/5.5f);
+        textureRegion = new TextureRegion(new Texture("wallup.jpg"));
+        setSize(textureRegion.getRegionWidth()*1.325f,textureRegion.getRegionHeight()*1.25f);
     }
 }

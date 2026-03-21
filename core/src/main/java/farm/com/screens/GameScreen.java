@@ -94,8 +94,6 @@ public class GameScreen implements Screen {
         back = new TextButton("Back", style);
         back.setPosition(1000,1000);
         staticStage.addActor(back);
-
-
         famer = new Character(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/10 + HEIGHT/2,stage,game);
         famer.setSize(50,50);
         timing = 0;
@@ -346,6 +344,7 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
         stage.clear();
+        cages.clear();
     }
 
     @Override

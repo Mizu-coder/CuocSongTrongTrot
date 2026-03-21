@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import farm.com.*;
 import farm.com.actors.Weather;
 import farm.com.enums.ChooseType;
+import farm.com.inhome.*;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
@@ -20,6 +21,21 @@ public class Master extends Game {
     public static Well well;
     public static Tree tree;
     public static Finger finger;
+    public static Wallup wallup;
+    public static Wallright wallright;
+    public static WallDL wallDL;
+    public static Bed bed;
+    public static TV tv;
+    public static Pic pic;
+    public static     Sensor sensor;
+
+    public static Heater heater;
+    public static Sofa sofa;
+    public static Wall_left wallLeft;
+    public static WallDR wallDR;
+    public static boolean chai = false;
+    public static boolean wea = false;
+
 
 
     public static ChooseType type = ChooseType.NOTHING;
@@ -34,6 +50,7 @@ public class Master extends Game {
 
     public GameScreen gameScreen;
     public HomeScreen homeScreen;
+    public TeleScreen teleScreen;
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;
@@ -76,6 +93,7 @@ public class Master extends Game {
         gameScreen = new GameScreen(this);
         menuScreen = new MenuScreen(this);
         homeScreen = new HomeScreen(this);
+        teleScreen = new TeleScreen(this);
         this.setScreen(menuScreen);
 
     }

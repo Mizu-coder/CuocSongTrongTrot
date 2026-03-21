@@ -5,17 +5,20 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.screens.HomeScreen;
 import farm.com.screens.Master;
 
 
 public class Character extends MyActor{
 
     Master game;
+
     public Character(float x, float y, Stage s,Master game) {
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("farmer.png"));
         setSize(textureRegion.getRegionWidth()/2, textureRegion.getRegionHeight()/2);
         this.game = game;
+        game.chai = false;
     }
 
     @Override
@@ -67,8 +70,16 @@ public class Character extends MyActor{
         }
 
         moveBy(speedX, speedY);
-        if(collision()){
+        if(collision() || game.chai){
             moveBy(-speedX,-speedY);
+        }
+        if(game.chai){
+            textureRegion = new TextureRegion(new Texture("farmer3.png"));
+            setPosition(527,379);
+        }
+        if(game.chai && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            setPosition(777,412);
+            game.chai = false;
         }
 
     }
@@ -91,6 +102,38 @@ public class Character extends MyActor{
         if(getBound().overlaps(Master.lake.getBound())) {
             return true;
         }
+        if(getBound().overlaps(Master.bed.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.tv.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.heater.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.sofa.getBound())) {
+            game.chai = true;
+            return true;
+        }
+        if(getBound().overlaps(Master.wallLeft.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.wallDL.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.wallDR.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.wallright.getBound())) {
+            return true;
+        }
+        if(getBound().overlaps(Master.sensor.getBound())) {
+            game.setScreen(game.gameScreen);
+            return true;
+        }
+
+
+
         return false;
     }
 }
