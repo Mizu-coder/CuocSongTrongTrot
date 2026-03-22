@@ -17,8 +17,9 @@ public class TeleScreen implements Screen {
     GlyphLayout layout;
     OrthographicCamera camera;
     Texture options;
-
     TextButton education;
+    Texture edu;
+
 
     public TeleScreen(Master game) {
         this.game = game;
@@ -32,11 +33,12 @@ public class TeleScreen implements Screen {
         style.font = game.font;
         style.fontColor = Color.WHITE;
 
-        education = new TextButton("Education",style);
-        education.setPosition(438,589);
-        education
-
         options = new Texture("optv.jpg");
+        edu = new Texture("edu.png");
+
+        education = new TextButton("Education",style);
+        education.setPosition(560,597);
+
         stage.addActor(education);
 
     }
@@ -54,6 +56,7 @@ public class TeleScreen implements Screen {
         game.batch.begin();
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2,Gdx.graphics.getHeight()/2 + 2*layout.height);
         game.batch.draw(options,400,400);
+        game.batch.draw(edu,education.getX()-70,education.getY());
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
