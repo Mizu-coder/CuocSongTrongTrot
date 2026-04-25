@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.enums.Place;
 import farm.com.inhome.*;
 
 public class HomeScreen implements Screen {
@@ -46,6 +47,7 @@ public class HomeScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        game.place = Place.INHOME;
     }
 
     @Override
@@ -84,7 +86,7 @@ public class HomeScreen implements Screen {
 
     @Override
     public void hide() {
-
+        game.place = null;
     }
 
     @Override

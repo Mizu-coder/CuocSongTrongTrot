@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.Book;
 import farm.com.Edu;
+import farm.com.News;
 
 public class TeleScreen implements Screen {
     Master game;
@@ -25,9 +26,10 @@ public class TeleScreen implements Screen {
     TextButton news;
     TextButton tutorial;
     TextButton back;
-    Texture ne;
     Book book;
     Edu edu;
+    News ne;
+
 
     public TeleScreen(Master game) {
         this.game = game;
@@ -41,7 +43,6 @@ public class TeleScreen implements Screen {
         style.font = game.font;
         style.fontColor = Color.WHITE;
         options = new Texture("optv.jpg");
-        ne = new Texture("news.png");
 
 
         back = new TextButton("Back", style);
@@ -54,6 +55,8 @@ public class TeleScreen implements Screen {
             }
         });
 
+
+
         education = new TextButton("Education",style);
         education.setPosition(500,597);
         education.addListener(new ClickListener(){
@@ -64,9 +67,12 @@ public class TeleScreen implements Screen {
                 layout.width = 0.4f;
             }
         });
+        edu = new Edu(education.getX()-80,577,stage);
+        book = new Book(education.getX()-80,457,stage);
+        ne = new News(education.getX()-80,527,stage);
 
         news = new TextButton("News",style);
-        news.setPosition(500,567);
+        news.setPosition(500,ne.getY()+20);
         news.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -77,7 +83,7 @@ public class TeleScreen implements Screen {
         });
 
         tutorial = new TextButton("Cooking tutorial",style);
-        tutorial.setPosition(500,537);
+        tutorial.setPosition(500,book.getY()+20);
         tutorial.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -86,12 +92,6 @@ public class TeleScreen implements Screen {
                 layout.width = 0.4f;
             }
         });
-
-        book = new Book(education.getX()-80,527,stage);
-        edu = new Edu(education.getX()-80,577,stage);
-
-
-
 
         stage.addActor(tutorial);
         stage.addActor(education);
@@ -113,7 +113,6 @@ public class TeleScreen implements Screen {
         game.batch.begin();
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2,Gdx.graphics.getHeight()/2 + 2*layout.height);
         game.batch.draw(options,400,400);
-        game.batch.draw(ne,education.getX()-80,527);
         game.font.draw(game.batch,layout,941,511);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());

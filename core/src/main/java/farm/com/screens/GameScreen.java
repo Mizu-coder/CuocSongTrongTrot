@@ -125,7 +125,7 @@ public class GameScreen implements Screen {
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
-        coin = new Coin(Gdx.graphics.getWidth() - 950 , Gdx.graphics.getHeight() - 50 , staticStage);
+        coin = new Coin(Gdx.graphics.getWidth() - 400 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
         loAp = new LoApTrung(700, 20*20, stage);
@@ -380,7 +380,7 @@ public class GameScreen implements Screen {
         Master.home.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.homeScreen);
+                game.setScreen(new HomeScreen(game));
             }
         });
 

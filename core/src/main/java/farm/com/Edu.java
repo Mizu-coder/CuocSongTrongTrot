@@ -8,6 +8,6 @@ public class Edu extends MyActor{
     public Edu(float x, float y, Stage s){
         super(x, y, s);
         textureRegion = new TextureRegion(new Texture("edu.png"));
-        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        setSize(textureRegion.getRegionWidth()/1.25f, textureRegion.getRegionHeight()/1.25f);
     }
 }

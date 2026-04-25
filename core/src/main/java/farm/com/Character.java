@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.enums.Place;
 import farm.com.screens.HomeScreen;
 import farm.com.screens.Master;
 
@@ -102,38 +103,41 @@ public class Character extends MyActor{
         if(getBound().overlaps(Master.lake.getBound())) {
             return true;
         }
-        if(getBound().overlaps(Master.bed.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.tv.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.heater.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.sofa.getBound())) {
-            game.chai = true;
-            return true;
-        }
-        if(getBound().overlaps(Master.wallLeft.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.wallDL.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.wallDR.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.wallright.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.wallup.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.sensor.getBound())) {
-            game.setScreen(game.gameScreen);
-            setPosition(game.sofa.getX(), game.sofa.getY());
-            return true;
+
+        if(Place.INHOME.equals(game.place)) {
+            if (getBound().overlaps(Master.bed.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.tv.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.heater.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.sofa.getBound())) {
+                game.chai = true;
+                return true;
+            }
+            if (getBound().overlaps(Master.wallLeft.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.wallDL.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.wallDR.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.wallright.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.wallup.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.sensor.getBound())) {
+                game.setScreen(game.gameScreen);
+                setPosition(game.sofa.getX(), game.sofa.getY());
+                return true;
+            }
         }
 
 

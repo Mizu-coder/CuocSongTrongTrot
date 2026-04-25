@@ -8,6 +8,6 @@ public class Book extends MyActor{
     public Book(float x, float y, Stage s){
         super(x,y,s);
         textureRegion = new TextureRegion(new Texture("book.png"));
-        setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
+        setSize(textureRegion.getRegionWidth()/1.25f,textureRegion.getRegionHeight()/1.25f);
     }
 }

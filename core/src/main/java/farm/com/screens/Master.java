@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import farm.com.*;
 import farm.com.actors.Weather;
 import farm.com.enums.ChooseType;
+import farm.com.enums.Place;
 import farm.com.inhome.*;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -59,6 +60,8 @@ public class Master extends Game {
 
     public boolean clicked = false;
     private boolean sell = false;
+
+    public static Place place;
 
     @Override
     public void create() {
