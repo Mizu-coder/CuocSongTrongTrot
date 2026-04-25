@@ -7,9 +7,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.Book;
+import farm.com.Edu;
 
 public class TeleScreen implements Screen {
     Master game;
@@ -18,8 +22,12 @@ public class TeleScreen implements Screen {
     OrthographicCamera camera;
     Texture options;
     TextButton education;
-    Texture edu;
-
+    TextButton news;
+    TextButton tutorial;
+    TextButton back;
+    Texture ne;
+    Book book;
+    Edu edu;
 
     public TeleScreen(Master game) {
         this.game = game;
@@ -32,14 +40,63 @@ public class TeleScreen implements Screen {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = game.font;
         style.fontColor = Color.WHITE;
-
         options = new Texture("optv.jpg");
-        edu = new Texture("edu.png");
+        ne = new Texture("news.png");
+
+
+        back = new TextButton("Back", style);
+        back.setPosition(435, 425);
+
+        back.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.homeScreen);
+            }
+        });
 
         education = new TextButton("Education",style);
-        education.setPosition(560,597);
+        education.setPosition(500,597);
+        education.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                layout.setText(style.font,"giaoduc");
+                layout.height = 0.4f;
+                layout.width = 0.4f;
+            }
+        });
 
+        news = new TextButton("News",style);
+        news.setPosition(500,567);
+        news.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                layout.setText(style.font,"tintuc");
+                layout.height = 0.4f;
+                layout.width = 0.4f;
+            }
+        });
+
+        tutorial = new TextButton("Cooking tutorial",style);
+        tutorial.setPosition(500,537);
+        tutorial.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                layout.setText(style.font,"congthuc");
+                layout.height = 0.4f;
+                layout.width = 0.4f;
+            }
+        });
+
+        book = new Book(education.getX()-80,527,stage);
+        edu = new Edu(education.getX()-80,577,stage);
+
+
+
+
+        stage.addActor(tutorial);
         stage.addActor(education);
+        stage.addActor(news);
+        stage.addActor(back);
 
     }
 
@@ -56,7 +113,8 @@ public class TeleScreen implements Screen {
         game.batch.begin();
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2,Gdx.graphics.getHeight()/2 + 2*layout.height);
         game.batch.draw(options,400,400);
-        game.batch.draw(edu,education.getX()-70,education.getY());
+        game.batch.draw(ne,education.getX()-80,527);
+        game.font.draw(game.batch,layout,941,511);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

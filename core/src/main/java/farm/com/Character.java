@@ -127,8 +127,12 @@ public class Character extends MyActor{
         if(getBound().overlaps(Master.wallright.getBound())) {
             return true;
         }
+        if(getBound().overlaps(Master.wallup.getBound())) {
+            return true;
+        }
         if(getBound().overlaps(Master.sensor.getBound())) {
             game.setScreen(game.gameScreen);
+            setPosition(game.sofa.getX(), game.sofa.getY());
             return true;
         }
 
