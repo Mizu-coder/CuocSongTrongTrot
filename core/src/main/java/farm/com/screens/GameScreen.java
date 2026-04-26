@@ -50,7 +50,6 @@ public class GameScreen implements Screen {
 
     public static Boolean go = false;
 
-    LoApTrung loAp;
     Save save;
     Shop shop;
     Coin coin;
@@ -128,7 +127,7 @@ public class GameScreen implements Screen {
         coin = new Coin(Gdx.graphics.getWidth() - 400 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
-        loAp = new LoApTrung(700, 20*20, stage);
+        Master.loAp = new LoApTrung(700, 20*20, stage);
 
         Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage, game);
 
@@ -146,7 +145,7 @@ public class GameScreen implements Screen {
             }
         });
 
-        loAp.addListener(new ClickListener(){
+        Master.loAp.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new LoApTrungScreen(game));

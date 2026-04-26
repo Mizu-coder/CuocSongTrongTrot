@@ -32,7 +32,7 @@ public class TeleScreen implements Screen {
     Tur3 tur3;
     Tur4 tur4;
     Tur5 tur5;
-
+    boolean c= false;
 
     public TeleScreen(Master game) {
         this.game = game;
@@ -76,11 +76,8 @@ public class TeleScreen implements Screen {
         education.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                layout.height = 0.4f;
-                layout.width = 0.4f;
-                //can doi
-
-
+                stage.addActor(tur1);
+                c = true;
             }
         });
         edu = new Edu(education.getX()-80,577,stage);
@@ -138,6 +135,43 @@ public class TeleScreen implements Screen {
             mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
             stage.getViewport().unproject(mousePosition);
             System.out.println("x = " + mousePosition.x + " y = " + mousePosition.y);
+        }
+        if(c){
+            tur1.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    tur1.remove();
+                    stage.addActor(tur2);
+                }
+            });
+            tur2.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    tur2.remove();
+                    stage.addActor(tur3);
+                }
+            });
+            tur3.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    tur3.remove();
+                    stage.addActor(tur4);
+                }
+            });
+            tur4.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    tur4.remove();
+                    stage.addActor(tur5);
+                }
+            });
+            tur5.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    tur5.remove();
+                    c = false;
+                }
+            });
         }
     }
 
