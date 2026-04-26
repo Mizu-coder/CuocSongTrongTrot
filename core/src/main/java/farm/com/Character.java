@@ -5,7 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.actors.LoApTrung;
 import farm.com.enums.Place;
+import farm.com.screens.GameScreen;
 import farm.com.screens.HomeScreen;
 import farm.com.screens.Master;
 
@@ -101,6 +103,9 @@ public class Character extends MyActor{
             return true;
         }
         if(getBound().overlaps(Master.lake.getBound())) {
+            return true;
+        }
+        if (getBound().overlaps(game.loAp.getBound())) {
             return true;
         }
 

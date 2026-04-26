@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import farm.com.*;
+import farm.com.actors.LoApTrung;
 import farm.com.actors.Weather;
 import farm.com.enums.ChooseType;
 import farm.com.enums.Place;
@@ -20,6 +21,7 @@ public class Master extends Game {
     public static Lake lake;
     public static Home home;
     public static Well well;
+    public static LoApTrung loAp;
     public static Tree tree;
     public static Finger finger;
     public static Wallup wallup;

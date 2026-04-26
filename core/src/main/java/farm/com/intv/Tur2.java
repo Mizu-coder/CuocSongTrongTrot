@@ -1,15 +1,14 @@
-package farm.com;
+package farm.com.intv;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import farm.com.MyActor;
 
-import java.util.Stack;
-
-public class News extends MyActor{
-    public News(float x, float y, Stage s){
+public class Tur2 extends MyActor {
+    public Tur2(float x, float y, Stage s){
         super(x,y,s);
-        textureRegion = new TextureRegion(new Texture("news.png"));
+        textureRegion = new TextureRegion(new Texture("tu2.png"));
         setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
     }
 }

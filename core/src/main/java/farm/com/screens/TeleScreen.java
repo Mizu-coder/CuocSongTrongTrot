@@ -12,9 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import farm.com.Book;
-import farm.com.Edu;
-import farm.com.News;
+import farm.com.intv.*;
 
 public class TeleScreen implements Screen {
     Master game;
@@ -29,6 +27,11 @@ public class TeleScreen implements Screen {
     Book book;
     Edu edu;
     News ne;
+    Tur1 tur1;
+    Tur2 tur2;
+    Tur3 tur3;
+    Tur4 tur4;
+    Tur5 tur5;
 
 
     public TeleScreen(Master game) {
@@ -44,6 +47,17 @@ public class TeleScreen implements Screen {
         style.fontColor = Color.WHITE;
         options = new Texture("optv.jpg");
 
+
+        tur1 = new Tur1(690,423,stage);
+        tur2 = new Tur2(690,423,stage);
+        tur3 = new Tur3(690,423,stage);
+        tur4 = new Tur4(690,423,stage);
+        tur5 = new Tur5(660,410,stage);
+        tur1.remove();
+        tur2.remove();
+        tur3.remove();
+        tur4.remove();
+        tur5.remove();
 
         back = new TextButton("Back", style);
         back.setPosition(435, 425);
@@ -62,9 +76,11 @@ public class TeleScreen implements Screen {
         education.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                layout.setText(style.font,"giaoduc");
                 layout.height = 0.4f;
                 layout.width = 0.4f;
+                //can doi
+
+
             }
         });
         edu = new Edu(education.getX()-80,577,stage);
