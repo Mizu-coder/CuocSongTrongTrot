@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.GameState;
 import farm.com.intv.*;
 
 public class TeleScreen implements Screen {
@@ -33,6 +34,7 @@ public class TeleScreen implements Screen {
     Tur4 tur4;
     Tur5 tur5;
     boolean c= false;
+    boolean t = false;
 
     public TeleScreen(Master game) {
         this.game = game;
@@ -65,7 +67,7 @@ public class TeleScreen implements Screen {
         back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.homeScreen);
+                game.setScreen(game.gameScreen);
             }
         });
 
@@ -170,8 +172,13 @@ public class TeleScreen implements Screen {
                 public void clicked(InputEvent event, float x, float y) {
                     tur5.remove();
                     c = false;
+                    t = true;
                 }
             });
+        }
+        if(t){
+            GameState.money += 100;
+            t = false;
         }
     }
 
