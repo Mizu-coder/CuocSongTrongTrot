@@ -66,7 +66,6 @@ public class GameScreen implements Screen {
 
     TextButton back;
 
-
     public static int complete = 0;
 
     public static final int WIDTH = 960;
@@ -124,9 +123,11 @@ public class GameScreen implements Screen {
         layout.width = 0.4f;
         layout.height = 0.4f;
 
+        //keo con vat
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
+
         coin = new Coin(Gdx.graphics.getWidth() - 1670 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
@@ -327,6 +328,10 @@ public class GameScreen implements Screen {
         x += 40;
         layout.setText(game.font, "" + GameState.seedb);
         game.font.draw(game.batch, layout,x,y);
+
+        layout.setText(game.font,"Day " + day);
+        game.font.draw(game.batch,layout,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight());
+
         game.batch.end();
 
     }

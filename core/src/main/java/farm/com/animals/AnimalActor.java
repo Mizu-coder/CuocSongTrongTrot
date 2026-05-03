@@ -32,7 +32,7 @@ public class AnimalActor extends MyActor {
 
     boolean ill = false;
     float timeForIll = 0;
-    float timeforIllMax = 5;
+    float timeforIllMax = 60;
     int hour = 0;
     boolean touched = false;
     float lastX = 0;
