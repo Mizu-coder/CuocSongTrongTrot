@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.NOTHING;
+    NV nv = NV.CAY;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -40,25 +40,25 @@ public class Misson extends MyActor{
         switch (nv){
             case NOTHING -> {
                 gameScreen.layout.setText(game.font, " Không có nhiệm vụ");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 650, gameScreen.khung.getY()+ 750);
             }
             case DONGVAT -> {
                 gameScreen.layout.setText(game.font, " Cho động vật ăn 5 lần (con vật nào cũng được không bắt buộc 1 loài) " + gameScreen.complete +" /5");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 60, gameScreen.khung.getY()+ 400);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 590, gameScreen.khung.getY()+ 750);
                 gameScreen.layout.setText(game.font, "Phần thưởng 1 con vật bất kì");
-                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 60, gameScreen.khung.getY()+ 350);
+                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 590, gameScreen.khung.getY()+ 710);
             }
             case BAN -> {
                 gameScreen.layout.setText(game.font,"Bán 1 thứ bất kì" + gameScreen.complete +" /1");
-                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 400);
+                game.font.draw(game.batch,gameScreen.layout,gameScreen.khung.getX()+ 650, gameScreen.khung.getY()+ 750);
                 gameScreen.layout.setText(game.font,"Phần thưởng 400 xu");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 300, gameScreen.khung.getY()+ 360);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 650, gameScreen.khung.getY()+ 710);
             }
             case CAY -> {
                 gameScreen.layout.setText(game.font, "Tưới và thu hoạch 5 cây" + gameScreen.complete +" /5");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 260, gameScreen.khung.getY()+ 400);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 720, gameScreen.khung.getY()+ 750);
                 gameScreen.layout.setText(game.font,"Phần thưởng 5 hạt giống ngẫu nhiên");
-                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 260, gameScreen.khung.getY()+ 360);
+                game.font.draw(game.batch, gameScreen.layout,gameScreen.khung.getX()+ 720, gameScreen.khung.getY()+ 710);
             }
         }
     }

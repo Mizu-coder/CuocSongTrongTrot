@@ -87,26 +87,28 @@ public class Character extends MyActor{
 
     }
     public boolean collision(){
-        if(getBound().overlaps(Master.home.getBound())) {
-            return true;
-        }
-        for (Cage c: game.gameScreen.cages){
-            if(getBound().overlaps(c.getBound())) {
+        if(Place.FARM.equals(game.place)) {
+            if (getBound().overlaps(Master.home.getBound())) {
                 return true;
             }
-        }
-        if(getBound().overlaps(Master.tree.getBound())) {
-            return true;
-        }
+            for (Cage c : game.gameScreen.cages) {
+                if (getBound().overlaps(c.getBound())) {
+                    return true;
+                }
+            }
+            if (getBound().overlaps(Master.tree.getBound())) {
+                return true;
+            }
 
-        if(getBound().overlaps(Master.well.getBound())) {
-            return true;
-        }
-        if(getBound().overlaps(Master.lake.getBound())) {
-            return true;
-        }
-        if (getBound().overlaps(game.loAp.getBound())) {
-            return true;
+            if (getBound().overlaps(Master.well.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(Master.lake.getBound())) {
+                return true;
+            }
+            if (getBound().overlaps(game.loAp.getBound())) {
+                return true;
+            }
         }
 
         if(Place.INHOME.equals(game.place)) {
@@ -144,9 +146,6 @@ public class Character extends MyActor{
                 return true;
             }
         }
-
-
-
         return false;
     }
 }

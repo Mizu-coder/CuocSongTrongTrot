@@ -67,7 +67,7 @@ public class TeleScreen implements Screen {
         back.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.gameScreen);
+                game.setScreen(new HomeScreen(game));
             }
         });
 

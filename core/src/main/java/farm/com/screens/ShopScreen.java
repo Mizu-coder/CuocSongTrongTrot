@@ -50,7 +50,7 @@ public class ShopScreen implements Screen {
 
         col = new MyActor(Gdx.graphics.getWidth()/2, 40, stage);
         col.textureRegion = new TextureRegion(new Texture("energy.png"));
-        col.setSize(2, 450);
+        col.setSize(2, 850);
         col.setColor(Color.YELLOW);
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
@@ -67,14 +67,14 @@ public class ShopScreen implements Screen {
             }
         });
 
-        porkButton = new PorkButton( 10, Gdx.graphics.getHeight() - 100, stage,game);
-        milkButton = new MilkButton( 10, Gdx.graphics.getHeight() - 200, stage, game);
-        eggButton = new EggButton( 10, Gdx.graphics.getHeight() - 300, stage,game);
+        chickenButton = new ChickenButton( 900, 750, stage);
+        pigButton = new PigButton(900, 680, stage);
+        cowButton = new CowButton(900, 610, stage);
+        medicineButton = new MedicineButton(900, 540, stage);
 
-        chickenButton = new ChickenButton( 600, 450, stage);
-        pigButton = new PigButton(600, 380, stage);
-        cowButton = new CowButton(600, 310, stage);
-        medicineButton = new MedicineButton(600, 240, stage);
+        porkButton = new PorkButton( pigButton.getX()- 200, 750, stage,game);
+        milkButton = new MilkButton( cowButton.getX() - 200, 680, stage, game);
+        eggButton = new EggButton( chickenButton.getX() - 200, 610, stage,game);
 
         stage.addActor(back);
 
@@ -127,27 +127,27 @@ public class ShopScreen implements Screen {
         layout.setText(game.font,"$" + GameState.money);
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth() - layout.width, Gdx.graphics.getHeight() - layout.height );
         layout.setText(game.font,"Sell");
-        game.font.draw(game.batch, layout, 200, 500);
+        game.font.draw(game.batch, layout, porkButton.getX()-300, 800);
         layout.setText(game.font,"Buy");
-        game.font.draw(game.batch, layout, 700, 500);
+        game.font.draw(game.batch, layout, pigButton.getX() +300, 800);
 
         layout.setText(game.font,"" + pigButton.cost);
-        game.font.draw(game.batch, layout, 500, 400);
+        game.font.draw(game.batch, layout, pigButton.getX() -50, 700);
         layout.setText(game.font,"" + chickenButton.cost);
-        game.font.draw(game.batch, layout, 500, 470);
+        game.font.draw(game.batch, layout, chickenButton.getX() - 50, 770);
         layout.setText(game.font,"" + cowButton.cost);
-        game.font.draw(game.batch, layout, 500, 330);
+        game.font.draw(game.batch, layout, cowButton.getX() - 50, 630);
         layout.setText(game.font,"" + medicineButton.cost);
-        game.font.draw(game.batch, layout, 500, 260);
+        game.font.draw(game.batch, layout, medicineButton.getX() - 50, 560);
 
         layout.setText(game.font,"" + GameState.totalPork);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 60);
+        game.font.draw(game.batch, layout, porkButton.getX()+100, porkButton.getY()+25);
 
         layout.setText(game.font,"" + GameState.milkTotal);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 160);
+        game.font.draw(game.batch, layout, milkButton.getX()+100, milkButton.getY()+30);
 
         layout.setText(game.font,"" + GameState.egg);
-        game.font.draw(game.batch, layout, 100, Gdx.graphics.getHeight() - 260);
+        game.font.draw(game.batch, layout, eggButton.getX()+100, eggButton.getY()+30);
 
         game.batch.end();
     }

@@ -46,9 +46,9 @@ public class MenuScreen implements Screen {
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = game.font;
         style.fontColor = Color.WHITE;
-        start = new Start(Gdx.graphics.getWidth()/3+100, 200,stage);
-        bContinue = new Continue(Gdx.graphics.getWidth()/3+100, 160, stage);
-        guide = new Guide(Gdx.graphics.getWidth()/3+100, 120, stage);
+        start = new Start(Gdx.graphics.getWidth()/3+200, 400,stage);
+        bContinue = new Continue(Gdx.graphics.getWidth()/3+200, 360, stage);
+        guide = new Guide(Gdx.graphics.getWidth()/3+200, 320, stage);
         Gdx.input.setInputProcessor(stage);
         start.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y){

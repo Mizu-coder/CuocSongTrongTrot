@@ -49,11 +49,12 @@ public class Master extends Game {
     public static int sohieu = 0;
     public static int sohat = 0;
 
-    public static boolean nvb = true;
+    public static boolean nvb;
 
     public GameScreen gameScreen;
     public HomeScreen homeScreen;
     public TeleScreen teleScreen;
+    public LoApTrungScreen loApTrung;
     MenuScreen menuScreen;
     public Weather weather;
     public Season season;
@@ -99,8 +100,9 @@ public class Master extends Game {
         menuScreen = new MenuScreen(this);
         homeScreen = new HomeScreen(this);
         teleScreen = new TeleScreen(this);
+        loApTrung = new LoApTrungScreen(this);
         this.setScreen(menuScreen);
-
+        nvb = true;
     }
 
     @Override

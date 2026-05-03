@@ -85,6 +85,7 @@ public class GameScreen implements Screen {
     }
     @Override
     public void show() {
+        Master.place = Place.FARM;
         generateMap();
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.font = game.font;
@@ -98,7 +99,9 @@ public class GameScreen implements Screen {
         timing = 0;
         switch (text) {
             case GIEO -> {
-                Master.finger = new Finger(290, 750, stage);
+                if(game.nvb) {
+                    Master.finger = new Finger(290, 750, stage);
+                }
             }
         }
 
@@ -124,12 +127,12 @@ public class GameScreen implements Screen {
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(staticStage);
-        coin = new Coin(Gdx.graphics.getWidth() - 400 , Gdx.graphics.getHeight() - 50 , staticStage);
+        coin = new Coin(Gdx.graphics.getWidth() - 1670 , Gdx.graphics.getHeight() - 50 , staticStage);
         shop = new Shop(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102, staticStage);
         save = new Save(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight(), staticStage);
         Master.loAp = new LoApTrung(700, 20*20, stage);
 
-        Master.misson = new Misson(Gdx.graphics.getWidth() - 90, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage, game);
+        Master.misson = new Misson(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 102 - shop.getHeight()-90, staticStage, game);
 
 
         save.addListener(new ClickListener(){
@@ -148,7 +151,7 @@ public class GameScreen implements Screen {
         Master.loAp.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new LoApTrungScreen(game));
+                game.setScreen(game.loApTrung);
             }
         });
 
@@ -205,7 +208,7 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
         timing++;
-        if(timing % (60*5) == 0){
+        if(timing % (60*60) == 0){
             newDay();
             Master.misson.giaoNV();
             Master.sohieu = (MathUtils.random(1,3));
@@ -223,7 +226,7 @@ public class GameScreen implements Screen {
                 }
             });
             khung.setPosition(Gdx.graphics.getWidth()/10,Gdx.graphics.getHeight()/14);
-            back.setPosition(khung.getWidth() + 50, 475);
+            back.setPosition(khung.getWidth() + 50, 875);
         }
 
 
@@ -342,6 +345,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
+        Master.place = null;
         stage.clear();
         cages.clear();
     }
