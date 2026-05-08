@@ -40,7 +40,7 @@ public class Pig extends AnimalActor {
         animationBig.setPlayMode(Animation.PlayMode.LOOP);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
-        minusEnerGy = 1f/(300/2);
+        minusEnerGy = 1f/(300/2.5f);
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){

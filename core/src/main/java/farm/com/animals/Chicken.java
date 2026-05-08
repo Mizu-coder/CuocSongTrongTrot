@@ -33,7 +33,7 @@ public class Chicken extends AnimalActor {
         setSize(textureRegion.getRegionWidth()*4,textureRegion.getRegionHeight()*4);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
-        minusEnerGy = 1f/(180/2);
+        minusEnerGy = 1f/(180/3);
             addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y) {
                     if(ill && Master.type.equals(ChooseType.KIMTIEM) && GameState.soKimTiem > 0){

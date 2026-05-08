@@ -34,7 +34,7 @@ public class Cow extends AnimalActor {
         setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);
-        minusEnerGy = 1f/(420/2);
+        minusEnerGy = 1f/(420/3);
 
 
             addListener(new ClickListener() {
