@@ -42,8 +42,6 @@ public class Plants extends MyActor {
             frames[0] = Utils.getRegionPlants(0, 0, 16, 16);
             frames[1] = Utils.getRegionPlants(16, 0, 16, 16);
             frames[2] = Utils.getRegionPlants(32, 0, 16, 16);
-            frames[3] = Utils.getRegionPlants(48, 0, 16, 16);
-            frames[4] = Utils.getRegionPlants(64, 0, 16, 16);
             animation = new Animation<TextureRegion>(0.01f,frames);
         }
         if (Master.type.equals(ChooseType.CAROT)) {
