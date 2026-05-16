@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import farm.com.*;
@@ -29,6 +28,7 @@ import farm.com.buttons.Save;
 import farm.com.enums.*;
 import farm.com.inshop.SellButton;
 import farm.com.seeds.*;
+import farm.com.water.*;
 
 import static farm.com.enums.SeasonType.*;
 
@@ -111,7 +111,7 @@ public class GameScreen implements Screen {
 
         // Vài đống rơm
         new Cock(250, HEIGHT - 200, stage, 3);
-        new Cock(280, 230, stage, 3);
+        new Cock(580, 430, stage, 3);
         new Cock(870, 620, stage, 2);
 
         camera = new OrthographicCamera();
@@ -391,35 +391,6 @@ public class GameScreen implements Screen {
                 game.setScreen(new HomeScreen(game));
             }
         });
-
-        // Giếng
-        x = 200;
-        y = 303 + HEIGHT / 2;
-        Master.well = new Well(x, y, stage,game);
-        Master.well.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                changeType(ChooseType.WATER);
-            }
-        });
-        x = Gdx.graphics.getWidth()/1.5f + 180 ;
-        y = 150 + HEIGHT / 2;
-        Master.lake = new Lake(x, y, stage);
-
-        x = 0;
-        y = 10 + HEIGHT / 2;
-
-        // Ruộng
-        for (int i = 0; i < 4; i++) {
-            soils.add(new Soil(x, y, stage));
-            x += 105;
-        }
-
-        // chuồng nuôi
-        cages.add(new Cage(0,0, stage, 8));
-        cages.add(new Cage(0, 32 * 8, stage, 5));
-        cages.add(new Cage(700, 20 * 8, stage, 5));
-
         // Duong di trong nong trai
         x = 460;
         y = 0;
@@ -428,6 +399,74 @@ public class GameScreen implements Screen {
             new Ground(x + 32, y, stage, 2);
             y += 32;
         }
+        // Giếng
+        x = 200;
+        y = 333 + HEIGHT / 2;
+        Master.well = new Well(x, y, stage,game);
+        Master.well.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.WATER);
+            }
+        });
+
+
+        x = 0;
+        y = 10 + HEIGHT / 2;
+        // Ruộng
+        for (int i = 0; i < 4; i++) {
+            soils.add(new Soil(x, y, stage));
+            x += 120;
+        }
+
+        x = Gdx.graphics.getWidth()/1.5f + 180 ;
+        y = 150 + HEIGHT / 2;
+        Master.lake = new Lake(x, y, stage);
+        y-= 700;
+        x += 20;
+        Master.waterL = new WaterL(x,y,stage);
+        y+=90;
+        x+=10;
+        for(int i =0;i<10;i++) {
+            Master.water = new Water(x, y, stage);
+            y+=60;
+        }
+        y-=690;
+        x-=90;
+        for(int i =0;i<10;i++) {
+            Master.waterDoc = new WaterDoc(x, y, stage);
+            x -= 90;
+        }
+        y += 10;
+        Master.waterR = new WaterR(x,y,stage);
+        y += 60;
+        for(int i =0;i<6;i++) {
+            Master.water = new Water(x, y, stage);
+            y+= 60;
+        }
+        y+=35;
+        Master.waterLU = new WaterLU(x,y,stage);
+        x-=95;
+        y+=10;
+        for(int i =0;i<5;i++){
+            Master.waterDoc = new WaterDoc(x,y,stage);
+            x-= 60;
+        }
+
+        x = 329;
+        y = 530;
+        for(int i =0;i<3;i++) {
+            Master.water2 = new Water2(x, y, stage);
+            x-=120;
+        }
+
+
+
+        // chuồng nuôi
+        cages.add(new Cage(0,0, stage, 8));
+        cages.add(new Cage(0, 32 * 8, stage, 5));
+        cages.add(new Cage(700, 20 * 8, stage, 5));
+
 
 
         x = Gdx.graphics.getWidth() - 240;

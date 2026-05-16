@@ -12,6 +12,7 @@ import farm.com.actors.Weather;
 import farm.com.enums.ChooseType;
 import farm.com.enums.Place;
 import farm.com.inhome.*;
+import farm.com.water.*;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Master extends Game {
@@ -19,6 +20,12 @@ public class Master extends Game {
     public SpriteBatch batch;
     public static BitmapFont font;
     public static Lake lake;
+    public static Water water;
+    public static Water2 water2;
+    public static WaterL waterL;
+    public static WaterR waterR;
+    public static WaterLU waterLU;
+    public static WaterDoc waterDoc;
     public static Home home;
     public static Well well;
     public static LoApTrung loAp;

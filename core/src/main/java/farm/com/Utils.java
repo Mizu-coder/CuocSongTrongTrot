@@ -9,6 +9,7 @@ import farm.com.screens.Master;
 import farm.com.utils.GameStateForSave;
 
 public class Utils {
+    private static Texture nc = new Texture("water.jpg");
     private static Texture chic = new Texture("Chicken_run.png");
     private static Texture ch = new Texture("Chick_run.png");
     private static Texture pi = new Texture("Pig_run.png");
@@ -44,6 +45,9 @@ public class Utils {
     }
     public static TextureRegion chike(int x, int y, int width, int height) {
         return new TextureRegion(chic,x,y,width,height);
+    }
+    public static TextureRegion wat(int x,int y,int width, int height){
+        return new TextureRegion(nc,x,y,width,height);
     }
 
     public static void saveGame(Master game) {
