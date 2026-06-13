@@ -14,9 +14,9 @@ public class Cage extends MyActor{
     TextureRegion t7;
     TextureRegion t8;
     TextureRegion t9;
-    int size = 5;
+    float size = 5;
 
-    public Cage(float x, float y, Stage s, int size) {
+    public Cage(float x, float y, Stage s, float size) {
         super(x, y, s);
         this.size = size;
         t1 = Utils.getRegion(128,80,16,16);

@@ -100,9 +100,6 @@ public class AnimalActor extends MyActor {
     }
 
     public void feed(){
-
-
-
         if (energy < 100) {
             switch (Master.type){
                 case PUMKIN -> {

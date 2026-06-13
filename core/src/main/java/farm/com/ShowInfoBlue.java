@@ -9,11 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-public class ShowInfoBlack extends Actor {
+public class ShowInfoBlue extends Actor {
     public String text;
     private BitmapFont font;
 
-    public ShowInfoBlack(float x, float y, Stage s, String words, int size) {
+    public ShowInfoBlue(float x, float y, Stage s, String words, int size) {
         text = words;
 
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("vietnam.ttf"));

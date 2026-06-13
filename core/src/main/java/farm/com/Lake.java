@@ -11,8 +11,8 @@ import farm.com.screens.Master;
 public class Lake extends MyActor{
     public Lake(float x, float y, Stage s) {
         super(x, y, s);
-        textureRegion = new TextureRegion(new Texture("lake.png"));
-       setSize(textureRegion.getRegionWidth()*10, textureRegion.getRegionHeight()*8);
+        textureRegion = new TextureRegion(new Texture("ao1.png"));
+       setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
     @Override
     public String toString() {

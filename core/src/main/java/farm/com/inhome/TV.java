@@ -25,4 +25,8 @@ public class TV extends MyActor {
             }
         });
     }
+    @Override
+    public String toString() {
+        return "Tv,Bấm vào để xem";
+    }
 }

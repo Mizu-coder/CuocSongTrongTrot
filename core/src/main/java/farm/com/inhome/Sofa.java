@@ -12,4 +12,9 @@ public class Sofa extends MyActor {
         textureRegion = new TextureRegion(new Texture("sofa.png"));
         setSize(Gdx.graphics.getWidth()/11, Gdx.graphics.getHeight()/6);
     }
+    @Override
+    public String toString() {
+        return "Sofa, hãy đến gần để ngồi và bấm shift để đứng dậy";
+    }
 }
+

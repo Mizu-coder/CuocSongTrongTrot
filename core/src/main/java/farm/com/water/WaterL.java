@@ -8,6 +8,6 @@ public class WaterL extends MyActor {
     public WaterL(float x, float y, Stage s) {
         super(x, y, s);
         textureRegion = Utils.wat(32 * 34, 32 * 15, 120, 32 * 3);
-        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        setSize(textureRegion.getRegionWidth()/1.5f, textureRegion.getRegionHeight()/1.5f);
     }
 }

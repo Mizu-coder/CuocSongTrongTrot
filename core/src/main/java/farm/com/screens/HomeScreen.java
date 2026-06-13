@@ -1,18 +1,19 @@
 package farm.com.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import farm.com.MyActor;
+import farm.com.ShowInfoBlue;
 import farm.com.enums.Place;
 import farm.com.inhome.*;
 
@@ -21,7 +22,8 @@ public class HomeScreen implements Screen {
     Stage stage;
     Texture floor;
     OrthographicCamera camera;
-
+    private ShowInfoBlue info;
+    InputMultiplexer multiplexer;
 
     farm.com.Character main;
     public HomeScreen(Master game) {
@@ -48,6 +50,38 @@ public class HomeScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         game.place = Place.INHOME;
+        info = new ShowInfoBlue(0,0, null, "", 6);
+
+        multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(stage);
+
+        stage.addListener(new InputListener() {
+            private Actor lastActor = null;
+
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                Actor actor = stage.hit(x, y, true);
+
+
+
+                if (lastActor != null && lastActor instanceof MyActor && lastActor != actor) {
+                    info.remove();
+                }
+                if(actor instanceof Sofa){
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(),actor.getY() + actor.getHeight() + 16);
+                    stage.addActor(info);
+                }
+                if(actor instanceof TV){
+                    info.text = actor.toString();
+                    info.setPosition(actor.getX(),actor.getY() + actor.getHeight() + 16);
+                    stage.addActor(info);
+                }
+                lastActor = actor;
+                return super.mouseMoved(event, x, y);
+            }
+        });
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override

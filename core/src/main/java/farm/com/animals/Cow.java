@@ -30,7 +30,6 @@ public class Cow extends AnimalActor {
         animation.setPlayMode(Animation.PlayMode.LOOP);
         textureRegion = animation.getKeyFrame(time);
         time = 0;
-
         setSize(textureRegion.getRegionWidth()*3,textureRegion.getRegionHeight()*3);
 
         energyBar = new EnergyBar(getX(), getY() + getHeight() + 4, s);

@@ -12,7 +12,7 @@ public class Continue extends MyActor {
     public Continue(float x, float y, Stage s) {
         super(x, y, s);
 
-        textureRegion = new TextureRegion(new Texture("continue.jpg"));
-        setSize(100, 32);
+        textureRegion = new TextureRegion(new Texture("con.png"));
+        setSize(textureRegion.getRegionWidth()/1.25f, textureRegion.getRegionHeight()/1.25f);
     }
 }

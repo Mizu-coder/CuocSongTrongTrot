@@ -9,7 +9,7 @@ public class Guide extends MyActor {
     public Guide(float x, float y, Stage s) {
         super(x, y, s);
 
-        textureRegion = new TextureRegion(new Texture("guide.jpg"));
-        setSize(100, 32);
+        textureRegion = new TextureRegion(new Texture("guide.png"));
+        setSize(textureRegion.getRegionWidth()/2, textureRegion.getRegionHeight()/2);
     }
 }

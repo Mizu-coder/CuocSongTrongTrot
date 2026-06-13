@@ -26,6 +26,9 @@ public class Master extends Game {
     public static WaterR waterR;
     public static WaterLU waterLU;
     public static WaterDoc waterDoc;
+    public static SoilP soilP;
+    public static ChoAn choAn;
+    public static Windmills windmills;
     public static Home home;
     public static Well well;
     public static LoApTrung loAp;
@@ -44,6 +47,7 @@ public class Master extends Game {
     public static Wall_left wallLeft;
     public static WallDR wallDR;
     public static boolean chai = false;
+    public static boolean wa = false;
     public static boolean wea = false;
 
 

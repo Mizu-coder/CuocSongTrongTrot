@@ -414,47 +414,72 @@ public class GameScreen implements Screen {
         x = 0;
         y = 10 + HEIGHT / 2;
         // Ruộng
-        for (int i = 0; i < 4; i++) {
-            soils.add(new Soil(x, y, stage));
-            x += 120;
-        }
+//        for (int i = 0; i < 4; i++) {
+//            soils.add(new Soil(x, y, stage));
+//            x += 120;
+//        }
+
+        float xs = 0;
+        float ys =0;
 
         x = Gdx.graphics.getWidth()/1.5f + 180 ;
-        y = 150 + HEIGHT / 2;
-        Master.lake = new Lake(x, y, stage);
-        y-= 700;
-        x += 20;
+        y = 250 + HEIGHT / 2;
+        y-= 745;
+        x += 30;
         Master.waterL = new WaterL(x,y,stage);
-        y+=90;
+        xs = x + 90;
+        ys = y;
+        for(int i =0;i<6;i++) {
+            Master.soilP = new SoilP(xs, ys, stage);
+            ys+= 110;
+        }
+        ys =y-130.4f;
+        xs = x+90;
+        Master.soilP = new SoilP(xs, ys, stage);
+        xs -= 90;
+        for(int i =0;i<8;i++) {
+            Master.soilP = new SoilP(xs, ys, stage);
+            xs -= 130;
+        }
+        xs = x-105;
+        ys = y+44;
+        for(int i =0;i<5;i++) {
+            Master.soilP = new SoilP(xs, ys, stage);
+            ys += 110;
+        }
+
+        y+=60;
         x+=10;
-        for(int i =0;i<10;i++) {
+        for(int i =0;i<14;i++) {
             Master.water = new Water(x, y, stage);
             y+=60;
         }
-        y-=690;
-        x-=90;
-        for(int i =0;i<10;i++) {
+        x = Gdx.graphics.getWidth()/1.5f + 160 ;
+        y = 150 + HEIGHT / 2;
+        Master.lake = new Lake(x, y, stage);
+        y-=650;
+        x-=10;
+        for(int i =0;i<14;i++) {
             Master.waterDoc = new WaterDoc(x, y, stage);
-            x -= 90;
+            x -= 60;
         }
         y += 10;
         Master.waterR = new WaterR(x,y,stage);
-        y += 60;
-        for(int i =0;i<6;i++) {
+        y += 50;
+        for(int i =0;i<7;i++) {
             Master.water = new Water(x, y, stage);
             y+= 60;
         }
-        y+=35;
         Master.waterLU = new WaterLU(x,y,stage);
-        x-=95;
-        y+=10;
-        for(int i =0;i<5;i++){
+        x-=60;
+        y+=5;
+        for(int i =0;i<8;i++){
             Master.waterDoc = new WaterDoc(x,y,stage);
             x-= 60;
         }
 
         x = 329;
-        y = 530;
+        y = 560;
         for(int i =0;i<3;i++) {
             Master.water2 = new Water2(x, y, stage);
             x-=120;
@@ -466,6 +491,11 @@ public class GameScreen implements Screen {
         cages.add(new Cage(0,0, stage, 8));
         cages.add(new Cage(0, 32 * 8, stage, 5));
         cages.add(new Cage(700, 20 * 8, stage, 5));
+        cages.add(new Cage(949,432,stage,6f));
+        Master.choAn = new ChoAn(946,559,stage);
+
+        //coi xay
+        Master.windmills = new Windmills(1000,170,stage);
 
 
 
