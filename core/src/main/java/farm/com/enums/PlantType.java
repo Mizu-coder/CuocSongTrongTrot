@@ -5,5 +5,6 @@ public enum PlantType {
     CARROT,
     POTATO,
     TOMATO,
-    BEAN
+    BEAN,
+    PADDY
 }

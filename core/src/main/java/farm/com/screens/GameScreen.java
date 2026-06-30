@@ -28,6 +28,8 @@ import farm.com.buttons.Save;
 import farm.com.enums.*;
 import farm.com.inshop.SellButton;
 import farm.com.seeds.*;
+import farm.com.soilpaddy.R1;
+import farm.com.soilpaddy.SoilP;
 import farm.com.water.*;
 
 import static farm.com.enums.SeasonType.*;
@@ -42,6 +44,7 @@ public class GameScreen implements Screen {
     public static GlyphLayout layout;
     Character famer;
     Array<Soil> soils;
+    Array<R1> r1;
     public static Array<Plants> listPlants = new Array<>();;
     public Array<Cage> cages;
     public static Array<Chicken> chickens = new Array<>();;
@@ -75,6 +78,7 @@ public class GameScreen implements Screen {
         stage = new Stage();
         staticStage = new Stage();
         soils = new Array<>();
+        r1 = new Array<>();
         cages = new Array<>();
         sellButton = new SellButton(10000,10000,stage,game);
 
@@ -254,6 +258,7 @@ public class GameScreen implements Screen {
             stage.getViewport().unproject(mousePosition);
             System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
             float x = onSoils(mousePosition.x, mousePosition.y);
+            float xp = soilPa(mousePosition.x,mousePosition.y);
 
             if(x >= 0) {
                 if(mousePosition.x < x + 48){
@@ -288,6 +293,11 @@ public class GameScreen implements Screen {
                     GameState.seedb -= 1;
                     Master.finger.changeText();
                 }
+            }else{
+                if(Master.type.equals(ChooseType.PADDY) && GameState.seedpa >= 25 && isFree(mousePosition.x,mousePosition.y)){
+                    listPlants.add(new Plants(xp,mousePosition.y-16*2,stage,game,0));
+                    GameState.seedpa -= 25;
+                }
             }
         }
 
@@ -303,7 +313,7 @@ public class GameScreen implements Screen {
             Master.misson.choNV();
         }
 
-        float x = Gdx.graphics.getWidth() - 215;
+        float x = Gdx.graphics.getWidth() - 250;
         float y = Gdx.graphics.getHeight() - 5;
 
         layout.setText(game.font, "" + GameState.soKimTiem);
@@ -327,6 +337,10 @@ public class GameScreen implements Screen {
 
         x += 40;
         layout.setText(game.font, "" + GameState.seedb);
+        game.font.draw(game.batch, layout,x,y);
+
+        x+= 40;
+        layout.setText(game.font,""+GameState.seedpa);
         game.font.draw(game.batch, layout,x,y);
 
         layout.setText(game.font,"Day " + day);
@@ -414,10 +428,10 @@ public class GameScreen implements Screen {
         x = 0;
         y = 10 + HEIGHT / 2;
         // Ruộng
-//        for (int i = 0; i < 4; i++) {
-//            soils.add(new Soil(x, y, stage));
-//            x += 120;
-//        }
+        for (int i = 0; i < 4; i++) {
+            soils.add(new Soil(x, y, stage));
+            x += 120;
+        }
 
         float xs = 0;
         float ys =0;
@@ -430,21 +444,21 @@ public class GameScreen implements Screen {
         xs = x + 90;
         ys = y;
         for(int i =0;i<6;i++) {
-            Master.soilP = new SoilP(xs, ys, stage);
+            r1.add(new R1(xs, ys, stage));
             ys+= 110;
         }
         ys =y-130.4f;
         xs = x+90;
-        Master.soilP = new SoilP(xs, ys, stage);
+        r1.add(new R1(xs, ys, stage));
         xs -= 90;
         for(int i =0;i<8;i++) {
-            Master.soilP = new SoilP(xs, ys, stage);
+            r1.add(new R1(xs, ys, stage));
             xs -= 130;
         }
         xs = x-105;
         ys = y+44;
         for(int i =0;i<5;i++) {
-            Master.soilP = new SoilP(xs, ys, stage);
+            r1.add(new R1(xs, ys, stage));
             ys += 110;
         }
 
@@ -499,7 +513,7 @@ public class GameScreen implements Screen {
 
 
 
-        x = Gdx.graphics.getWidth() - 240;
+        x = Gdx.graphics.getWidth() - 280;
         y = Gdx.graphics.getHeight() - 40;
 
         new Kimtiem(x, y, staticStage);
@@ -539,6 +553,13 @@ public class GameScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 changeType(ChooseType.BEAN);
+            }
+        });
+        x += 43.5f;
+        new Paddy(x,y,staticStage).addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                changeType(ChooseType.PADDY);
             }
         });
         game.weather = new Weather(0,0, staticStage,game);
@@ -624,6 +645,16 @@ public class GameScreen implements Screen {
         }
         return -1;
     }
+
+    private float soilPa(float x,float y){
+        for(R1 s: r1){
+            if(s.getBound().contains(x, y)){
+                return s.getX();
+            }
+        }
+        return -1;
+   }
+
     private boolean isFree(float x, float y){
         for (Plants p: listPlants) {
             if(p.getBound().contains(x, y)){
@@ -694,6 +725,12 @@ public class GameScreen implements Screen {
                 Master.type = ChooseType.WATER;
                 game.wateringCan = new WateringCan(0,0,stage,game);
                 Master.finger.tuoi();
+            }
+            case PADDY -> {
+                Master.type = ChooseType.PADDY;
+                if(game.wateringCan != null && game.wateringCan.getStage() != null){
+                    game.wateringCan.remove();
+                }
             }
         }
     }

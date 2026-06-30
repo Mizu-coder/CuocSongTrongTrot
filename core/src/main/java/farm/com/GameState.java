@@ -23,6 +23,7 @@ public class GameState {
     public static int seedp = 5;
     public static int seedt = 5;
     public static int seedpu = 5;
+    public static int seedpa = 25;
 
     public static void loadData(Master game, GameStateForSave gameStateForSave) {
         money = gameStateForSave.money;
@@ -54,6 +55,10 @@ public class GameState {
         }
         for (Vector3 v: gameStateForSave.beans) {
             Master.type = ChooseType.BEAN;
+            GameScreen.listPlants.add(new Plants(v.x, v.y, null, game, v.z));
+        }
+        for (Vector3 v: gameStateForSave.paddies){
+            Master.type = ChooseType.PADDY;
             GameScreen.listPlants.add(new Plants(v.x, v.y, null, game, v.z));
         }
 

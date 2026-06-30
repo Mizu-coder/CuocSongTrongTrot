@@ -23,12 +23,14 @@ public class GameStateForSave {
     public  int seedp = 5;
     public  int seedt = 5;
     public  int seedpu = 5;
+    public int seedpa = 0;
 
     public Array<Vector3> pumkins = new Array<>();
     public Array<Vector3> carrots = new Array<>();
     public Array<Vector3> tomatos = new Array<>();
     public Array<Vector3> potatos = new Array<>();
     public Array<Vector3> beans = new Array<>();
+    public Array<Vector3> paddies = new Array<>();
     public Array<Vector2> chickens = new Array<>();
     public Array<Vector2> pigs = new Array<>();
     public Array<Vector2> cows = new Array<>();
@@ -47,6 +49,7 @@ public class GameStateForSave {
         this.seedp = GameState.seedp;
         this.seedt = GameState.seedt;
         this.seedpu = GameState.seedpu;
+        this.seedpa = GameState.seedpa;
 
         for (Plants p: game.gameScreen.listPlants) {
             switch (p.plantType){
@@ -64,6 +67,9 @@ public class GameStateForSave {
                 }
                 case BEAN -> {
                     beans.add(new Vector3(p.getX(), p.getY(), p.time));
+                }
+                case PADDY -> {
+                    paddies.add(new Vector3(p.getX(),p.getY(),p.time));
                 }
             }
 

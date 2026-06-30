@@ -68,7 +68,7 @@ public class Misson extends MyActor{
                 GameScreen.complete += 1;
             }
         };
-        if(GameScreen.complete == 5){
+        if(GameScreen.complete >= 5){
             switch (nv){
                 case DONGVAT -> {
                     if (Master.sohieu == 1){
@@ -87,7 +87,7 @@ public class Misson extends MyActor{
 
     }
     public void thuongCay(){
-        if(GameScreen.complete == 5){
+        if(GameScreen.complete >= 5){
             switch (nv){
                 case CAY -> {
                     if (Master.sohat == 1){
@@ -105,6 +105,9 @@ public class Misson extends MyActor{
                     if (Master.sohat == 5){
                         GameState.seedb += 5;
 
+                    }
+                    if(Master.sohat ==6){
+                        GameState.seedpa += 10;
                     }
                 }
             }

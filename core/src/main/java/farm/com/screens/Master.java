@@ -12,6 +12,7 @@ import farm.com.actors.Weather;
 import farm.com.enums.ChooseType;
 import farm.com.enums.Place;
 import farm.com.inhome.*;
+import farm.com.soilpaddy.*;
 import farm.com.water.*;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -26,6 +27,10 @@ public class Master extends Game {
     public static WaterR waterR;
     public static WaterLU waterLU;
     public static WaterDoc waterDoc;
+    public static R1 r1;
+    public static R2 r2;
+    public static R3 r3;
+    public static R4 r4;
     public static SoilP soilP;
     public static ChoAn choAn;
     public static Windmills windmills;

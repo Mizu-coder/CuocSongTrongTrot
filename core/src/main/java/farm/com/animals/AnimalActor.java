@@ -137,6 +137,13 @@ public class AnimalActor extends MyActor {
                         Master.misson.thuongDV();
                     }
                 }
+                case PADDY -> {
+                    if(GameState.seedpa>0){
+                        GameState.seedpa -= 5;
+                        energy += 10;
+                        Master.misson.thuongDV();
+                    }
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package farm.com.seeds;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -19,6 +20,7 @@ import farm.com.enums.PlantType;
 import farm.com.enums.Text;
 import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
+import farm.com.soilpaddy.*;
 
 public class Plants extends MyActor {
     Master game;
@@ -29,10 +31,17 @@ public class Plants extends MyActor {
     Text text = Text.GIEO;
     NV nv = NV.NOTHING;
 
+    R1 r1;
+    R2 r2;
+    R3 r3;
+    R4 r4;
+    SoilP soilP;
+
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
         this.game = game;
         int seed = MathUtils.random(5, 10);
+        int seedp = MathUtils.random(10,20);
         infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + seed, 10);
         infoSeed.remove();
 
@@ -86,6 +95,33 @@ public class Plants extends MyActor {
             frames[4] = Utils.getRegionPlants(16 * 4, 16 * 4, 16, 16 * 3);
             animation = new Animation<TextureRegion>(0.01f, frames);
         }
+        if(Master.type.equals(ChooseType.PADDY)){
+            plantType = PlantType.PADDY;
+            TextureRegion[] frames = new TextureRegion[21];
+            frames[0] =new TextureRegion(new Texture("ruong.jpg")) ;
+            frames[1] = new TextureRegion(new Texture("ruong.jpg"));
+            frames[2] = new TextureRegion(new Texture("ruong.jpg"));
+            frames[3] = new TextureRegion(new Texture("ruong.jpg"));
+            frames[4] = new TextureRegion(new Texture("ruong.jpg"));
+            frames[5] = new TextureRegion(new Texture("ruong2.png"));
+            frames[6] = new TextureRegion(new Texture("ruong2.png"));
+            frames[7] = new TextureRegion(new Texture("ruong2.png"));
+            frames[8] = new TextureRegion(new Texture("ruong2.png"));
+            frames[9] = new TextureRegion(new Texture("ruong2.png"));
+            frames[10] = new TextureRegion(new Texture("ruong3.png"));
+            frames[11] = new TextureRegion(new Texture("ruong3.png"));
+            frames[12] = new TextureRegion(new Texture("ruong3.png"));
+            frames[13] = new TextureRegion(new Texture("ruong3.png"));
+            frames[14] = new TextureRegion(new Texture("ruong3.png"));
+            frames[15] = new TextureRegion(new Texture("ruong4.png"));
+            frames[16] = new TextureRegion(new Texture("ruong4.png"));
+            frames[17] = new TextureRegion(new Texture("ruong4.png"));
+            frames[18] = new TextureRegion(new Texture("ruong4.png"));
+            frames[19] = new TextureRegion(new Texture("ruong4.png"));
+            frames[20] = new TextureRegion(new Texture("ruong5.png"));
+            animation = new Animation<TextureRegion>(0.01f, frames);
+        }
+
 
 
         this.time = time;
@@ -217,6 +253,14 @@ public class Plants extends MyActor {
                                         }
                                     }
                                 }
+                                Master.misson.thuongCay();
+                                remove();
+                            }
+                            case PADDY -> {
+                                GameState.seedpa += seedp;
+                                infoSeed.fadeOut();
+                                GameScreen.listPlants.removeValue(Plants.this, true);
+                                GameScreen.complete += 5;
                                 Master.misson.thuongCay();
                                 remove();
                             }
