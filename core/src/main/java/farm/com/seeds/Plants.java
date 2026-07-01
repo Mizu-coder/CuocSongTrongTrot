@@ -31,17 +31,11 @@ public class Plants extends MyActor {
     Text text = Text.GIEO;
     NV nv = NV.NOTHING;
 
-    R1 r1;
-    R2 r2;
-    R3 r3;
-    R4 r4;
-    SoilP soilP;
 
     public Plants(float x, float y, Stage s, Master game, float time) {
         super(x, y, s);
         this.game = game;
         int seed = MathUtils.random(5, 10);
-        int seedp = MathUtils.random(10,20);
         infoSeed = new ShowInfo(getX(), getY() + getHeight() + 4, getStage(), "" + seed, 10);
         infoSeed.remove();
 
@@ -257,10 +251,11 @@ public class Plants extends MyActor {
                                 remove();
                             }
                             case PADDY -> {
-                                GameState.seedpa += seedp;
+                                GameState.seedpa += seed;
                                 infoSeed.fadeOut();
                                 GameScreen.listPlants.removeValue(Plants.this, true);
                                 GameScreen.complete += 5;
+                                GameState.totalPaddy += MathUtils.random(20,25);
                                 Master.misson.thuongCay();
                                 remove();
                             }

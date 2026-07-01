@@ -12,11 +12,12 @@ import farm.com.seeds.Plants;
 import farm.com.utils.GameStateForSave;
 
 public class GameState {
-    public static int money = 0000000;
+    public static int money = 00;
     public static int milkTotal = 0;
     public static int egg = 0;
     public static int totalPork = 0;
     public static int soKimTiem = 2;
+    public static int totalPaddy = 0;
 
     public static int seedc = 5;
     public static int seedb = 5;
@@ -30,6 +31,7 @@ public class GameState {
         milkTotal = gameStateForSave.milkTotal;
         egg = gameStateForSave.egg;
         totalPork = gameStateForSave.totalPork;
+        totalPaddy = gameStateForSave.totalPaddy;
         soKimTiem = gameStateForSave.soKimTiem;
         seedc = gameStateForSave.seedc;
         seedb = gameStateForSave.seedb;

@@ -219,6 +219,7 @@ public class GameScreen implements Screen {
             Master.sohieu = (MathUtils.random(1,3));
             Master.sohat = (MathUtils.random(1,5));
             complete = 0;
+            Master.c = true;
         }
 
         if(go){
@@ -313,7 +314,7 @@ public class GameScreen implements Screen {
             Master.misson.choNV();
         }
 
-        float x = Gdx.graphics.getWidth() - 250;
+        float x = Gdx.graphics.getWidth() - 270;
         float y = Gdx.graphics.getHeight() - 5;
 
         layout.setText(game.font, "" + GameState.soKimTiem);
@@ -513,7 +514,7 @@ public class GameScreen implements Screen {
 
 
 
-        x = Gdx.graphics.getWidth() - 280;
+        x = Gdx.graphics.getWidth() - 300;
         y = Gdx.graphics.getHeight() - 40;
 
         new Kimtiem(x, y, staticStage);

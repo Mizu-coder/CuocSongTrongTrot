@@ -4,5 +4,6 @@ public enum BuyTypeButton {
     CHICKEN,
     PIG,
     COW,
-    MEDICINE
+    MEDICINE,
+    SEP;
 }

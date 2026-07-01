@@ -8,7 +8,7 @@ import farm.com.MyActor;
 public class R3 extends MyActor {
     public R3(float x, float y, Stage s){
         super(x,y,s);
-        textureRegion = new TextureRegion(new Texture("ruong.jpg"));
-        setSize(163/1.25f, 168/1.25f);
+        textureRegion = new TextureRegion(new Texture("ruong3.jpg"));
+        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 }

@@ -30,11 +30,14 @@ public class ShopScreen implements Screen {
     PorkButton porkButton;
     MilkButton milkButton;
     EggButton eggButton;
+    PButton pButton;
 
     ChickenButton chickenButton;
     PigButton pigButton;
     CowButton cowButton;
     MedicineButton medicineButton;
+    SePButton sePButton;
+
 
     TextButton back;
     MyActor col;
@@ -71,10 +74,12 @@ public class ShopScreen implements Screen {
         pigButton = new PigButton(900, 680, stage);
         cowButton = new CowButton(900, 610, stage);
         medicineButton = new MedicineButton(900, 540, stage);
+        sePButton = new SePButton(900,470,stage);
 
         porkButton = new PorkButton( pigButton.getX()- 200, 750, stage,game);
         milkButton = new MilkButton( cowButton.getX() - 200, 680, stage, game);
         eggButton = new EggButton( chickenButton.getX() - 200, 610, stage,game);
+        pButton = new PButton(eggButton.getX(),540,stage,game);
 
         stage.addActor(back);
 
@@ -125,7 +130,7 @@ public class ShopScreen implements Screen {
         game.font.draw(game.batch, layout, Gdx.graphics.getWidth()/2 - layout.width/2, Gdx.graphics.getHeight() - layout.height);
 
         layout.setText(game.font,"$" + GameState.money);
-        game.font.draw(game.batch, layout, Gdx.graphics.getWidth() - layout.width, Gdx.graphics.getHeight() - layout.height );
+        game.font.draw(game.batch, layout, Gdx.graphics.getWidth() - layout.width-40, Gdx.graphics.getHeight() - layout.height );
         layout.setText(game.font,"Sell");
         game.font.draw(game.batch, layout, porkButton.getX()-300, 800);
         layout.setText(game.font,"Buy");
@@ -139,6 +144,9 @@ public class ShopScreen implements Screen {
         game.font.draw(game.batch, layout, cowButton.getX() - 50, 630);
         layout.setText(game.font,"" + medicineButton.cost);
         game.font.draw(game.batch, layout, medicineButton.getX() - 50, 560);
+        layout.setText(game.font,"" + sePButton.cost);
+        game.font.draw(game.batch, layout, sePButton.getX() - 50, 490);
+
 
         layout.setText(game.font,"" + GameState.totalPork);
         game.font.draw(game.batch, layout, porkButton.getX()+100, porkButton.getY()+25);
@@ -148,6 +156,10 @@ public class ShopScreen implements Screen {
 
         layout.setText(game.font,"" + GameState.egg);
         game.font.draw(game.batch, layout, eggButton.getX()+100, eggButton.getY()+30);
+        layout.setText(game.font,"" + GameState.totalPaddy);
+        game.font.draw(game.batch, layout, pButton.getX()+100, pButton.getY()+30);
+
+
 
         game.batch.end();
     }

@@ -16,7 +16,7 @@ import farm.com.screens.GameScreen;
 import farm.com.screens.Master;
 
 public class Misson extends MyActor{
-    NV nv = NV.CAY;
+    NV nv = NV.NOTHING;
     Master game;
     GameScreen gameScreen;
     SellButton sellButton;
@@ -68,7 +68,7 @@ public class Misson extends MyActor{
                 GameScreen.complete += 1;
             }
         };
-        if(GameScreen.complete >= 5){
+        if(GameScreen.complete == 5){
             switch (nv){
                 case DONGVAT -> {
                     if (Master.sohieu == 1){
@@ -82,36 +82,39 @@ public class Misson extends MyActor{
                     }
                 }
             }
+            nv = NV.NOTHING;
         }
 
 
     }
     public void thuongCay(){
-        if(GameScreen.complete >= 5){
-            switch (nv){
-                case CAY -> {
-                    if (Master.sohat == 1){
-                        GameState.seedpu += 5;
-                    }
-                    if (Master.sohat == 2){
-                        GameState.seedc += 5;
-                    }
-                    if (Master.sohat == 3){
-                        GameState.seedp += 5;
-                    }
-                    if (Master.sohat == 4){
-                        GameState.seedt += 5;
-                    }
-                    if (Master.sohat == 5){
-                        GameState.seedb += 5;
 
-                    }
-                    if(Master.sohat ==6){
-                        GameState.seedpa += 10;
+            if (GameScreen.complete >= 5) {
+
+                switch (nv) {
+                    case CAY -> {
+                        if (Master.sohat == 1) {
+                            GameState.seedpu += 5;
+                        }
+                        if (Master.sohat == 2) {
+                            GameState.seedc += 5;
+                        }
+                        if (Master.sohat == 3) {
+                            GameState.seedp += 5;
+                        }
+                        if (Master.sohat == 4) {
+                            GameState.seedt += 5;
+                        }
+                        if (Master.sohat == 5) {
+                            GameState.seedb += 5;
+
+                        }
+                        if (Master.sohat == 6) {
+                            GameState.seedpa += 10;
+                        }
                     }
                 }
-            }
-
+                nv = NV.NOTHING;
         }
     }
 }

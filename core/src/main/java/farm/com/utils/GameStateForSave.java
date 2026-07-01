@@ -17,6 +17,7 @@ public class GameStateForSave {
     public  int egg = 0;
     public  int totalPork = 0;
     public  int soKimTiem = 2;
+    public int totalPaddy = 0;
 
     public  int seedc = 5;
     public  int seedb = 5;
@@ -43,6 +44,7 @@ public class GameStateForSave {
         this.milkTotal = GameState.milkTotal;
         this.egg = GameState.egg;
         this.totalPork = GameState.totalPork;
+        this.totalPaddy = GameState.totalPaddy;
         this.soKimTiem = GameState.soKimTiem;
         this.seedc = GameState.seedc;
         this.seedb = GameState.seedb;

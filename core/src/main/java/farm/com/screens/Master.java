@@ -55,7 +55,9 @@ public class Master extends Game {
     public static boolean wa = false;
     public static boolean wea = false;
 
-
+    public static boolean b;
+    public static boolean c;
+    public static boolean d;
 
     public static ChooseType type = ChooseType.NOTHING;
 

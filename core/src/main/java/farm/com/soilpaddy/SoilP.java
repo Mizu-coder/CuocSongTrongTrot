@@ -8,7 +8,7 @@ import farm.com.MyActor;
 public class SoilP extends MyActor {
     public SoilP(float x, float y, Stage s){
         super(x,y,s);
-        textureRegion = new TextureRegion(new Texture("ruonglua.png"));
+        textureRegion = new TextureRegion(new Texture("ruong5.png"));
         setSize(textureRegion.getRegionWidth()/1.25f, textureRegion.getRegionHeight()/1.25f);
     }
 }

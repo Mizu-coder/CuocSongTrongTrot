@@ -25,7 +25,7 @@ public class BuyButton extends MyActor {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(GameState.money > cost) {
+                if(GameState.money >= cost) {
                     ting.play();
                     GameState.money -= cost;
                     switch (type) {
@@ -40,6 +40,9 @@ public class BuyButton extends MyActor {
                         }
                         case MEDICINE -> {
                             GameState.soKimTiem += 1;
+                        }
+                        case SEP -> {
+                            GameState.seedpa += 25;
                         }
                     }
                 }

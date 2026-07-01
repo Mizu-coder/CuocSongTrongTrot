@@ -14,11 +14,8 @@ public class SellButton extends MyActor {
     int cost = 0;
     SellTypeButton type;
     Sound ting;
-    boolean pork = false;
-    boolean egg = false;
-    boolean milk = false;
+    private boolean sell;
     private int t;
-    private boolean sell = false;
     Master game;
     public SellButton(float x, float y, Stage s, Master game) {
         super(x, y, s);
@@ -28,63 +25,44 @@ public class SellButton extends MyActor {
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(pork){
+                sell = false;
+                switch (type) {
+                    case EGG -> {
+                        if(GameState.egg > 0){
+                            GameState.egg--;
+                            sell = true;
+                        }
 
-                    if(GameState.totalPork > 0  ) {
-                        GameState.money += cost;
-                        pork = false;
-                        t += 1;
-                        if (t >= 5) {
-                            GameState.money += 400;
+                    }
+                    case MILK -> {
+                        if (GameState.milkTotal > 0) {
+                            GameState.milkTotal--;
+                            sell = true;
+                        }
+                    }
+                    case PORK -> {
+                        if (GameState.totalPork > 0) {
+                            GameState.totalPork--;
+                            sell = true;
+                        }
+                    }
+                    case PADDY -> {
+                        if(GameState.totalPaddy > 0){
+                            GameState.totalPaddy--;
+                            sell = true;
                         }
                     }
                 }
-
-                if(egg){
-                    if (GameState.egg > 0 ){
-                        GameState.money += cost;
-                        egg = false;
-                        t += 1;
-                        if (t >= 5) {
-                            GameState.money += 400;
-                        }
+                if (sell) {
+                    GameState.money += cost;
+                    t++;
+                    if (t >= 5) {
+                        GameState.money += 400;
+                        t = 0;
                     }
+                    System.out.println(GameState.money);
+                    ting.play();
                 }
-                if(milk){
-                    if (GameState.milkTotal >0){
-                        GameState.money += cost;
-                        milk = false;
-                        t += 1;
-                        if (t >= 5) {
-                            GameState.money += 400;
-                        }
-                    }
-                }
-
-                ting.play();
-
-                    switch (type) {
-                        case EGG -> {
-                            if(GameState.egg > 0){
-                                GameState.egg--;
-                                egg = true;
-                            }
-
-                        }
-                        case MILK -> {
-                            if (GameState.milkTotal > 0) {
-                                GameState.milkTotal--;
-                                milk = true;
-                            }
-                        }
-                        case PORK -> {
-                            if (GameState.totalPork > 0) {
-                                GameState.totalPork--;
-                                pork = true;
-                            }
-                        }
-                    }
-
             }
         });
     }

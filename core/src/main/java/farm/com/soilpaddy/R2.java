@@ -9,6 +9,6 @@ public class R2 extends MyActor {
     public R2(float x, float y, Stage s){
         super(x,y,s);
         textureRegion = new TextureRegion(new Texture("ruong2.jpg"));
-        setSize(163/1.25f, 168/1.25f);
+        setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
     }
 }
