@@ -12,7 +12,7 @@ import farm.com.seeds.Plants;
 import farm.com.utils.GameStateForSave;
 
 public class GameState {
-    public static int money = 00;
+    public static int money = 000;
     public static int milkTotal = 0;
     public static int egg = 0;
     public static int totalPork = 0;

@@ -13,7 +13,7 @@ public class PButton extends SellButton {
         this.game = game;
         textureRegion = new TextureRegion(new Texture("lua.png"));
         setSize(textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
-        cost = 10;
+        cost = 30;
         type = SellTypeButton.PADDY;
     }
 }
