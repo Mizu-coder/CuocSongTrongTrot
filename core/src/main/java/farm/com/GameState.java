@@ -14,7 +14,7 @@ import farm.com.utils.GameStateForSave;
 public class GameState {
     public static int money = 000;
     public static int milkTotal = 0;
-    public static int egg = 0;
+    public static int egg = 5;
     public static int totalPork = 0;
     public static int soKimTiem = 2;
     public static int totalPaddy = 0;
@@ -24,7 +24,7 @@ public class GameState {
     public static int seedp = 5;
     public static int seedt = 5;
     public static int seedpu = 5;
-    public static int seedpa = 25;
+    public static int seedpa = 0;
 
     public static void loadData(Master game, GameStateForSave gameStateForSave) {
         money = gameStateForSave.money;

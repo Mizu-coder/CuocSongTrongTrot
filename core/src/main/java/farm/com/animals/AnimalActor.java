@@ -140,7 +140,7 @@ public class AnimalActor extends MyActor {
                 case PADDY -> {
                     if(GameState.seedpa>0){
                         GameState.seedpa -= 5;
-                        energy += 10;
+                        energy += 5;
                         Master.misson.thuongDV();
                     }
                 }

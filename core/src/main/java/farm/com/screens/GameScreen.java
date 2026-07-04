@@ -260,6 +260,7 @@ public class GameScreen implements Screen {
             System.out.println("x = "+mousePosition.x + " y = " + mousePosition.y);
             float x = onSoils(mousePosition.x, mousePosition.y);
             float xp = soilPa(mousePosition.x,mousePosition.y);
+            float yp = soilPay(mousePosition.x,mousePosition.y);
 
             if(x >= 0) {
                 if(mousePosition.x < x + 48){
@@ -296,7 +297,7 @@ public class GameScreen implements Screen {
                 }
             }else{
                 if(Master.type.equals(ChooseType.PADDY) && GameState.seedpa >= 25 && isFree(mousePosition.x,mousePosition.y)){
-                    listPlants.add(new Plants(xp,mousePosition.y-16*2,stage,game,0));
+                    listPlants.add(new Plants(xp,yp,stage,game,0));
                     GameState.seedpa -= 25;
                 }
             }
@@ -655,6 +656,15 @@ public class GameScreen implements Screen {
         }
         return -1;
    }
+
+    private float soilPay(float x,float y){
+        for(R1 s: r1){
+            if(s.getBound().contains(x, y)){
+                return s.getY();
+            }
+        }
+        return -1;
+    }
 
     private boolean isFree(float x, float y){
         for (Plants p: listPlants) {

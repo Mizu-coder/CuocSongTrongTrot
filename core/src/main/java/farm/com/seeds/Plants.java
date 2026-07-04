@@ -120,7 +120,27 @@ public class Plants extends MyActor {
 
         this.time = time;
         textureRegion = animation.getKeyFrame(time);
-        setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+        switch (plantType){
+            case PUMKIN -> {
+                setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            }
+            case CARROT -> {
+                setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            }
+            case POTATO -> {
+                setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            }
+            case TOMATO -> {
+                setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            }
+            case BEAN -> {
+                setSize(textureRegion.getRegionWidth()*2,textureRegion.getRegionHeight()*2);
+            }
+            case PADDY -> {
+                setSize(textureRegion.getRegionWidth(),textureRegion.getRegionHeight());
+            }
+        }
+
 
         addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
